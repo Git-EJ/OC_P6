@@ -1,0 +1,23 @@
+{
+  "name": "wf",
+  "version": "1.0.0",
+  "description": "https://git-ej.github.io/OC_P6/",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "sass": "sass --watch ./scss/style.scss:./css/style.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Git-EJ/OC_P6.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Git-EJ/OC_P6/issues"
+  },
+  "homepage": "https://github.com/Git-EJ/OC_P6#readme",
+  "dependencies": {
+    "sass": "^1.63.2"
+  }
+}
