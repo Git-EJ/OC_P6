@@ -8,14 +8,26 @@ function closeModal() {
     modal.style.display = "none";
 }
 
+
 const allFields = document.querySelectorAll('input, textarea')
 const inputFields = document.querySelectorAll('input')
 const textareaField = document.querySelector('textarea')
 const lastnameField = document.getElementById('lastname')
 const firstnameField = document.getElementById('firstname')
+const emailField = document.getElementById('email')
 
 
-// ALL FIELDS
+
+
+
+
+
+
+
+
+
+
+// START ALL FIELDS 
 
 // Check if fields are empty
 //before user entry
@@ -27,68 +39,14 @@ allFields.forEach(emptyField => {
         emptyField.value ==="" ? emptyField.setCustomValidity('Veuillez renseigner ce champ') : emptyField.setCustomValidity('')
     })
 })  
-//End of Check if fields are empty 
+//END of Check if fields are empty 
 
 
 
-// Validity States:
-// Allowed characters (regex)
-// Minimum length
-
-inputFields.forEach((inputField) => {
-    inputField.addEventListener('input', (e) => {
-        if(e.target.validity.tooShort) { 
-            e.target.setCustomValidity('Veuillez saisir au minimum 2 caratères')
-            e.stopPropagation()
-        } else if(inputField.type != 'email' && e.target.validity.patternMismatch) {
-            e.target.setCustomValidity('Caractères non Autorisés')
-           e.stopPropagation()
-        } else {
-            e.target.setCustomValidity('')
-        }
-    })
-})
-
-textareaField.addEventListener('input', (e) => {
-    e.target.validity.tooShort ? (e.target.setCustomValidity('Veuillez saisir au minimum 20 caractères')) : e.target.setCustomValidity('')
-})
-//END of Validity States
-//END OF ALL FIELDS
-
-
-const form = document.querySelector('form')
-
-form.addEventListener('input', (e) => {
-    if(!form.checkValidity()) {
-        e.preventDefault();
-    }
-})
-
-// FIRSTNAME NAME AND LASTNAME FIELDS
-
+//No space at the beginning or at the end of the fields
 /**
  * @param {*DOM Element} inputField (input field for modal contact form)
- */
-function only1Dash(inputField) {
-    inputField.addEventListener('input', (e) => {
-        let value = e.target.value
-        let newValue = value.replace('--', '-').replace('  ', ' ')
-        value.length != newValue.length ? e.target.value = newValue : ''
-    })
-}
-
-/**
- * @param {*DOM Element} inputField (input field for modal contact form)
- */
-function noDashFirstAndLast (inputField) {
-    inputField.addEventListener('input', (e) => {
-        inputField.value.startsWith('-') || inputField.value.endsWith('-')
-            ? (inputField.setCustomValidity("Pas de trait d'union au début ou à la fin de ce champ"), e.stopPropagation())
-            : ''
-    })
-}
-
-
+*/
 function noSpaceBeginningAndEnd(inputFields) {
     let timeout;
     inputFields.forEach(inputField => {
@@ -103,15 +61,76 @@ function noSpaceBeginningAndEnd(inputFields) {
         });
     });
 }
-  
+noSpaceBeginningAndEnd(allFields)
+// END off No space at the beginning or at the end of the fields
+
+
+
+// Validity States:
+// Allowed characters (regex)
+// Minimum length
+inputFields.forEach((inputField) => {
+    inputField.addEventListener('input', (e) => {
+        if(e.target.validity.tooShort) { 
+            e.target.setCustomValidity('Veuillez saisir au minimum 2 caratères')
+            e.stopPropagation()
+        } else if(inputField.type != 'email' && e.target.validity.patternMismatch) {
+            e.target.setCustomValidity('Caractères non Autorisés')
+            e.stopPropagation()
+        } else {
+            e.target.setCustomValidity('')
+        }
+    })
+})
+
+textareaField.addEventListener('input', (e) => {
+    e.target.validity.tooShort ? (e.target.setCustomValidity('Veuillez saisir au minimum 20 caractères')) : e.target.setCustomValidity('')
+})
+//END of Validity States
+//END OF ALL FIELDS
+
+
+// FIRSTNAME NAME AND LASTNAME FIELDS
+/**
+ * @param {*DOM Element} inputField (input field for modal contact form)
+ */
+function only1Dash(inputField) {
+    inputField.addEventListener('input', (e) => {
+        let value = e.target.value
+        let newValue = value.replace('--', '-').replace('  ', ' ')
+        value.length != newValue.length ? e.target.value = newValue : ''
+    })
+}
+
+/**
+ * @param {*DOM Element} inputField (input field for modal contact form)
+*/
+function noDashFirstAndLast (inputField) {
+    inputField.addEventListener('input', (e) => {
+        inputField.value.startsWith('-') || inputField.value.endsWith('-')
+        ? (inputField.setCustomValidity("Pas de trait d'union au début ou à la fin de ce champ"), e.stopPropagation())
+        : ''
+    })
+}
+
+
 only1Dash(firstnameField)
 only1Dash(lastnameField)
 noDashFirstAndLast(firstnameField)
 noDashFirstAndLast(lastnameField)
-noSpaceBeginningAndEnd(inputFields)
-
-
 // END FIRSTNAME NAME AND LASTNAME FIELDS
+
+
+
+// START OF EMAIL FIELD
+emailField.addEventListener('keydown', (e) => {
+    if (e.key === ' ') {
+      e.preventDefault(); //space can't be enter even if it's press
+    }
+  });
+// END OF EMAIL FIELD
+
+
 
 
 
