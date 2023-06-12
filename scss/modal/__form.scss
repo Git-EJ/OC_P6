@@ -1,0 +1,95 @@
+#contact_modal {
+    display: none;
+}
+
+.modal {
+    border-radius: 5px;
+    background-color: #DB8876;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 35px;
+    margin: auto;
+}
+
+.modal header {
+    justify-content: space-between;
+    width: 100%;
+}
+
+.modal header img {
+    cursor: pointer;
+}
+
+.modal header h2 {
+    font-size: 4em;
+    font-weight: normal;
+    text-align: center;
+}
+
+form {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+form label {
+    color: #312E2E;
+    font-size: 2.3em;
+}
+
+form div {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: self-start;
+    margin-bottom: 26px;
+}
+
+form input {
+    width: 100%;
+    height: 68px;
+    border: none;
+    border-radius: 5px;
+    appearance: none;
+
+    &:focus-visible {
+        outline: none;
+    }
+
+    &::placeholder {
+        padding-left: 0.5em;
+        font-size: 1.2em;
+    }
+}
+
+.form_message {
+    width : 100%;
+    resize: none;
+    border: none;
+    border-radius: 5px;
+
+    &:focus-visible {
+        outline: none;
+    }
+
+    &::placeholder{
+        padding:1em 0 0 0.5em;
+        font-size: 1.2em;
+    }
+}
+
+input:valid,
+textarea:valid {
+    border: green solid 2px;
+    border-radius: 5px;
+  }
+
+input:invalid,
+textarea:invalid{
+    border: red solid 2px;
+    border-radius: 5px;
+  }

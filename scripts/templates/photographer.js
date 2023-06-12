@@ -1,15 +1,15 @@
 function photographerTemplate(data) {
     const { name, id, city, country, tagline, price, portrait } = data;
-    // console.log(data);
+    console.log(data);
 
-    //Retrieval PIcture of Photographer
+    //Retrieval Picture of Photographer
     let idForPicture = portrait
     idForPicture = id
     const picture = `assets/photographers/${id}.jpg`;
 
+
     function getUserCardDOM() {
         const article = document.createElement('article');
-
 
         //Photographer img Portrait
         const imgContainer = document.createElement('div')
@@ -20,9 +20,9 @@ function photographerTemplate(data) {
         imgForPhotographers.classList.add('photographer_img')
 
         //Photographer Name
-        const photographerNameTitle = document.createElement('h2');
-        photographerNameTitle.textContent = name;
-        photographerNameTitle.classList.add('photographer_name')
+        const photographerName = document.createElement('h2');
+        photographerName.textContent = name;
+        photographerName.classList.add('photographer_name')
 
         //Photographer City
         const cityAndCountrySpan = document.createElement('span')
@@ -42,16 +42,21 @@ function photographerTemplate(data) {
         article.appendChild(imgContainer)
         imgContainer.appendChild(imgForPhotographers);
 
-        article.appendChild(photographerNameTitle);
+        article.appendChild(photographerName);
         article.appendChild(cityAndCountrySpan);
         article.appendChild(taglineSpan);
         article.appendChild(pricePerDaySpan)
-
-
-
-
 
         return (article);
     }
     return { name, id, city, country, tagline, price, portrait, getUserCardDOM }
 }
+
+
+// const photographersHomeSection = function(data) {
+//     const photographer = document.createElement('h2')
+//     const key = Object.keys(data)[0]
+//     const key1stLetterToUpperCase = key.charAt(0).toUpperCase() + key.slice(1)
+//     photographer.textContent = `photographer${key1stLetterToUpperCase}`
+//     console.log(photographer);
+// }

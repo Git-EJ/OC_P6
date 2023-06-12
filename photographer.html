@@ -24,8 +24,18 @@
         </header>
 				<form>
 					<div>
-						<label>Prénom</label>
-						<input />
+            <label for="firstname">Prénom</label>
+            <input id="firstname" type="text" name="firstname" value="rr" placeholder="Votre prénom ici" minlength="2" maxlength='40' pattern="^[a-zA-ZÀ-ÿ][a-zA-ZÀ-ÿ\s\-]*[a-zA-ZÀ-ÿ]$" required/>
+
+            <label for="lastname">Nom</label>
+            <input id="lastname" type="text" name="lastname" value="uu" placeholder="Votre nom ici" minlength="2" maxlength='40' pattern="^[a-zA-ZÀ-ÿ][a-zA-ZÀ-ÿ\s\-]*[a-zA-ZÀ-ÿ]$" required />
+
+            <label for="email">Email</label>
+            <input id="email" type="email" name="email" value="ihjif@g.com" placeholder="email@example.com" pattern="^[\w.%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}$" required/>
+
+            <label for="message">Votre Message</label> 
+            <textarea id="message" rows="15" class="form_message" name="message" value="" placeholder="Votre message ici" minlength="20" maxlength="600" pattern="^[a-zA-Z0-9\-_@#]+$" required></textarea> 
+
 					</div>
           <button class="contact_button">Envoyer</button>
 				</form>
