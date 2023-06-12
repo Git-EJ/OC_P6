@@ -37,12 +37,14 @@ allFields.forEach(emptyField => {
 
 inputFields.forEach((inputField) => {
     inputField.addEventListener('input', (e) => {
+        console.log(inputField.value)
         if(e.target.validity.tooShort) { 
+            console.log(e.target);
             e.target.setCustomValidity('Veuillez saisir au minimum 2 caratères')
             e.stopPropagation()
-        } else if(e.target.validity.patternMismatch) {
+        } else if(inputField.type != 'email' && e.target.validity.patternMismatch) {
             e.target.setCustomValidity('Caractères non Autorisés')
-            e.stopPropagation() 
+           e.stopPropagation()
         } else {
             e.target.setCustomValidity('')
         }
@@ -50,47 +52,75 @@ inputFields.forEach((inputField) => {
 })
 
 textareaField.addEventListener('input', (e) => {
-    e.target.validity.tooShort ? e.target.setCustomValidity('Veuillez saisir au minimum 20 caractères') : e.target.setCustomValidity('')
+    e.target.validity.tooShort ? (e.target.setCustomValidity('Veuillez saisir au minimum 20 caractères')) : e.target.setCustomValidity('')
 })
-
-
 //END of Validity States
 //END OF ALL FIELDS
 
 
+const form = document.querySelector('form')
 
+form.addEventListener('input', (e) => {
+    if(!form.checkValidity()) {
+        e.preventDefault();
+    }
+})
 
 // FIRSTNAME NAME AND LASTNAME FIELDS
 
 /**
- * @param {*DOM Element} inputFieldName (input field for modal contact form)
+ * @param {*DOM Element} inputField (input field for modal contact form)
  */
-function only1Dash(inputFieldName) {
-    inputFieldName.addEventListener('input', (e) => {
-        let name = e.target.value
-        let name1 = name.trim()
-        let name2 = name1.replace('--', '-')
-        name.length !== name2.length ? inputFieldName.value = name2 : ''
+function only1Dash(inputField) {
+    inputField.addEventListener('input', (e) => {
+        let value = e.target.value
+        let newValue = value.replace('--', '-').replace('  ', ' ')
+        value.length != newValue.length ? e.target.value = newValue : ''
     })
 }
 
 /**
- * @param {*DOM Element} inputFieldName (input field for modal contact form)
+ * @param {*DOM Element} inputField (input field for modal contact form)
  */
-function noDashFirstAndLast (inputFieldName) {
-    inputFieldName.addEventListener('input', (e) => {
-        if(inputFieldName.value.startsWith('-') || inputFieldName.value.endsWith('-')){
-            inputFieldName.setCustomValidity("Pas de trait d'union au début ou à la fin de ce champ")
-            e.stopPropagation()
-        }
+function noDashFirstAndLast (inputField) {
+    inputField.addEventListener('input', (e) => {
+        inputField.value.startsWith('-') || inputField.value.endsWith('-')
+            ? (inputField.setCustomValidity("Pas de trait d'union au début ou à la fin de ce champ"), e.stopPropagation())
+            : ''
     })
 }
-    
-    
+
+// function noSpaceBeginningAndEnd (inputFields) {
+//     inputFields.forEach(inputField => {
+//         inputField.addEventListener('input', (e) => {
+//             setTimeout(() => {
+//                 inputField.value = e.target.value.trim()
+//                 inputField.dispatchEvent(new Event('input')
+//             },1000) 
+//         })
+//     })
+// }
+
+function noSpaceBeginningAndEnd(inputFields) {
+    inputFields.forEach(inputField => {
+        inputField.addEventListener('input', (e) => {
+            const timeout = setTimeout(() => {
+                const trimmedValue = inputField.value.trim();
+                if (inputField.value !== trimmedValue) {
+                    inputField.value = trimmedValue;
+                    inputField.dispatchEvent(new Event('input'));
+                }
+            }, 1000);
+            // clearTimeout(timeout)
+        });
+    });
+}
+  
 only1Dash(firstnameField)
 only1Dash(lastnameField)
 noDashFirstAndLast(firstnameField)
 noDashFirstAndLast(lastnameField)
+noSpaceBeginningAndEnd(inputFields)
 
 // END FIRSTNAME NAME AND LASTNAME FIELDS
 
