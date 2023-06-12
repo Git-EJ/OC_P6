@@ -107,6 +107,15 @@ h1 {
   transform: scale(1.2);
 }
 
+.hidden {
+  height: 1px;
+  left: 0;
+  overflow: hidden;
+  position: absolute;
+  top: -10000px;
+  width: 1px;
+}
+
 .logo {
   height: 50px;
   margin-left: 100px;

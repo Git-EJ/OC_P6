@@ -1,14 +1,4 @@
-function displayModal() {
-    const modal = document.getElementById("contact_modal");
-	modal.style.display = "block";
-}
-
-function closeModal() {
-    const modal = document.getElementById("contact_modal");
-    modal.style.display = "none";
-}
-
-
+const modal = document.getElementById("contact_modal");
 const allFields = document.querySelectorAll('input, textarea')
 const inputFields = document.querySelectorAll('input')
 const textareaField = document.querySelector('textarea')
@@ -17,13 +7,10 @@ const firstnameField = document.getElementById('firstname')
 const emailField = document.getElementById('email')
 
 
+const displayModal = () => {modal.style.display = "block"}
 
-
-
-
-
-
-
+const closeModal = () => {modal.style.display = "none"}
+document.addEventListener('keydown', (e) => {e.key === 'Escape' ?  closeModal() : ''})
 
 
 
@@ -71,6 +58,7 @@ noSpaceBeginningAndEnd(allFields)
 // Minimum length
 inputFields.forEach((inputField) => {
     inputField.addEventListener('input', (e) => {
+        console.log(`${inputField.name}`, inputField.value)           // SOUTENANCE 
         if(e.target.validity.tooShort) { 
             e.target.setCustomValidity('Veuillez saisir au minimum 2 caratères')
             e.stopPropagation()
@@ -84,6 +72,7 @@ inputFields.forEach((inputField) => {
 })
 
 textareaField.addEventListener('input', (e) => {
+    console.log(`${textareaField.name}`, textareaField.value)        // SOUTENANCE                        
     e.target.validity.tooShort ? (e.target.setCustomValidity('Veuillez saisir au minimum 20 caractères')) : e.target.setCustomValidity('')
 })
 //END of Validity States
@@ -134,10 +123,10 @@ emailField.addEventListener('keydown', (e) => {
 
 
 
-
+ 
 //DEV START
 
 //modal automatic spawn
-displayModal();
+// displayModal();
 
 //DEV END

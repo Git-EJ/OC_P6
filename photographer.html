@@ -8,6 +8,7 @@
     <title>Fisheye - photographe </title>
   </head>
   <body>
+
     <header>
       <img src="assets/images/logo.png" class="logo" />
     </header>
@@ -16,31 +17,41 @@
         <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
       </div>
     </main>
+
     <div id="contact_modal">
 			<div class="modal">
 				<header>
           <h2>Contactez-moi</h2>
           <img src="assets/icons/close.svg" onclick="closeModal()" />
         </header>
+        
 				<form>
-					<div>
-            <label for="firstname">Prénom</label>
-            <input id="firstname" type="text" name="firstname" value="rr" placeholder="Votre prénom ici" minlength="2" maxlength='40' spellcheck="false" pattern="^[a-zA-ZÀ-ÿ][a-zA-ZÀ-ÿ\s\-]*[a-zA-ZÀ-ÿ]$" required/>
+					<div role= "group" aria-labelledby="Informations personnelles">
 
-            <label for="lastname">Nom</label>
-            <input id="lastname" type="text" name="lastname" value="uu" placeholder="Votre nom ici" minlength="2" maxlength='40' spellcheck="false" pattern="^[a-zA-ZÀ-ÿ][a-zA-ZÀ-ÿ\s\-]*[a-zA-ZÀ-ÿ]$" required />
+            <label for="firstname" id="first-name">Prénom</label>
+            <input id="firstname" type="text" name="firstname" value="rr" aria-labelledby="first-name" placeholder="Votre prénom ici" minlength="2" maxlength='40' spellcheck="false" pattern="^[a-zA-ZÀ-ÿ][a-zA-ZÀ-ÿ\s\-]*[a-zA-ZÀ-ÿ]$" required/>
+            
+            <label for="lastname" id="last-name">Nom</label>
+            <input id="lastname" type="text" name="lastname" value="uu" aria-labelledby="last-name" placeholder="Votre nom ici" minlength="2" maxlength='40' spellcheck="false" pattern="^[a-zA-ZÀ-ÿ][a-zA-ZÀ-ÿ\s\-]*[a-zA-ZÀ-ÿ]$" required />
+            
+            <label for="email" id="e-mail">Email</label>
+            <input id="email" type="email" name="email" value="ihjif@g.com" aria-labelledby="e-mail" placeholder="Votre email ici: email@example.com" pattern="^[\w.%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}$" required/>
+					
+          </div>
+          
+          <div role= "group" aria-labelledby="Informations personnelles">
 
-            <label for="email">Email</label>
-            <input id="email" type="email" name="email" value="ihjif@g.com" placeholder="email@example.com" pattern="^[\w.%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}$" required/>
-
-            <label for="message">Votre Message</label> 
-            <textarea id="message" rows="15" class="form_message" name="message" value="" placeholder="Votre message ici" minlength="20" maxlength="600" pattern="^[a-zA-Z0-9\-_@#]+$" required></textarea> 
+            <label for="message" id="m-essage">Votre Message</label> 
+            <textarea id="message" rows="15" class="form_message" name="message" value="" aria-labelledby="m-essage" placeholder="Votre message ici" minlength="20" maxlength="600" pattern="^[a-zA-Z0-9\-_@#]+$" required></textarea> 
 
 					</div>
-          <button class="contact_button">Envoyer</button>
+          
+          <label for="submit-button" id="s-ubmit-button" class="hidden">Envoyer</label>
+          <button id="submit-button"  aria-labelledby="s-ubmit-button" class="contact_button">Envoyer</button>
 				</form>
 			</div>
 		</div>
+
     <script src="/scripts/pages/photographer.js"></script>
     <script src="/scripts/utils/contactForm.js"></script>
   </body>
