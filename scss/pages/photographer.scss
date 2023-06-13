@@ -2,8 +2,7 @@
 
 .photograph-header {
     background-color: #FAFAFA;
-    // height: 300px; //origin
-    height: 50px; //modif
+    height: 300px;
     margin: 0 100px;
 }
 
@@ -18,5 +17,9 @@
     background-color: $primary-color;
     border-radius: 5px;
     cursor: pointer;
+
+    &:hover{
+        background: $secondary-color
+    }
 }
 

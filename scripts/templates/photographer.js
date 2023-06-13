@@ -15,13 +15,18 @@ function photographerTemplate(data) {
         article.setAttribute("aria-label", "Description du photographe")
         
         //Photographer img Portrait
-        const imgContainer = document.createElement('div')
-        imgContainer.classList.add('img_container')
+        const imgContainerLink = document.createElement('a')
+        imgContainerLink.setAttribute("href", `./photographer.html?id=${id}` )
+        imgContainerLink.classList.add('img_container')
+        
         const imgForPhotographers = document.createElement('img')
         imgForPhotographers.setAttribute("src", picture)
         imgForPhotographers.setAttribute("alt", `${name} photographer portrait`)
         imgForPhotographers.setAttribute("aria-label", `photo portrait du photographe ${name}`)
         imgForPhotographers.classList.add('photographer_img')
+
+       
+
         
         
         /**
@@ -33,7 +38,7 @@ function photographerTemplate(data) {
          */
         function addElement (tag, objectKey, addClass, ariaLabel) {
             const newElement = document.createElement(tag)
-            newElement.textContent = objectKey
+            newElement.textContent = objectKey ?? ("Pas d'informations") //nullish work for name and tagline
             newElement.classList.add(addClass)
             newElement.setAttribute("aria-label", ariaLabel)
             return newElement
@@ -52,12 +57,12 @@ function photographerTemplate(data) {
         const pricePerDaySpan = addElement('span', (`${price}\u20AC/jour`), 'photographer_price',`prix du photographe: ${price}\u20AC/jour`)
 
         
-        article.appendChild(imgContainer)
-        imgContainer.appendChild(imgForPhotographers);
+        article.appendChild(imgContainerLink)
+        imgContainerLink.appendChild(imgForPhotographers)
         
-        article.appendChild(photographerName);
-        article.appendChild(cityAndCountrySpan);
-        article.appendChild(taglineSpan);
+        article.appendChild(photographerName)
+        article.appendChild(cityAndCountrySpan)
+        article.appendChild(taglineSpan)
         article.appendChild(pricePerDaySpan)
         
         return (article);
