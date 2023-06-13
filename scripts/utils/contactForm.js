@@ -112,11 +112,10 @@ noDashFirstAndLast(lastnameField)
 
 
 // START OF EMAIL FIELD
-emailField.addEventListener('keydown', (e) => {
-    if (e.key === ' ') {
-      e.preventDefault(); //space can't be enter even if it's press
-    }
-  });
+
+//space can't be enter even if it's press
+emailField.addEventListener('keydown', (e) => {e.key === ' ' ? e.preventDefault() : '' })
+
 // END OF EMAIL FIELD
 
 

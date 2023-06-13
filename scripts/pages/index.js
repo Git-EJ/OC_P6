@@ -17,6 +17,7 @@
             photographersSection.appendChild(userCardDOM);
             
             // photographersHomeSection(photographer);
+            // console.log(photographersHomeSection(photographer));
         });
     }
 
