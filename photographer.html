@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
   <head>
     <link href="css/style.css" rel="stylesheet" type="text/css" />
     <meta charset="utf-8">
@@ -10,7 +10,7 @@
   <body>
 
     <header>
-      <img src="assets/images/logo.png" class="logo" />
+      <img src="assets/images/logo.png" class="logo" alt="Logo du site fisheye" aria-label="Logo du site fisheye"/>
     </header>
     <main id="main">
       <div class="photograph-header">
@@ -22,11 +22,11 @@
 			<div class="modal">
 				<header>
           <h2>Contactez-moi</h2>
-          <img src="assets/icons/close.svg" onclick="closeModal()" />
+          <img src="assets/icons/close.svg" onclick="closeModal()" alt="icone de fermeture formulaire" aria-label="icone de fermeture formulaire" />
         </header>
         
 				<form>
-					<div role= "group" aria-labelledby="Informations personnelles">
+					<div role="group" aria-label="Informations personnelles">
 
             <label for="firstname" id="first-name">Prénom</label>
             <input id="firstname" type="text" name="firstname" value="rr" aria-labelledby="first-name" placeholder="Votre prénom ici" minlength="2" maxlength='40' spellcheck="false" pattern="^[a-zA-ZÀ-ÿ][a-zA-ZÀ-ÿ\s\-]*[a-zA-ZÀ-ÿ]$" required/>
@@ -39,7 +39,7 @@
 					
           </div>
           
-          <div role= "group" aria-labelledby="Informations personnelles">
+          <div role= "group" aria-label="Message">
 
             <label for="message" id="m-essage">Votre Message</label> 
             <textarea id="message" rows="15" class="form_message" name="message" value="" aria-labelledby="m-essage" placeholder="Votre message ici" minlength="20" maxlength="600" pattern="^[a-zA-Z0-9\-_@#]+$" required></textarea> 
