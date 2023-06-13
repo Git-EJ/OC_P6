@@ -13,20 +13,33 @@ function getPhotographerID() {
     const findPhotographerID = (new URL(document.location)).searchParams
     return findPhotographerID.get('id')
 }
-const photographerId = getPhotographerID()
-// console.log(photographerId);
-
-
+const photographerId = Number(getPhotographerID())
+console.log(photographerId);
 
 async function initPhotographerPage() {
     // Récupère les datas des photographes
     const {photographers} = await getPhotographersData()
     // console.log(photographers);
+    
+    
+    let findPhotographerElementsById
+    for (let i=0 ; i < photographers.length ; i++){
+        if(photographers[i].id == photographerId) {
+            console.log(typeof photographerId, photographerId );
+            console.log(photographers[i].id)
+            findPhotographerElementsById = photographers[i] 
+            console.log(findPhotographerElementsById);
+            break
+        }
 
-const findPhotographerById = photographers.find(element => element = photographerId )
-console.log(findPhotographerById);
+    }
 }
-initPhotographerPage()
 
+
+
+
+
+initPhotographerPage()
+    
 
 
