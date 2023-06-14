@@ -1,0 +1,33 @@
+.hidden {
+    height: 1px;
+    left: 0;
+    overflow: hidden;
+    position: absolute;
+    top: -10000px;
+    width: 1px;
+}
+
+.our_photographers {
+    margin-right: 100px;
+    color: $primary-color;
+    transition: transform 0.5s cubic-bezier(0.2, 0.5, 0.3, 2);
+
+    &:hover{
+        color: $secondary-color;
+        transform:scale(1.2);
+    }
+}
+
+.photographer_portrait_container {
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.photographer_portrait {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    transform: scale(1.1);
+}

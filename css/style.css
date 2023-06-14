@@ -94,19 +94,6 @@ header {
   height: 90px;
 }
 
-h1 {
-  margin-right: 100px;
-}
-
-.text_link {
-  color: #901C1C;
-  transition: transform 0.5s cubic-bezier(0.2, 0.5, 0.3, 2);
-}
-.text_link:hover {
-  color: #D3573C;
-  transform: scale(1.2);
-}
-
 .hidden {
   height: 1px;
   left: 0;
@@ -114,6 +101,30 @@ h1 {
   position: absolute;
   top: -10000px;
   width: 1px;
+}
+
+.our_photographers {
+  margin-right: 100px;
+  color: #901C1C;
+  transition: transform 0.5s cubic-bezier(0.2, 0.5, 0.3, 2);
+}
+.our_photographers:hover {
+  color: #D3573C;
+  transform: scale(1.2);
+}
+
+.photographer_portrait_container {
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.photographer_portrait {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  transform: scale(1.1);
 }
 
 .logo {
@@ -133,18 +144,6 @@ h1 {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-}
-.photographer_section article .img_container {
-  height: 200px;
-  width: 200px;
-  border-radius: 50%;
-  overflow: hidden;
-}
-.photographer_section article .img_container .photographer_img {
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
-  transform: scale(1.1);
 }
 .photographer_section article .photographer_name {
   color: #D3573C;

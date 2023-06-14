@@ -14,23 +14,24 @@ function photographerTemplate(data) {
         article.setAttribute("role", "group")
         article.setAttribute("aria-label", "Description du photographe")
         
-        //Photographer img Portrait
+        //Photographer img Portrait Link (is a link and the container of the img portrait)
         const imgContainerLink = document.createElement('a')
         imgContainerLink.setAttribute("href", `./photographer.html?id=${id}` )
-        imgContainerLink.classList.add('img_container')
-        
-        const imgForPhotographers = document.createElement('img')
-        imgForPhotographers.setAttribute("src", picture)
-        imgForPhotographers.setAttribute("alt", `${name} photographer portrait`)
-        imgForPhotographers.setAttribute("aria-label", `photo portrait du photographe ${name}`)
-        imgForPhotographers.classList.add('photographer_img')
+        imgContainerLink.classList.add('photographer_portrait_container')
 
-       
+        //Photographer img portrait
+        function photographersPortrait () {
+            const photographerPortrait = document.createElement('img')
+            photographerPortrait.setAttribute("src", picture)
+            photographerPortrait.setAttribute("alt", `${name} photographer portrait`)
+            photographerPortrait.setAttribute("aria-label", `photo portrait du photographe ${name}`)
+            photographerPortrait.classList.add('photographer_portrait')
+            return photographerPortrait
+        }
+        const photographerPortrait = photographersPortrait()
 
-        
-        
         /**
-         * 
+         * function for add photographer name, city, tagline, price per day
          * @param {String} tag new HTML Tag
          * @param {Object.Key} objectKey data/photographer.json
          * @param {String} addClass
@@ -58,7 +59,7 @@ function photographerTemplate(data) {
 
         
         article.appendChild(imgContainerLink)
-        imgContainerLink.appendChild(imgForPhotographers)
+        imgContainerLink.appendChild(photographerPortrait)
         
         article.appendChild(photographerName)
         article.appendChild(cityAndCountrySpan)
@@ -91,5 +92,4 @@ function photographerTemplate(data) {
 
 
     //END of dev in progress
-    
     

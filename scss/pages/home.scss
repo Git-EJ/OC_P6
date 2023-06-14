@@ -16,20 +16,6 @@
         align-items: center;
         flex-direction: column;
 
-        .img_container {
-            height: 200px;
-            width: 200px;
-            border-radius: 50%;
-            overflow: hidden;
-            
-            .photographer_img {
-                height: 100%;
-                width: 100%;
-                object-fit: cover;
-                transform: scale(1.1);
-            }
-        }
-
         .photographer_name {
             color: $secondary-color;
             font-size: 2.3em;
