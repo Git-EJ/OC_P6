@@ -1,25 +1,55 @@
 
-
-.photograph-header {
-    background-color: #FAFAFA;
+.photographHeader_container {
     height: 300px;
     margin: 0 100px;
+    display: flex;
+    background-color: #FAFAFA;
 }
 
-.contact_button {
-    font-size: 1.3em;
-    font-weight: bold;
-    color: white;
-    padding: 11px;
-    width: 170px;
-    height: 70px;
-    border: none;
-    background-color: $primary-color;
-    border-radius: 5px;
-    cursor: pointer;
+.photographHeader {
+    width:33.33%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    &.left{
+        flex-direction: column;
+        align-items: start;
+        gap:1.2em;
+        padding-left: 2em;
+    }
 
-    &:hover{
-        background: $secondary-color
+    &.right{ padding-left: 5em;}
+     
+}
+
+.photograph_contact_button_position {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.select_container {
+    margin: 20px 0 0 100px;
+
+    label {
+        font-size: 1.1em;
+        font-weight: 700;
+        margin-right: 1em;
+    }
+
+    select {
+        width: 170px;
+        padding: 0.5em;
+        outline:none;
+        border:none;
+        border-radius: 5px;
+        color: #FAFAFA;
+        font-size:1.2em;
+        background: $primary-color;
+        box-shadow: 1px 1px 3px 1px$secondary-color;
+        // text-decoration: underline;
+
+        option:checked {background: $secondary-color;}
     }
 }
-

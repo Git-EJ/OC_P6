@@ -7,27 +7,62 @@
     width: 1px;
 }
 
-.our_photographers {
-    margin-right: 100px;
-    color: $primary-color;
-    transition: transform 0.5s cubic-bezier(0.2, 0.5, 0.3, 2);
 
-    &:hover{
+.photographer {
+    &_name {
         color: $secondary-color;
-        transform:scale(1.2);
+        font-size: 2.3em;
+        font-weight: 400;
+    }
+
+    &_portrait_container {
+        height: 200px;
+        width: 200px;
+        border-radius: 50%;
+        overflow: hidden;
+    }
+
+    &_portrait {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        transform: scale(1.1);
+    }
+
+    &_city {
+        color: $primary-color;
+        font-size: 0.9em;
+    }
+
+    &_tagline {
+        font-size: 0.7em;
+    }
+
+    &_price {
+        font-size: 0.6em;
+        color:#757575;
     }
 }
 
-.photographer_portrait_container {
-    height: 200px;
-    width: 200px;
-    border-radius: 50%;
-    overflow: hidden;
+.page {
+    &_name {font-size: 4em}
+    &_city {font-size: 1.5em}
+    &_tagline {font-size: 1.1em;}
 }
 
-.photographer_portrait {
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-    transform: scale(1.1);
+.contact_button {
+    font-size: 1.3em;
+    font-weight: bold;
+    color: white;
+    padding: 11px;
+    width: 170px;
+    height: 70px;
+    border: none;
+    background-color: $primary-color;
+    border-radius: 5px;
+    cursor: pointer;
+
+    &:hover{
+        background: $secondary-color
+    }
 }
