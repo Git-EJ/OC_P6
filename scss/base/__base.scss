@@ -1,6 +1,13 @@
+html,
 body {
+    max-width: 1600px;
+    margin: 0 auto;
     font-family: "DM Sans", sans-serif;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    ::-webkit-scrollbar {display: none}
 }
+
 
 header {
     display: flex;

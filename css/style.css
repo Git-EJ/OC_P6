@@ -82,8 +82,17 @@ button {
   border: none;
 }
 
+html,
 body {
+  max-width: 1600px;
+  margin: 0 auto;
   font-family: "DM Sans", sans-serif;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+html ::-webkit-scrollbar,
+body ::-webkit-scrollbar {
+  display: none;
 }
 
 header {
