@@ -8,13 +8,11 @@ export function photographerPicture(photographer) {
     return picture
 }
 
-
 /**
  * @param {string} picture url de l'image
  * @param {string} name nom du photographe
  */
-export function Portrait(picture, altText, className, parent=null) {
-    //Photographer img portrait
+export function DOMPortrait(picture, altText, className, parent=null) {
     const portrait = document.createElement('img')
     portrait.setAttribute("src", picture)
     portrait.setAttribute("alt", altText)
@@ -24,4 +22,12 @@ export function Portrait(picture, altText, className, parent=null) {
     return portrait
 }
 
-export function 
+export function photographerPortrait (data, picture, imgContainer ) {
+    const name = data.name
+    DOMPortrait(
+        picture,
+        `${name} photographer portrait`,
+        'photographer_portrait',
+        imgContainer
+    )       
+}

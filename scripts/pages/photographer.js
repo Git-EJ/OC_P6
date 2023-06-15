@@ -1,6 +1,6 @@
 import {getPhotographerMediaById, getPhotographerById } from "../api/API.js"
-import { DOMElement, photographerName } from "../components/DomElement.js"
-import { photographerPicture } from "../components/Portrait.js"
+import { DOMElement, photographerName, photographerCity, photographerTagline } from "../components/DomElement.js"
+import { photographerPicture, photographerPortrait,} from "../components/Portrait.js"
 
 
 // get the photographer's id from the url
@@ -30,50 +30,38 @@ retrivalData()
 function getPhotographerPageDOM (photographer) {
     const { name, id, city, country, tagline, price, portrait } = photographer
 
-    // picture for function Portrait
-    const picture = photographerPicture(photographer)
-    
     const photographHeaderContainer = document.querySelector('.photographHeader_container')
     const photographHeaderLeft = photographHeaderContainer.querySelector('.left')
     const photographHeaderMiddle = photographHeaderContainer.querySelector('.middle')
     const photographHeaderRight = photographHeaderContainer.querySelector('.right')
     const photographContactButton = document.getElementById('photograph_contact_button_position')
-
-
-
+    
     // Photographer name
     const photographerName_payload = photographerName(photographer)
-    const addClass = 'page_name';
-    photographerName_payload.classNames = photographerName_payload.classNames.concat(' ', addClass);
+    photographerName_payload.classNames = photographerName_payload.classNames.concat(' ', 'page_name')
     DOMElement(photographerName_payload, photographHeaderLeft)
     
     
     //Photographer city & country
-    const photographCityAndCOuntry = document.createElement('span')
-    photographCityAndCOuntry.textContent = (`${city}, ${country}`)
-    photographCityAndCOuntry.classList.add('photographer_city', 'page_city')
-
-    photographHeaderLeft.appendChild(photographCityAndCOuntry)
-
-    //Photographer tagline
-    const photographTagline = document.createElement('span')
-    photographTagline.textContent = tagline
-    photographTagline.classList.add('photographer_tagline', 'page_tagline')
-
-    photographHeaderLeft.appendChild(photographTagline)
+    const photographerCity_payload = photographerCity(photographer)
+    photographerCity_payload.classNames = photographerCity_payload.classNames.concat(' ', 'page_city')
+    DOMElement(photographerCity_payload, photographHeaderLeft)
     
+    //Photographer tagline
+
+    const photographerTagline_payload = photographerTagline(photographer)
+    photographerTagline_payload.classNames = photographerTagline_payload.classNames.concat(' ', 'page_Tagline')
+    DOMElement(photographerTagline_payload, photographHeaderLeft)
+
+
     //Photographer img portrait
     const imgContainer = document.createElement('div')
     imgContainer.classList.add('photographer_portrait_container')
-
-    const photographerPortrait = document.createElement('img')
-    photographerPortrait.setAttribute("src", picture)
-    photographerPortrait.setAttribute("alt", `${name} photographer portrait`)
-    photographerPortrait.setAttribute("aria-label", `photo portrait du photographe ${name}`)
-    photographerPortrait.classList.add('photographer_portrait')
+    
+    const picture = photographerPicture(photographer)
+    photographerPortrait(photographer, picture, imgContainer)
 
     photographHeaderRight.appendChild(imgContainer)
-    imgContainer.appendChild(photographerPortrait)
 
     //Photographer contact button
     photographContactButton.classList.add('photograph_contact_button_position')

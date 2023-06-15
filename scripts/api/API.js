@@ -48,6 +48,6 @@ export async function getPhotographerMediaById(id) {
 
 // async function retrivalPhotographers() {
 //     const photographers = await getPhotographers() 
-//    toto(photographers)
+//    photographerPortrait(photographers)
 // }
 // retrivalPhotographers()

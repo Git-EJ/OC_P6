@@ -1,12 +1,9 @@
 import { DOMElement, photographerName, photographerCity, photographerTagline, photographePrice } from "../components/DomElement.js";
-import { Portrait, photographerPicture } from "../components/Portrait.js";
+import { photographerPicture, photographerPortrait } from "../components/Portrait.js";
 
 
 export function photographerTemplate(data) {
-    
     const { name, id, city, country, tagline, price, portrait } = data
-    
-    
     
     function getUserCardDOM() {
         const article = document.createElement('article')
@@ -19,17 +16,12 @@ export function photographerTemplate(data) {
         imgContainerLink.setAttribute("href", `./photographer.html?id=${id}` )
         imgContainerLink.classList.add('photographer_portrait_container')
         
-        article.appendChild(imgContainerLink)
         
         //Photographer img portrait
         const picture = photographerPicture(data)
-        Portrait(
-            picture,
-            `${name} photographer portrait`,
-            'photographer_portrait',
-            imgContainerLink
-        )
-
+        photographerPortrait(data, picture, imgContainerLink)
+        article.appendChild(imgContainerLink)
+        
         //Photographer Name
         const photographerName_payload = photographerName(data)
         DOMElement(photographerName_payload, article)
