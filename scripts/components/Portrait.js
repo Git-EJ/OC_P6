@@ -1,3 +1,14 @@
+// //Retrieval Picture of Photographer base on the id
+export function photographerPicture(photographer) {
+    const { id, portrait } = photographer
+    let idForPicture = portrait
+    idForPicture = id
+    const ext = portrait.split('.').slice(-1)[0] // ext for extension
+    const picture = `./assets/photographers/${id}.${ext}`
+    return picture
+}
+
+
 /**
  * @param {string} picture url de l'image
  * @param {string} name nom du photographe
@@ -12,3 +23,5 @@ export function Portrait(picture, altText, className, parent=null) {
     parent && parent.appendChild(portrait)
     return portrait
 }
+
+export function 

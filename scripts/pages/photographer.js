@@ -1,4 +1,7 @@
-import {getPhotographerMediaById, getPhotographers } from "../api/API.js"
+import {getPhotographerMediaById, getPhotographerById } from "../api/API.js"
+import { DOMElement, photographerName } from "../components/DomElement.js"
+import { photographerPicture } from "../components/Portrait.js"
+
 
 // get the photographer's id from the url
 function getPhotographerID() {
@@ -13,25 +16,22 @@ if (!photographerId) {
 
 
 async function retrivalData() {
-    const photographers = await getPhotographers()
+    const photographer = await getPhotographerById(photographerId)  
 
-    getPhotographerPageDOM(photographers)
-    // console.log(photographers);
+    getPhotographerPageDOM(photographer)
+    // console.log(photographer);
+
     const photographerMedia = await getPhotographerMediaById(photographerId)
-    console.log(photographerMedia)
+    // console.log(photographerMedia)
 }
 retrivalData()
 
 
-function getPhotographerPageDOM (photographers) {
-    const photographer = photographers.find( p => p.id === photographerId )
-
+function getPhotographerPageDOM (photographer) {
     const { name, id, city, country, tagline, price, portrait } = photographer
 
-     //Retrieval Picture of Photographer base on the id
-    let idForPicture = portrait
-    idForPicture = id
-    const picture = `assets/photographers/${id}.jpg`
+    // picture for function Portrait
+    const picture = photographerPicture(photographer)
     
     const photographHeaderContainer = document.querySelector('.photographHeader_container')
     const photographHeaderLeft = photographHeaderContainer.querySelector('.left')
@@ -39,28 +39,30 @@ function getPhotographerPageDOM (photographers) {
     const photographHeaderRight = photographHeaderContainer.querySelector('.right')
     const photographContactButton = document.getElementById('photograph_contact_button_position')
 
-    //Photograph name
-    const photographName = document.createElement('h2')
-    photographName.textContent = name
-    photographName.classList.add('photographer_name', 'page_name')
 
-    photographHeaderLeft.appendChild(photographName)
 
-    //Photograph city & country
+    // Photographer name
+    const photographerName_payload = photographerName(photographer)
+    const addClass = 'page_name';
+    photographerName_payload.classNames = photographerName_payload.classNames.concat(' ', addClass);
+    DOMElement(photographerName_payload, photographHeaderLeft)
+    
+    
+    //Photographer city & country
     const photographCityAndCOuntry = document.createElement('span')
     photographCityAndCOuntry.textContent = (`${city}, ${country}`)
     photographCityAndCOuntry.classList.add('photographer_city', 'page_city')
 
     photographHeaderLeft.appendChild(photographCityAndCOuntry)
 
-    //Photograph tagline
+    //Photographer tagline
     const photographTagline = document.createElement('span')
     photographTagline.textContent = tagline
     photographTagline.classList.add('photographer_tagline', 'page_tagline')
 
     photographHeaderLeft.appendChild(photographTagline)
     
-    //Photograph img portrait
+    //Photographer img portrait
     const imgContainer = document.createElement('div')
     imgContainer.classList.add('photographer_portrait_container')
 
@@ -73,7 +75,7 @@ function getPhotographerPageDOM (photographers) {
     photographHeaderRight.appendChild(imgContainer)
     imgContainer.appendChild(photographerPortrait)
 
-    //Photograph contact button
+    //Photographer contact button
     photographContactButton.classList.add('photograph_contact_button_position')
 
 }

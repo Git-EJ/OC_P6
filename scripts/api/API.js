@@ -16,10 +16,10 @@ async function getData() {
                 media:[]
             }
         })
-        localStorage.setItem("photographers", JSON.stringify(data))
+        localStorage.setItem("photographers", JSON.stringify(data)) // localStorage only string for storage
         _data = data
     } else {
-        _data = JSON.parse(ls)
+        _data = JSON.parse(ls) // local storage string to json object
         return _data
     }
 }
@@ -43,3 +43,11 @@ export async function getPhotographerMediaById(id) {
     const media = await getMedia()
     return media.filter ( m => m.photographerId === id)
 }
+
+
+
+// async function retrivalPhotographers() {
+//     const photographers = await getPhotographers() 
+//    toto(photographers)
+// }
+// retrivalPhotographers()
