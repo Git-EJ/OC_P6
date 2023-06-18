@@ -28,7 +28,7 @@ export function photographerName(photographers) {
 
 export function photographerCity(photographers) {
     const { city, country } = photographers
-    const photographerCity_payload= {
+    const photographerCity_payload= { 
         tag: "span",
         textContent: (`${city}, ${country}`),
         classNames: 'photographer_city',
@@ -52,7 +52,7 @@ export function photographerTagline(photographers) {
     return photographerTagline_payload
 }
 
-export function photographePrice(photographers) {
+export function photographerPrice(photographers) {
     const {price} = photographers
     const photographerPrice_payload= {
         tag: "span",

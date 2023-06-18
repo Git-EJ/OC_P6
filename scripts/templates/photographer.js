@@ -1,4 +1,4 @@
-import { DOMElement, photographerName, photographerCity, photographerTagline, photographePrice } from "../components/DomElement.js";
+import { DOMElement, photographerName, photographerCity, photographerTagline, photographerPrice } from "../components/DomElement.js";
 import { photographerPicture, photographerPortrait } from "../components/Portrait.js";
 
 
@@ -35,7 +35,7 @@ export function photographerTemplate(data) {
         DOMElement(photographerTagline_payload, article)
         
         // Photographer Price per day
-        const photographerPrice_payload = photographePrice(data)
+        const photographerPrice_payload = photographerPrice(data)
         DOMElement(photographerPrice_payload, article)
         
         return (article);
