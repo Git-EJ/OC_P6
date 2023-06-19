@@ -288,6 +288,22 @@ header {
   padding: 0.3em 0 0 0.2em;
   font-size: 0.8em;
 }
+.medias .fa-heart:hover {
+  cursor: pointer;
+}
+.medias .isLiked {
+  color: #D3573C;
+}
+
+.overlay_bottomRight {
+  background: #D3573C;
+  width: 200px;
+  height: 45px;
+  position: sticky;
+  margin-right: 100px;
+  bottom: 0;
+  left: 100%;
+}
 
 #contact_modal {
   display: none;

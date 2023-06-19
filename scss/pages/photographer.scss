@@ -102,5 +102,24 @@
         align-items: center;
         padding: 0.3em 0 0 0.2em;
         font-size: 0.8em;
+        
+        &:hover {
+            cursor: pointer;
+        }
     }
+
+    .isLiked {
+        color:$secondary-color
+    }
+}
+
+.overlay_bottomRight {
+    background: $secondary-color;
+    width:200px;
+    height: 45px;
+    position: sticky;
+    margin-right: 100px;
+    bottom:0;
+    left: 100%;
+
 }

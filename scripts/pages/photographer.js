@@ -70,20 +70,18 @@ function getPhotographerPageHeaderDOM (photographer) {
     return { name, id, city, country, tagline, price, portrait, getPhotographerPageHeaderDOM }
 }
 
-
-
 const arrayOfPhotographerMedias = []
 const arrayOfPhotographerMediasKeyValue = []
 
 function getPhotographerMedias(photographersMedias) {
-    photographersMedias.map(photographerMedias => {
+    photographersMedias.forEach(photographerMedias => {
         arrayOfPhotographerMedias.push(photographerMedias)
         getKeyAndValue(photographerMedias, arrayOfPhotographerMediasKeyValue)
         // console.log(photographerMedias); 
     });
     // photographerMedias(arrayOfPhotographerMedias)
-    getPhotographerPageMediasDOM(arrayOfPhotographerMedias, photographerJsonId)
-    likesCounter(arrayOfPhotographerMedias)
+    getPhotographerPageMediasDOM(arrayOfPhotographerMedias)
+    mediasLikesCounter()
 }
 
 function getKeyAndValue(photographerMedias, arrayOfPhotographerMediasKeyValue) {
@@ -95,8 +93,13 @@ function getKeyAndValue(photographerMedias, arrayOfPhotographerMediasKeyValue) {
 // console.log(arrayOfPhotographerMedias);
 // console.log(arrayOfPhotographerMediasKeyValue);
 
+// const array = [...DOMElement.document.querySelectorAll(".vignette")]
+// array.map(vignette => parent.removeChild(vignette))
 
-
+// array.sort((a,b)=> {
+//     new Date(b.date) - new Date(a.date)
+// })
+// array.map(vignette => parent.appendChild(vignette))
 
 export function getPhotographerPageMediasDOM(data){ 
     
@@ -122,13 +125,14 @@ export function getPhotographerPageMediasDOM(data){
             aLink.setAttribute('href', '#')
             article.appendChild(aLink)
         }
-
+        
         if (video) { 
             const video_container = document.createElement('video') 
             const videoMedia = document.createElement('source')
-
+            
             video_container.classList.add('media')
-            video_container.setAttribute('controls', "")
+            video_container.setAttribute('controls', "controls")
+            video_container.setAttribute('preload', "metadata")
             video_container.appendChild(videoMedia)
             
             aLink.appendChild(video_container)  
@@ -157,23 +161,51 @@ export function getPhotographerPageMediasDOM(data){
 }
 
 
-function likesCounter(data) {
-    data.forEach(() => {
-        const counterButtons  = document.querySelectorAll('.heartButton')
-        const counterValues = document.querySelectorAll('.medias_likes_counter')
-        
-        counterButtons.forEach((counterButton, i)=> {
-            let isLiked = false
-            if (!isLiked) {
-                let counterBase = (+counterValues[i].textContent)
-                counterButton.addEventListener(('click'), () => {
-                    counterBase += 1
-                    counterValues[i].textContent = counterBase
-                    isLiked = true
-                    //mettre à jour la BD Json
-                    //pas plus d'un like par media/utilisateur isliked ne fonctionne pas 😭
-                })
+// [{id:photographerId, likes:[id]}]
+
+
+let arrayOfLikes = []
+function mediasLikesCounter() {
+    const counterButtons  = document.querySelectorAll('.heartButton')
+    const likesCounter = document.querySelectorAll('.medias_likes_counter')
+    
+    counterButtons.forEach((el, i)=> {
+
+        let isLiked = false
+        let counterBase = +likesCounter[i].textContent
+        arrayOfLikes.push(counterBase)
+        totalLikesCounter(arrayOfLikes)
+
+        el.addEventListener(('click'), () => {
+            if (el[i] = !isLiked) {
+                counterBase ++
+                likesCounter[i].textContent = counterBase
+                isLiked = true
+                counterButtons[i].classList.add('isLiked')
+                arrayOfLikes[i] = counterBase
+                totalLikesCounter (arrayOfLikes)
+
+            } else {
+                counterBase --
+                likesCounter[i].textContent = counterBase
+                isLiked = false
+                counterButtons[i].classList.remove('isLiked')
+                arrayOfLikes[i] = counterBase
+                totalLikesCounter (arrayOfLikes)
             }
         })
     })
 }
+
+function totalLikesCounter(data) {
+    let totalLikes = 0
+    data.forEach(el => { totalLikes += el })
+    likesCounter(totalLikes)
+}
+
+function likesCounter(data) {
+    console.log(data);
+}
+
+// updateOverlayLikes()
+//mettre à jour la BD Json en locale storage

@@ -7,7 +7,7 @@ const firstnameField = document.getElementById('firstname')
 const emailField = document.getElementById('email')
 
 
-const displayModal = () => {modal.style.display = "block"}
+const displayModal = () => {modal.style.display = "flex"}
 
 const closeModal = () => {modal.style.display = "none"}
 document.addEventListener('keydown', (e) => {e.key === 'Escape' ?  closeModal() : ''})
@@ -81,10 +81,10 @@ textareaField.addEventListener('input', (e) => {
 
 // FIRSTNAME NAME AND LASTNAME FIELDS
 /**
- * @param {*DOM Element} inputField (input field for modal contact form)
+ * @param {*DOM Element} pInputField (input field for modal contact form)
  */
-function only1Dash(inputField) {
-    inputField.addEventListener('input', (e) => {
+function only1Dash(pInputField) {
+    pInputField.addEventListener('input', (e) => {
         let value = e.target.value
         let newValue = value.replace('--', '-').replace('  ', ' ')
         value.length != newValue.length ? e.target.value = newValue : ''
@@ -92,12 +92,12 @@ function only1Dash(inputField) {
 }
 
 /**
- * @param {*DOM Element} inputField (input field for modal contact form)
+ * @param {*DOM Element}pInputField (input field for modal contact form)
 */
-function noDashFirstAndLast (inputField) {
-    inputField.addEventListener('input', (e) => {
-        inputField.value.startsWith('-') || inputField.value.endsWith('-')
-        ? (inputField.setCustomValidity("Pas de trait d'union au début ou à la fin de ce champ"), e.stopPropagation())
+function noDashFirstAndLast (pInputField) {
+    pInputField.addEventListener('input', (e) => {
+        pInputField.value.startsWith('-') || pInputField.value.endsWith('-')
+        ? (pInputField.setCustomValidity("Pas de trait d'union au début ou à la fin de ce champ"), e.stopPropagation())
         : ''
     })
 }
