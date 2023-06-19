@@ -36,6 +36,7 @@ function getPhotographerPageHeaderDOM (photographer) {
     const photographHeaderMiddle = photographHeaderContainer.querySelector('.middle')
     const photographHeaderRight = photographHeaderContainer.querySelector('.right')
     const photographContactButton = document.getElementById('photograph_contact_button_position')
+    const pricePerDay = document.querySelector('.overlay_bottomRight_pricePerDay')
 
     // Photographer name
     const photographerName_payload = photographerName(photographer)
@@ -66,6 +67,9 @@ function getPhotographerPageHeaderDOM (photographer) {
     
     //Photographer contact button
     photographContactButton.classList.add('photograph_contact_button_position')
+
+    // Photographer pricePerDay in overlay
+    pricePerDay.textContent = `${price}\u20AC / jour`
 
     return { name, id, city, country, tagline, price, portrait, getPhotographerPageHeaderDOM }
 }
@@ -174,8 +178,7 @@ function mediasLikesCounter() {
         let isLiked = false
         let counterBase = +likesCounter[i].textContent
         arrayOfLikes.push(counterBase)
-        totalLikesCounter(arrayOfLikes)
-
+        
         el.addEventListener(('click'), () => {
             if (el[i] = !isLiked) {
                 counterBase ++
@@ -195,17 +198,17 @@ function mediasLikesCounter() {
             }
         })
     })
+    totalLikesCounter(arrayOfLikes)
 }
 
 function totalLikesCounter(data) {
+    const counter = document.querySelector('.overlay_bottomRight_likesCounter')
+    const heartIcon = document.createElement('i')
     let totalLikes = 0
     data.forEach(el => { totalLikes += el })
-    likesCounter(totalLikes)
+    counter.textContent = totalLikes
+    heartIcon.classList.add('fa-solid', 'fa-heart')
+    counter.appendChild(heartIcon)
 }
 
-function likesCounter(data) {
-    console.log(data);
-}
-
-// updateOverlayLikes()
 //mettre à jour la BD Json en locale storage

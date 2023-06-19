@@ -296,13 +296,33 @@ header {
 }
 
 .overlay_bottomRight {
-  background: #D3573C;
-  width: 200px;
+  width: fit-content;
   height: 45px;
-  position: sticky;
   margin-right: 100px;
+  position: sticky;
   bottom: 0;
   left: 100%;
+  font-size: 1.5em;
+  background: #D3573C;
+  display: flex;
+  justify-content: space-between;
+}
+.overlay_bottomRight_likesCounter {
+  padding-left: 20px;
+  display: flex;
+  align-items: center;
+}
+.overlay_bottomRight_pricePerDay {
+  padding-right: 20px;
+  display: flex;
+  align-items: center;
+}
+.overlay_bottomRight .fa-heart {
+  font-size: 0.7em;
+  display: flex;
+  align-items: center;
+  margin-right: 2em;
+  padding: 0.1em 0 0 0.3em;
 }
 
 #contact_modal {
