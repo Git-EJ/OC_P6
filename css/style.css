@@ -242,7 +242,6 @@ header {
   color: #FAFAFA;
   font-size: 1.2em;
   background: #901C1C;
-  box-shadow: 1px 1px 3px 1px #D3573C;
 }
 .select_container select option:checked {
   background: #D3573C;
@@ -254,7 +253,7 @@ header {
   justify-content: space-between;
   align-items: center;
   gap: 70px 0;
-  margin: 50px 100px 0 100px;
+  margin: 50px 100px 70px 100px;
 }
 .photographer_media_container {
   width: 350px;

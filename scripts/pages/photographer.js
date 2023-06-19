@@ -131,12 +131,15 @@ export function getPhotographerPageMediasDOM(data){
         }
         
         if (video) { 
+            const removeVideoExt = video.split(".")[0] //for video poster 
+
             const video_container = document.createElement('video') 
             const videoMedia = document.createElement('source')
             
             video_container.classList.add('media')
             video_container.setAttribute('controls', "controls")
             video_container.setAttribute('preload', "metadata")
+            video_container.setAttribute('poster', `/assets/images/${photographerId}/${removeVideoExt}.jpg`)
             video_container.appendChild(videoMedia)
             
             aLink.appendChild(video_container)  
@@ -204,7 +207,7 @@ function mediasLikesCounter() {
 function totalLikesCounter(data) {
     const counter = document.querySelector('.overlay_bottomRight_likesCounter')
     const heartIcon = document.createElement('i')
-    
+
     let totalLikes = 0
     data.forEach(el => { totalLikes += el })
 

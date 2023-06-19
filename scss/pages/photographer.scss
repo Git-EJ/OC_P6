@@ -47,7 +47,6 @@
         color: #FAFAFA;
         font-size:1.2em;
         background: $primary-color;
-        box-shadow: 1px 1px 3px 1px$secondary-color;
 
         option:checked {background: $secondary-color;}
     }
@@ -62,7 +61,7 @@
         justify-content: space-between;
         align-items: center;
         gap: 70px 0;
-        margin: 50px 100px 0 100px;
+        margin: 50px 100px 70px 100px;
     }
     
     &_media_container{
