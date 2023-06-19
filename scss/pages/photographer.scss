@@ -70,13 +70,37 @@
         width:350px;
         height:300px;
         border-radius: 5px;
-        border:1px solid red;
         
-        .dev{
+        .media{
             width:100%;
             height:100%;
             object-fit: cover;
         }
     }
-    
+}
+
+
+.medias {
+    color:$primary-color;
+    display:flex;
+    justify-content: space-between ;
+    font-size: 1.5em;
+
+    &_name {
+        width: 78%
+    }
+
+    &_likes_container {
+        width: 22%;
+        display: flex;
+        justify-content:flex-end;
+        align-items: flex-start;
+    }
+
+    .fa-heart {
+        display: flex;
+        align-items: center;
+        padding: 0.3em 0 0 0.2em;
+        font-size: 0.8em;
+    }
 }

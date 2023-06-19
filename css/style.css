@@ -260,12 +260,33 @@ header {
   width: 350px;
   height: 300px;
   border-radius: 5px;
-  border: 1px solid red;
 }
-.photographer_media_container .dev {
+.photographer_media_container .media {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.medias {
+  color: #901C1C;
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.5em;
+}
+.medias_name {
+  width: 78%;
+}
+.medias_likes_container {
+  width: 22%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+.medias .fa-heart {
+  display: flex;
+  align-items: center;
+  padding: 0.3em 0 0 0.2em;
+  font-size: 0.8em;
 }
 
 #contact_modal {

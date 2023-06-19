@@ -36,7 +36,7 @@ function getPhotographerPageHeaderDOM (photographer) {
     const photographHeaderMiddle = photographHeaderContainer.querySelector('.middle')
     const photographHeaderRight = photographHeaderContainer.querySelector('.right')
     const photographContactButton = document.getElementById('photograph_contact_button_position')
-    
+
     // Photographer name
     const photographerName_payload = photographerName(photographer)
     photographerName_payload.classNames = photographerName_payload.classNames.concat(' ', 'page_name')
@@ -83,6 +83,7 @@ function getPhotographerMedias(photographersMedias) {
     });
     // photographerMedias(arrayOfPhotographerMedias)
     getPhotographerPageMediasDOM(arrayOfPhotographerMedias, photographerJsonId)
+    likesCounter(arrayOfPhotographerMedias)
 }
 
 function getKeyAndValue(photographerMedias, arrayOfPhotographerMediasKeyValue) {
@@ -100,17 +101,22 @@ function getKeyAndValue(photographerMedias, arrayOfPhotographerMediasKeyValue) {
 export function getPhotographerPageMediasDOM(data){ 
     
     data.forEach(el => {
-        const {image, video, photographerId} = el
+        const {image, video, title, likes, photographerId} = el
         const photographer_medias_section = document.querySelector('.photographer_medias_section')
         const article = document.createElement('article')
         const aLink = document.createElement('a')
+        const mediaNameAndLikes = document.createElement('div')
+        const mediaName = document.createElement('span')
+        const mediaLikes = document.createElement('span')
+        const mediaLikesCounter = document.createElement('span')
+        const heartIcon = document.createElement('i')
         
         article.classList.add('photographer_media_container')
         photographer_medias_section.appendChild(article)
         
         if (image) { 
             const img = document.createElement('img') 
-            img.classList.add('dev')
+            img.classList.add('media')
             img.setAttribute('src', `./assets/images/${photographerId}/${image}`)
             aLink.appendChild(img)  
             aLink.setAttribute('href', '#')
@@ -118,11 +124,10 @@ export function getPhotographerPageMediasDOM(data){
         }
 
         if (video) { 
-            console.log(video);
             const video_container = document.createElement('video') 
             const videoMedia = document.createElement('source')
 
-            video_container.classList.add('dev')
+            video_container.classList.add('media')
             video_container.setAttribute('controls', "")
             video_container.appendChild(videoMedia)
             
@@ -133,5 +138,42 @@ export function getPhotographerPageMediasDOM(data){
             videoMedia.setAttribute('src', `./assets/images/${photographerId}/${video}`)
             videoMedia.setAttribute('type', 'video/mp4')
         }   
+        
+        mediaNameAndLikes.classList.add('medias')
+        mediaName.classList.add('medias_name')
+        mediaLikes.classList.add('medias_likes_container')
+        mediaLikesCounter.classList.add('medias_likes_counter')
+        heartIcon.classList.add('fa-solid', 'fa-heart')
+        heartIcon.classList.add('heartButton')
+        mediaName.textContent = `${title}`
+        mediaLikesCounter.textContent = `${likes}`
+        
+        article.appendChild(mediaNameAndLikes)
+        mediaNameAndLikes.appendChild(mediaName)
+        mediaNameAndLikes.appendChild(mediaLikes)
+        mediaLikes.appendChild(mediaLikesCounter)
+        mediaLikes.appendChild(heartIcon)
+    })
+}
+
+
+function likesCounter(data) {
+    data.forEach(() => {
+        const counterButtons  = document.querySelectorAll('.heartButton')
+        const counterValues = document.querySelectorAll('.medias_likes_counter')
+        
+        counterButtons.forEach((counterButton, i)=> {
+            let isLiked = false
+            if (!isLiked) {
+                let counterBase = (+counterValues[i].textContent)
+                counterButton.addEventListener(('click'), () => {
+                    counterBase += 1
+                    counterValues[i].textContent = counterBase
+                    isLiked = true
+                    //mettre à jour la BD Json
+                    //pas plus d'un like par media/utilisateur isliked ne fonctionne pas 😭
+                })
+            }
+        })
     })
 }
