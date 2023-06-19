@@ -204,8 +204,10 @@ function mediasLikesCounter() {
 function totalLikesCounter(data) {
     const counter = document.querySelector('.overlay_bottomRight_likesCounter')
     const heartIcon = document.createElement('i')
+    
     let totalLikes = 0
     data.forEach(el => { totalLikes += el })
+
     counter.textContent = totalLikes
     heartIcon.classList.add('fa-solid', 'fa-heart')
     counter.appendChild(heartIcon)
