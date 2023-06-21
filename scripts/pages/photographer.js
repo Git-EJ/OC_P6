@@ -173,19 +173,12 @@ export function getPhotographerPageMediasDOM(data){
     })
 }
 
-//local storage
-// [{id:photographerId, likes:[id]}]
-
-
-
-
 
 
 let arrayOfLikes = []
 function mediasLikesCounter() {
     const counterButtons  = document.querySelectorAll('.heartButton')
     const likesCounter = document.querySelectorAll('.medias_likes_counter')
-    
     
     // for localstorage retrival medias name
     const mediasName = document.querySelectorAll('.medias_name')
@@ -215,7 +208,7 @@ function mediasLikesCounter() {
         }
 
         el.addEventListener(('click'), () => {
-            if (el[i] = !isLiked) {
+            if (el = !isLiked) {
                 counterBase ++
                 likesCounter[i].textContent = counterBase
                 isLiked = true
@@ -242,40 +235,52 @@ function mediasLikesCounter() {
 function totalLikesCounter(data) {
     const counter = document.querySelector('.overlay_bottomRight_likesCounter')
     const heartIcon = document.createElement('i')
+    const likes = document.querySelectorAll('.medias_likes_counter')
 
-    let lsTotalLikesString = (localStorage.getItem(`${photographerJsonId}`))
-    let totalLikes = 0
+    let lsTotalLikesString = localStorage.getItem(`${photographerJsonId}`)
+    let lsTotalLikesNumber = JSON.parse(lsTotalLikesString)
+
+    let lsnewDataString = localStorage.getItem(`${photographerJsonId}_newData`)
+    let lsnewDataNumber = JSON.parse(lsnewDataString)
     
-    if (lsTotalLikesString === null) {
-        console.log('(1)', lsTotalLikesString);
-        data.forEach(el => { totalLikes += el })
 
-        counter.textContent = totalLikes
+    if (!lsTotalLikesString) {
+
+        console.log('(data if)', data);
+        
+        const dataSum = data.reduce((acc, el) => acc + el, 0)
+        console.log('(1)', dataSum);
+
+        counter.textContent = (dataSum + '  1er charg')
         heartIcon.classList.add('fa-solid', 'fa-heart')
         counter.appendChild(heartIcon)
 
-        lsTotalLikesString = totalLikes
-        console.log('(2)', lsTotalLikesString);
-        localStorage.setItem(`${photographerJsonId}`, JSON.stringify(lsTotalLikesString))
+        console.log('(2)', dataSum);
+        localStorage.setItem(`${photographerJsonId}`, JSON.stringify(dataSum))
 
     } else { 
-        console.log('(3)', lsTotalLikesString);
 
-        totalLikes = JSON.parse(lsTotalLikesString)
-        console.log('(4)', totalLikes);
+        counter.textContent = ( lsTotalLikesNumber + '   else react 1')
+        console.log('(data else)', data);
 
-        data.forEach(el => { totalLikes += el }) //issue à chaque click + 305 +1 ; à chaque reactualisaton +305
-        console.log('(5)', totalLikes);
+        let toto = []
+        likes.forEach(el => {
+            toto.push(el.textContent)
+            console.log('likes', toto);
+        })
 
-        counter.textContent = totalLikes
-        lsTotalLikesString = totalLikes
-        localStorage.setItem(`${photographerJsonId}`, JSON.stringify(lsTotalLikesString))
+        let newData = toto.reduce((acc, el) => acc + +el, 0)
+
+        // const newData = data.reduce((acc, el) => acc + el, 0)
+        console.log('(new data)', newData);
+
+        localStorage.setItem(`${photographerJsonId}_newData`, JSON.stringify(newData))
+    
+        counter.textContent = (newData + '   else react 2')
 
         heartIcon.classList.add('fa-solid', 'fa-heart')
         counter.appendChild(heartIcon)
-
         
     }
 }
 
-//mettre à jour la BD Json en locale storage
