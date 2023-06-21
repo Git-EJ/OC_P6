@@ -43,11 +43,3 @@ export async function getPhotographerMediaById(id) {
     const media = await getMedia()
     return media.filter ( m => m.photographerId === id)
 }
-
-
-
-// async function retrivalPhotographers() {
-//     const photographers = await getPhotographers() 
-//    photographerPortrait(photographers)
-// }
-// retrivalPhotographers()

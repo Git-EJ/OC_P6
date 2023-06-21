@@ -1,7 +1,7 @@
 import { getPhotographerMediaById, getPhotographerById } from "../api/API.js"
 import { DOMElement, photographerName, photographerCity, photographerTagline } from "../components/DomElement.js"
-// import { photographerMedias } from "../components/Medias.js"
 import { photographerPicture, photographerPortrait,} from "../components/Portrait.js"
+import { mediasLikesCounter, totalLikesCounter } from "../utils/likesCounter.js"
 
 
 // get the photographer's id from the url
@@ -19,25 +19,21 @@ if (!photographerJsonId) {
 async function retrivalData() {
     const photographer = await getPhotographerById(photographerJsonId) 
     getPhotographerPageHeaderDOM(photographer)
-    // console.log(photographer);
     
     const photographersMedias = await getPhotographerMediaById(photographerJsonId)
     getPhotographerMedias(photographersMedias)
-    // console.log(photographersMedias)
 }
 retrivalData()
 
 
 function getPhotographerPageHeaderDOM (photographer) {
-    // console.log(photographer);
     const { name, id, city, country, tagline, price, portrait } = photographer
     const photographHeaderContainer = document.querySelector('.photographHeader_container')
     const photographHeaderLeft = photographHeaderContainer.querySelector('.left')
-    const photographHeaderMiddle = photographHeaderContainer.querySelector('.middle')
     const photographHeaderRight = photographHeaderContainer.querySelector('.right')
     const photographContactButton = document.getElementById('photograph_contact_button_position')
     const pricePerDay = document.querySelector('.overlay_bottomRight_pricePerDay')
-
+    
     // Photographer name
     const photographerName_payload = photographerName(photographer)
     photographerName_payload.classNames = photographerName_payload.classNames.concat(' ', 'page_name')
@@ -67,48 +63,22 @@ function getPhotographerPageHeaderDOM (photographer) {
     
     //Photographer contact button
     photographContactButton.classList.add('photograph_contact_button_position')
-
+    
     // Photographer pricePerDay in overlay
     pricePerDay.textContent = `${price}\u20AC / jour`
-
+    
     return { name, id, city, country, tagline, price, portrait, getPhotographerPageHeaderDOM }
 }
 
 const arrayOfPhotographerMedias = []
-const arrayOfPhotographerMediasKeyValue = []
 
 function getPhotographerMedias(photographersMedias) {
     photographersMedias.forEach(photographerMedias => {
         arrayOfPhotographerMedias.push(photographerMedias)
-        getKeyAndValue(photographerMedias, arrayOfPhotographerMediasKeyValue)
-        // console.log(photographerMedias); 
+        // getKeyAndValue(photographerMedias) // DEV (end of page ===>  pages/photographers.js)
     });
-    // photographerMedias(arrayOfPhotographerMedias)
     getPhotographerPageMediasDOM(arrayOfPhotographerMedias)
-    mediasLikesCounter()
 }
-
-function getKeyAndValue(photographerMedias, arrayOfPhotographerMediasKeyValue) {
-    Object.entries(photographerMedias).forEach(([key, value]) => {
-        arrayOfPhotographerMediasKeyValue.push({key, value})
-    });
-}
-
-// console.log(arrayOfPhotographerMedias);
-// console.log(arrayOfPhotographerMediasKeyValue);
-
-
-
-//Sort by
-// const array = [...DOMElement.document.querySelectorAll(".vignette")]
-// array.map(vignette => parent.removeChild(vignette))
-
-// array.sort((a,b)=> {
-//     new Date(b.date) - new Date(a.date)
-// })
-// array.map(vignette => parent.appendChild(vignette))
-
-
 
 
 export function getPhotographerPageMediasDOM(data){ 
@@ -135,10 +105,10 @@ export function getPhotographerPageMediasDOM(data){
             aLink.setAttribute('href', '#')
             article.appendChild(aLink)
         }
-        
+    
         if (video) { 
             const removeVideoExt = video.split(".")[0] //for video poster 
-
+            
             const video_container = document.createElement('video') 
             const videoMedia = document.createElement('source')
             
@@ -155,7 +125,7 @@ export function getPhotographerPageMediasDOM(data){
             videoMedia.setAttribute('src', `./assets/images/${photographerId}/${video}`)
             videoMedia.setAttribute('type', 'video/mp4')
         }   
-        
+    
         mediaNameAndLikes.classList.add('medias')
         mediaName.classList.add('medias_name')
         mediaLikes.classList.add('medias_likes_container')
@@ -171,80 +141,22 @@ export function getPhotographerPageMediasDOM(data){
         mediaLikes.appendChild(mediaLikesCounter)
         mediaLikes.appendChild(heartIcon)
     })
-}
-
-
-
-function mediasLikesCounter() {
-    const counterButtons  = document.querySelectorAll('.heartButton')
-    const likesCounter = document.querySelectorAll('.medias_likes_counter')
-    
-    // for localstorage retrival medias name
-    const mediasName = document.querySelectorAll('.medias_name')
-    const mediaName = []
-    mediasName.forEach(el => { mediaName.push(el.textContent) })
-    
-    
-    counterButtons.forEach((el, i)=> {
-        
-        let isLiked = false
-        let counterBase = +likesCounter[i].textContent
-        
-        let arrayOfLikes = []
-        arrayOfLikes.push(counterBase)
-
-        const lsKey = `${photographerJsonId}_${mediaName[i]}`
-        const lsValue = localStorage.getItem(lsKey)
-        
-        if (lsValue) {
-            const { counterBase: lsCounterBase, isLiked: lsIsLiked } = JSON.parse(lsValue)
-            counterBase = lsCounterBase
-            isLiked = lsIsLiked
-            likesCounter[i].textContent = counterBase
-            
-            if (isLiked) {
-                el.classList.add('isLiked')
-            }
-        }
-
-        el.addEventListener(('click'), () => {
-            if (el = !isLiked) {
-                counterBase ++
-                likesCounter[i].textContent = counterBase
-                isLiked = true
-                counterButtons[i].classList.add('isLiked')
-                arrayOfLikes[i] = counterBase
-                totalLikesCounter (arrayOfLikes);
-                
-                
-            } else {
-                counterBase --
-                likesCounter[i].textContent = counterBase
-                isLiked = false
-                counterButtons[i].classList.remove('isLiked')
-                arrayOfLikes[i] = counterBase
-                totalLikesCounter (arrayOfLikes)
-            }
-            localStorage.setItem(`${photographerJsonId}_${mediaName[i]}`, JSON.stringify({counterBase, isLiked}))
-        })
-    })
+    mediasLikesCounter()
     totalLikesCounter()
 }
 
 
-function totalLikesCounter() {
-    const counter = document.querySelector('.overlay_bottomRight_likesCounter')
-    const heartIcon = document.createElement('i')
-    const likes = document.querySelectorAll('.medias_likes_counter')
 
-    let newArrayOfLikes = []
-    likes.forEach(el => { newArrayOfLikes.push(el.textContent)})
 
-    let newArrayOfLikesSum = newArrayOfLikes.reduce((acc, el) => acc + +el, 0)
+// //DEV START
+// const arrayOfPhotographerMediasKeyValue = []
+// function getKeyAndValue(photographerMedias, arrayOfPhotographerMediasKeyValue) {
+//     Object.entries(photographerMedias).forEach(([key, value]) => {
+//         arrayOfPhotographerMediasKeyValue.push({key, value})
+//     });
+// }
 
-    counter.textContent = newArrayOfLikesSum
+// //DEV END
 
-    heartIcon.classList.add('fa-solid', 'fa-heart')
-    counter.appendChild(heartIcon)
-}
+
 
