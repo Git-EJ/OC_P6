@@ -175,7 +175,6 @@ export function getPhotographerPageMediasDOM(data){
 
 
 
-let arrayOfLikes = []
 function mediasLikesCounter() {
     const counterButtons  = document.querySelectorAll('.heartButton')
     const likesCounter = document.querySelectorAll('.medias_likes_counter')
@@ -183,25 +182,26 @@ function mediasLikesCounter() {
     // for localstorage retrival medias name
     const mediasName = document.querySelectorAll('.medias_name')
     const mediaName = []
-    mediasName.forEach(el => {
-        const name =  el.textContent
-        mediaName.push(name)
-    })
-
-
+    mediasName.forEach(el => { mediaName.push(el.textContent) })
+    
+    
     counterButtons.forEach((el, i)=> {
-
+        
         let isLiked = false
         let counterBase = +likesCounter[i].textContent
+        
+        let arrayOfLikes = []
         arrayOfLikes.push(counterBase)
 
         const lsKey = `${photographerJsonId}_${mediaName[i]}`
         const lsValue = localStorage.getItem(lsKey)
+        
         if (lsValue) {
             const { counterBase: lsCounterBase, isLiked: lsIsLiked } = JSON.parse(lsValue)
             counterBase = lsCounterBase
             isLiked = lsIsLiked
             likesCounter[i].textContent = counterBase
+            
             if (isLiked) {
                 el.classList.add('isLiked')
             }
@@ -228,59 +228,23 @@ function mediasLikesCounter() {
             localStorage.setItem(`${photographerJsonId}_${mediaName[i]}`, JSON.stringify({counterBase, isLiked}))
         })
     })
-    totalLikesCounter(arrayOfLikes)
+    totalLikesCounter()
 }
 
 
-function totalLikesCounter(data) {
+function totalLikesCounter() {
     const counter = document.querySelector('.overlay_bottomRight_likesCounter')
     const heartIcon = document.createElement('i')
     const likes = document.querySelectorAll('.medias_likes_counter')
 
-    let lsTotalLikesString = localStorage.getItem(`${photographerJsonId}`)
-    let lsTotalLikesNumber = JSON.parse(lsTotalLikesString)
+    let newArrayOfLikes = []
+    likes.forEach(el => { newArrayOfLikes.push(el.textContent)})
 
-    let lsnewDataString = localStorage.getItem(`${photographerJsonId}_newData`)
-    let lsnewDataNumber = JSON.parse(lsnewDataString)
-    
+    let newArrayOfLikesSum = newArrayOfLikes.reduce((acc, el) => acc + +el, 0)
 
-    if (!lsTotalLikesString) {
+    counter.textContent = newArrayOfLikesSum
 
-        console.log('(data if)', data);
-        
-        const dataSum = data.reduce((acc, el) => acc + el, 0)
-        console.log('(1)', dataSum);
-
-        counter.textContent = (dataSum + '  1er charg')
-        heartIcon.classList.add('fa-solid', 'fa-heart')
-        counter.appendChild(heartIcon)
-
-        console.log('(2)', dataSum);
-        localStorage.setItem(`${photographerJsonId}`, JSON.stringify(dataSum))
-
-    } else { 
-
-        counter.textContent = ( lsTotalLikesNumber + '   else react 1')
-        console.log('(data else)', data);
-
-        let toto = []
-        likes.forEach(el => {
-            toto.push(el.textContent)
-            console.log('likes', toto);
-        })
-
-        let newData = toto.reduce((acc, el) => acc + +el, 0)
-
-        // const newData = data.reduce((acc, el) => acc + el, 0)
-        console.log('(new data)', newData);
-
-        localStorage.setItem(`${photographerJsonId}_newData`, JSON.stringify(newData))
-    
-        counter.textContent = (newData + '   else react 2')
-
-        heartIcon.classList.add('fa-solid', 'fa-heart')
-        counter.appendChild(heartIcon)
-        
-    }
+    heartIcon.classList.add('fa-solid', 'fa-heart')
+    counter.appendChild(heartIcon)
 }
 
