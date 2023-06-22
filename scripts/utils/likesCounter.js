@@ -1,6 +1,5 @@
-import { photographerJsonId } from "../pages/photographer.js"
-
-
+import { arrayOfPhotographerMedias, getDataForSort, photographerJsonId} from "../pages/photographer.js"
+getDataForSort
 export function mediasLikesCounter() {
     const counterButtons  = document.querySelectorAll('.heartButton')
     const likesCounter = document.querySelectorAll('.medias_likes_counter')
@@ -11,12 +10,12 @@ export function mediasLikesCounter() {
     mediasName.forEach(el => { mediaName.push(el.textContent) })
     
     
+    let arrayOfLikes = []
     counterButtons.forEach((el, i)=> {
         
         let isLiked = false
         let counterBase = +likesCounter[i].textContent
         
-        let arrayOfLikes = []
         arrayOfLikes.push(counterBase)
 
         const lsKey = `${photographerJsonId}_${mediaName[i]}`
@@ -62,14 +61,17 @@ export function totalLikesCounter() {
     const counter = document.querySelector('.overlay_bottomRight_likesCounter')
     const heartIcon = document.createElement('i')
     const likes = document.querySelectorAll('.medias_likes_counter')
-
+    
     let newArrayOfLikes = []
     likes.forEach(el => { newArrayOfLikes.push(el.textContent)})
-
+    
     let newArrayOfLikesSum = newArrayOfLikes.reduce((acc, el) => acc + +el, 0)
-
+    
     counter.textContent = newArrayOfLikesSum
-
+    
     heartIcon.classList.add('fa-solid', 'fa-heart')
     counter.appendChild(heartIcon)
+    
+    getDataForSort(newArrayOfLikes, arrayOfPhotographerMedias)
+    // console.log('likes ==> ',newArrayOfLikes);
 }

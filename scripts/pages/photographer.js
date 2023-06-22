@@ -70,7 +70,7 @@ function getPhotographerPageHeaderDOM (photographer) {
     return { name, id, city, country, tagline, price, portrait, getPhotographerPageHeaderDOM }
 }
 
-const arrayOfPhotographerMedias = []
+export const arrayOfPhotographerMedias = []
 
 function getPhotographerMedias(photographersMedias) {
     photographersMedias.forEach(photographerMedias => {
@@ -144,6 +144,62 @@ export function getPhotographerPageMediasDOM(data){
     mediasLikesCounter()
     totalLikesCounter()
 }
+
+//Sort by
+// const array = [...DOMElement.document.querySelectorAll(".vignette")]
+// array.map(vignette => parent.removeChild(vignette))
+
+// array.sort((a,b)=> {
+//     new Date(b.date) - new Date(a.date)
+// })
+// array.map(vignette => parent.appendChild(vignette))
+
+
+// Need all titles ===> arrayOfPhotographerMedias
+// Need all likes ===> newArrayOfLikes
+// Need all dates ===> arrayOfPhotographerMedias
+
+
+export async function getDataForSort (newArrayOfLikes, arrayOfPhotographerMedias) {
+    let data1 = await newArrayOfLikes
+    const data2 = await arrayOfPhotographerMedias
+    sort(data1, data2);
+}
+
+const select = document.getElementById('sort')
+const selectMediaPopularity = select[0]
+const selectMediaDate = select[1]
+const selectMediaTitle = select[2]
+
+let selectIndex = select.selectedIndex
+console.log('bef. listener ',selectIndex, select[selectIndex].textContent);
+
+
+
+function sort (newArrayOfLikes, arrayOfPhotographerMedias) {
+    console.log('sort ==>',newArrayOfLikes);
+    arrayOfPhotographerMedias.forEach(media => {
+        console.log(media.date,'==>', media.title )
+    })
+    select.addEventListener(('change'), () =>{
+        selectIndex = select.selectedIndex
+        selectMediaDate.selected ? console.log('date') : console.log('no date')
+        selectMediaPopularity.selected ? console.log('popularity') : console.log('no popularity')
+        selectMediaTitle.selected ? console.log('title') : console.log('no title')
+        console.log('listener ', selectIndex, select[selectIndex].textContent);
+    })
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 
