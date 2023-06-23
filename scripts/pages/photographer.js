@@ -3,7 +3,6 @@ import { DOMElement, photographerName, photographerCity, photographerTagline } f
 import { photographerPicture, photographerPortrait,} from "../components/Portrait.js"
 import { mediasLikesCounter, totalLikesCounter } from "../utils/likesCounter.js"
 
-
 // get the photographer's id from the url
 function getPhotographerID() {
     const findPhotographerID = (new URL(document.location)).searchParams
@@ -70,9 +69,10 @@ function getPhotographerPageHeaderDOM (photographer) {
     return { name, id, city, country, tagline, price, portrait, getPhotographerPageHeaderDOM }
 }
 
-export const arrayOfPhotographerMedias = []
 
 function getPhotographerMedias(photographersMedias) {
+    const arrayOfPhotographerMedias = []
+    
     photographersMedias.forEach(photographerMedias => {
         arrayOfPhotographerMedias.push(photographerMedias)
         // getKeyAndValue(photographerMedias) // DEV (end of page ===>  pages/photographers.js)
@@ -81,12 +81,17 @@ function getPhotographerMedias(photographersMedias) {
 }
 
 
-export function getPhotographerPageMediasDOM(data){ 
+/**
+ * @param {Array} data array of media
+ */
+export function getPhotographerPageMediasDOM(data) { 
     
     data.forEach(el => {
-        const { image, video, title, likes, photographerId } = el
+        const { id, image, video, title, likes, photographerId } = el
         const photographer_medias_section = document.querySelector('.photographer_medias_section')
         const article = document.createElement('article')
+        article.id = id
+        article.setAttribute("id", "media_"+id)
         const aLink = document.createElement('a')
         const mediaNameAndLikes = document.createElement('div')
         const mediaName = document.createElement('span')
@@ -95,7 +100,6 @@ export function getPhotographerPageMediasDOM(data){
         const heartIcon = document.createElement('i')
         
         article.classList.add('photographer_media_container')
-        photographer_medias_section.appendChild(article)
         
         if (image) { 
             const img = document.createElement('img') 
@@ -105,7 +109,7 @@ export function getPhotographerPageMediasDOM(data){
             aLink.setAttribute('href', '#')
             article.appendChild(aLink)
         }
-    
+        
         if (video) { 
             const removeVideoExt = video.split(".")[0] //for video poster 
             
@@ -125,7 +129,7 @@ export function getPhotographerPageMediasDOM(data){
             videoMedia.setAttribute('src', `./assets/images/${photographerId}/${video}`)
             videoMedia.setAttribute('type', 'video/mp4')
         }   
-    
+        
         mediaNameAndLikes.classList.add('medias')
         mediaName.classList.add('medias_name')
         mediaLikes.classList.add('medias_likes_container')
@@ -140,73 +144,47 @@ export function getPhotographerPageMediasDOM(data){
         mediaNameAndLikes.appendChild(mediaLikes)
         mediaLikes.appendChild(mediaLikesCounter)
         mediaLikes.appendChild(heartIcon)
+
+        photographer_medias_section.appendChild(article)
     })
-    mediasLikesCounter()
-    totalLikesCounter()
-}
-
-//Sort by
-// const array = [...DOMElement.document.querySelectorAll(".vignette")]
-// array.map(vignette => parent.removeChild(vignette))
-
-// array.sort((a,b)=> {
-//     new Date(b.date) - new Date(a.date)
-// })
-// array.map(vignette => parent.appendChild(vignette))
-
-
-// Need all titles ===> arrayOfPhotographerMedias
-// Need all likes ===> newArrayOfLikes
-// Need all dates ===> arrayOfPhotographerMedias
-
-
-export async function getDataForSort (newArrayOfLikes, arrayOfPhotographerMedias) {
-    let data1 = await newArrayOfLikes
-    const data2 = await arrayOfPhotographerMedias
-    sort(data1, data2);
-}
-
-const select = document.getElementById('sort')
-const selectMediaPopularity = select[0]
-const selectMediaDate = select[1]
-const selectMediaTitle = select[2]
-
-let selectIndex = select.selectedIndex
-console.log('bef. listener ',selectIndex, select[selectIndex].textContent);
-
-
-
-function sort (newArrayOfLikes, arrayOfPhotographerMedias) {
-    console.log('sort ==>',newArrayOfLikes);
-    arrayOfPhotographerMedias.forEach(media => {
-        console.log(media.date,'==>', media.title )
-    })
-    select.addEventListener(('change'), () =>{
-        selectIndex = select.selectedIndex
-        selectMediaDate.selected ? console.log('date') : console.log('no date')
-        selectMediaPopularity.selected ? console.log('popularity') : console.log('no popularity')
-        selectMediaTitle.selected ? console.log('title') : console.log('no title')
-        console.log('listener ', selectIndex, select[selectIndex].textContent);
-    })
+    mediasLikesCounter(data)
 }
 
 
+let lastSort = ""
+const selectElement = document.getElementById('sort')
+selectElement.addEventListener("change", (e)=>{
+    const name = e.target.value.toLowerCase()
+    sortArray(name)
+})
 
 
+export function sortArray (type, force=true) {
+    if (!force && type !== lastSort) return
+    lastSort = type
 
+    const mediaContainer = document.querySelector(".photographer_medias_section")
+    const medias = [...mediaContainer.querySelectorAll("article")]
+    medias.map(m=>mediaContainer.removeChild(m))
 
+    if (type==="popularité") { 
+        console.log("par pop.");
+        // [TODO] sort pop
+     } else if (name === "titre") {
+        console.log("par tit.");
+        // [TODO] sort title
+    } else if (name === "date") {
+        console.log("par dat.");
+        // [TODO] sort date
+    }
+    medias.map(m=>mediaContainer.appendChild(m))
+}
 
-
-
-
-
-
-
-
-
-// //DEV START
-// const arrayOfPhotographerMediasKeyValue = []
-// function getKeyAndValue(photographerMedias, arrayOfPhotographerMediasKeyValue) {
+            
+            
+            // //DEV START
+            // const arrayOfPhotographerMediasKeyValue = []
+            // function getKeyAndValue(photographerMedias, arrayOfPhotographerMediasKeyValue) {
 //     Object.entries(photographerMedias).forEach(([key, value]) => {
 //         arrayOfPhotographerMediasKeyValue.push({key, value})
 //     });
