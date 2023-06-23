@@ -185,11 +185,12 @@ export function sortArray (type, force=true) {
             const bLikes = b.querySelector(".medias_likes_counter")
             return bLikes.textContent - aLikes.textContent
         })
-
+    
     } else if (type === "titre") {
-        console.log("par tit.");
         medias.sort((a,b) => {
-
+            const aTitle = a.title
+            const bTitle = b.title
+            return aTitle.localeCompare(bTitle, 'fr', {sensitivity: 'base'});
         })
 
     } else if (type === 'date (plus récents)'|| type === 'date (plus anciens)') {
