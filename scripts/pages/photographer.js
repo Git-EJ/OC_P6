@@ -151,34 +151,52 @@ export function getPhotographerPageMediasDOM(data) {
 }
 
 
+
 let lastSort = ""
 const selectElement = document.getElementById('sort')
 selectElement.addEventListener("change", (e)=>{
     const name = e.target.value.toLowerCase()
+    console.log('name', name);
     sortArray(name)
 })
 
 
-export function sortArray (type, force=true) {
-    if (!force && type !== lastSort) return
-    lastSort = type
+/**
+ * Function for sort photographers medias by popularity, date and title
+ * @param {string} type select/option VALUE
+ * @param {boolean} force false when no localStorage 
+ */
 
+export function sortArray (type, force=true) {
+    console.log('force', force);
+    
+    if (!force && type !== lastSort) return lastSort = type
+    console.log('type', typeof type);
+    console.log('lastSort' , lastSort);
+    
     const mediaContainer = document.querySelector(".photographer_medias_section")
     const medias = [...mediaContainer.querySelectorAll("article")]
     medias.map(m=>mediaContainer.removeChild(m))
 
-    if (type==="popularité") { 
-        console.log("par pop.");
-        // [TODO] sort pop
-     } else if (name === "titre") {
+    if (type ==="popularité") {
+        medias.sort((a,b) => {
+            const aLikes = a.querySelector(".medias_likes_counter")
+            const bLikes = b.querySelector(".medias_likes_counter")
+            return bLikes.textContent - aLikes.textContent
+        })
+
+    } else if (type === "titre") {
         console.log("par tit.");
-        // [TODO] sort title
-    } else if (name === "date") {
+    } else if (type === "date") {
         console.log("par dat.");
-        // [TODO] sort date
     }
     medias.map(m=>mediaContainer.appendChild(m))
 }
+            
+            
+            
+
+
 
             
             

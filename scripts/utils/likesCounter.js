@@ -7,7 +7,7 @@ export function mediasLikesCounter(arrayOfPhotographerMedias) {
     const lsValue = localStorage.getItem(lsKey)
     const likedItems = lsValue ? JSON.parse(lsValue): []
 
-    arrayOfPhotographerMedias.forEach( (media, i) => {
+    arrayOfPhotographerMedias.forEach( media  => {
         const article = document.getElementById("media_"+media.id)
         const button = article.querySelector(".heartButton")
         const heart = article.querySelector(".medias_likes_counter")
@@ -40,6 +40,7 @@ export function totalLikesCounter() {
     const counter = document.querySelector('.overlay_bottomRight_likesCounter')
     const likes = [...document.querySelectorAll('.medias_likes_counter')]
     counter.textContent = likes.reduce((t,el) => { return t+ +el.textContent }, 0)
-    sortArray("popularité", false)
+    // sortArray("popularité", true) //set the type popularité as default 
+    sortArray("popularité", false) // JSON ORDER by default
 }
 
