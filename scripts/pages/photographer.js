@@ -87,11 +87,15 @@ function getPhotographerMedias(photographersMedias) {
 export function getPhotographerPageMediasDOM(data) { 
     
     data.forEach(el => {
-        const { id, image, video, title, likes, photographerId } = el
+        const { id, image, video, title, likes, photographerId, date } = el
         const photographer_medias_section = document.querySelector('.photographer_medias_section')
         const article = document.createElement('article')
         article.id = id
+        article.date = date
+        article.title = title
         article.setAttribute("id", "media_"+id)
+        article.setAttribute("date", "media_"+date)
+        article.setAttribute("title", "media_"+title)
         const aLink = document.createElement('a')
         const mediaNameAndLikes = document.createElement('div')
         const mediaName = document.createElement('span')
@@ -168,12 +172,9 @@ selectElement.addEventListener("change", (e)=>{
  */
 
 export function sortArray (type, force=true) {
-    console.log('force', force);
-    
+
     if (!force && type !== lastSort) return lastSort = type
-    console.log('type', typeof type);
-    console.log('lastSort' , lastSort);
-    
+
     const mediaContainer = document.querySelector(".photographer_medias_section")
     const medias = [...mediaContainer.querySelectorAll("article")]
     medias.map(m=>mediaContainer.removeChild(m))
@@ -187,8 +188,20 @@ export function sortArray (type, force=true) {
 
     } else if (type === "titre") {
         console.log("par tit.");
-    } else if (type === "date") {
-        console.log("par dat.");
+        medias.sort((a,b) => {
+
+        })
+
+    } else if (type === 'date (plus récents)'|| type === 'date (plus anciens)') {
+        medias.sort((a,b) => {
+            console.log(a.date);
+            const aDate = a.date
+            const bDate = b.date
+            const aNewDate = new Date(aDate)
+            const bNewDate = new Date(bDate)
+            const byDate = type === 'date (plus récents)' ? bNewDate - aNewDate : aNewDate - bNewDate
+            return byDate
+        })
     }
     medias.map(m=>mediaContainer.appendChild(m))
 }
