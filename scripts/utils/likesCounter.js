@@ -35,12 +35,17 @@ export function mediasLikesCounter(arrayOfPhotographerMedias) {
     totalLikesCounter()
 }
 
+const selectElement = document.getElementById('sort')
+const defaultSort = document.getElementById('popularite')
+let type = defaultSort.textContent.toLocaleLowerCase()
+selectElement.addEventListener("change", (e)=>{
+    type = e.target.value.toLowerCase()
+})
 
 export function totalLikesCounter() {
     const counter = document.querySelector('.overlay_bottomRight_likesCounter')
     const likes = [...document.querySelectorAll('.medias_likes_counter')]
     counter.textContent = likes.reduce((t,el) => { return t+ +el.textContent }, 0)
-    // sortArray("popularité", true) //set the type popularité as default 
-    sortArray("popularité", false) // JSON ORDER by default
+    type === "popularité" ? sortArray("popularité") : ""
 }
 

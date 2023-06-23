@@ -156,11 +156,10 @@ export function getPhotographerPageMediasDOM(data) {
 
 
 
-let lastSort = ""
+// let lastSort = ""
 const selectElement = document.getElementById('sort')
 selectElement.addEventListener("change", (e)=>{
     const name = e.target.value.toLowerCase()
-    console.log('name', name);
     sortArray(name)
 })
 
@@ -171,9 +170,7 @@ selectElement.addEventListener("change", (e)=>{
  * @param {boolean} force false when no localStorage 
  */
 
-export function sortArray (type, force=true) {
-
-    if (!force && type !== lastSort) return lastSort = type
+export function sortArray (type) {
 
     const mediaContainer = document.querySelector(".photographer_medias_section")
     const medias = [...mediaContainer.querySelectorAll("article")]
