@@ -7,6 +7,7 @@
     display:none;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     background: #fff;
 
     &_modal{
@@ -52,5 +53,14 @@
         height:100%;
         width:70%;
         object-fit: cover;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &_modal_title{
+        color:$primary-color;
+        font-size:1.5em;
+        width:80%;
     }
 }

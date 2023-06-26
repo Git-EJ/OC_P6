@@ -28,6 +28,18 @@ async function retrivalData() {
     
     const photographersMedias = await getPhotographerMediaById(photographerJsonId)
     getPhotographerMedias(photographersMedias)
+    
+    // Array of medias
+    const medias = [...document.querySelectorAll('article')]
+    setLightboxMedias( medias.map(m=>{
+        return {
+            content: m.querySelector('.media'),
+            title: m.getAttribute('title'),
+            name: m.getAttribute('name'),
+            type: m.getAttribute('data-type'),
+            photographerID: m.getAttribute('data-photographer-id'),
+        }
+    }))
 }
 retrivalData()
 
@@ -154,10 +166,10 @@ export function getPhotographerPageMediasDOM(data) {
             videoMedia.setAttribute('type', 'video/mp4')
         }   
         
-        mediaNameAndLikes.classList.add('medias')
-        mediaName.classList.add('medias_name')
-        mediaLikes.classList.add('medias_likes_container')
-        mediaLikesCounter.classList.add('medias_likes_counter')
+        mediaNameAndLikes.classList.add('media_description')
+        mediaName.classList.add('media_description_name')
+        mediaLikes.classList.add('media_description_likes_container')
+        mediaLikesCounter.classList.add('media_description_likes_counter')
         heartIcon.classList.add('fa-solid', 'fa-heart')
         heartIcon.classList.add('heartButton')
         mediaName.textContent = `${title}`
@@ -195,8 +207,8 @@ export function sortArray (type) {
 
     if (type ==="popularité") {
         medias.sort((a,b) => {
-            const aLikes = a.querySelector(".medias_likes_counter")
-            const bLikes = b.querySelector(".medias_likes_counter")
+            const aLikes = a.querySelector(".media_description_likes_counter")
+            const bLikes = b.querySelector(".media_description_likes_counter")
             return bLikes.textContent - aLikes.textContent
         })
     
@@ -204,7 +216,7 @@ export function sortArray (type) {
         medias.sort((a,b) => {
             const aTitle = a.title
             const bTitle = b.title
-            return aTitle.localeCompare(bTitle, 'fr', {sensitivity: 'base'});
+            return aTitle.localeCompare(bTitle);
         })
 
     } else if (type === 'date (plus récents)'|| type === 'date (plus anciens)') {

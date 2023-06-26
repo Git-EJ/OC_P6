@@ -13,7 +13,7 @@ export function mediasLikesCounter(arrayOfPhotographerMedias) {
     arrayOfPhotographerMedias.forEach( media  => {
         const article = document.getElementById("media_"+media.id)
         const button = article.querySelector(".heartButton")
-        const heart = article.querySelector(".medias_likes_counter")
+        const heart = article.querySelector(".media_description_likes_counter")
 
         let isLiked = likedItems.includes(media.id)
         heart.textContent = media.likes + (isLiked?1:0)
@@ -51,7 +51,7 @@ selectElement.addEventListener("change", (e)=>{
  */
 export function totalLikesCounter() {
     const counter = document.querySelector('.overlay_bottomRight_likesCounter')
-    const likes = [...document.querySelectorAll('.medias_likes_counter')]
+    const likes = [...document.querySelectorAll('.media_description_likes_counter')]
     counter.textContent = likes.reduce((t,el) => { return t+ +el.textContent }, 0)
     type === "popularité" ? sortArray("popularité") : ""
 }

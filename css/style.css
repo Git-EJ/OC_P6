@@ -260,37 +260,44 @@ header {
   height: 300px;
   border-radius: 5px;
 }
-.photographer_media_container .media {
+
+.media {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
-
-.medias {
+.media:hover {
+  cursor: pointer;
+}
+.media_description {
   color: #901C1C;
   display: flex;
   justify-content: space-between;
   font-size: 1.5em;
 }
-.medias_name {
+.media_description_name {
   width: 78%;
+  cursor: default;
 }
-.medias_likes_container {
+.media_description_likes_container {
   width: 22%;
   display: flex;
   justify-content: flex-end;
   align-items: flex-start;
 }
-.medias .fa-heart {
+.media_description_likes_counter {
+  cursor: default;
+}
+.media_description .fa-heart {
   display: flex;
   align-items: center;
   padding: 0.3em 0 0 0.2em;
   font-size: 0.8em;
 }
-.medias .fa-heart:hover {
+.media_description .fa-heart:hover {
   cursor: pointer;
 }
-.medias .isLiked {
+.media_description .isLiked {
   color: #D3573C;
 }
 
@@ -305,6 +312,7 @@ header {
   background: #D3573C;
   display: flex;
   justify-content: space-between;
+  cursor: default;
 }
 .overlay_bottomRight_likesCounter {
   padding-left: 20px;
@@ -432,6 +440,7 @@ textarea:invalid {
   display: none;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   background: #fff;
 }
 .lightbox_modal {
@@ -473,6 +482,14 @@ textarea:invalid {
   height: 100%;
   width: 70%;
   object-fit: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.lightbox_modal_title {
+  color: #901C1C;
+  font-size: 1.5em;
+  width: 80%;
 }
 
 /*# sourceMappingURL=style.css.map */

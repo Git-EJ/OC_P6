@@ -68,46 +68,56 @@
         width:350px;
         height:300px;
         border-radius: 5px;
-        
-        .media{
-            width:100%;
-            height:100%;
-            object-fit: cover;
-        }
     }
 }
 
-
-.medias {
-    color:$primary-color;
-    display:flex;
-    justify-content: space-between ;
-    font-size: 1.5em;
-
-    &_name {
-        width: 78%
+// media card
+.media {
+    // img
+    width:100%;
+    height:100%;
+    object-fit: cover;
+            
+    &:hover {
+        cursor: pointer;
     }
+    
+    &_description {
+        color:$primary-color;
+        display:flex;
+        justify-content: space-between ;
+        font-size: 1.5em;
 
-    &_likes_container {
-        width: 22%;
-        display: flex;
-        justify-content:flex-end;
-        align-items: flex-start;
-    }
-
-    .fa-heart {
-        display: flex;
-        align-items: center;
-        padding: 0.3em 0 0 0.2em;
-        font-size: 0.8em;
-        
-        &:hover {
-            cursor: pointer;
+        &_name {
+            width: 78%;
+            cursor: default;
         }
-    }
 
-    .isLiked {
-        color:$secondary-color
+        &_likes_container {
+            width: 22%;
+            display: flex;
+            justify-content:flex-end;
+            align-items: flex-start;
+        }
+
+        &_likes_counter {
+            cursor: default;
+        }
+
+        .fa-heart {
+            display: flex;
+            align-items: center;
+            padding: 0.3em 0 0 0.2em;
+            font-size: 0.8em;
+            
+            &:hover {
+                cursor: pointer;
+            }
+        }
+
+        .isLiked {
+            color:$secondary-color
+        }
     }
 }
 
@@ -122,6 +132,7 @@
     background: $secondary-color;
     display:flex;
     justify-content: space-between;
+    cursor: default;
 
     &_likesCounter {
         padding-left: 20px;
