@@ -1,6 +1,9 @@
 import {photographerJsonId, sortArray } from "../pages/photographer.js"
 
-
+/**
+ * 
+ * @param {Array} arrayOfPhotographerMedias 
+ */
 export function mediasLikesCounter(arrayOfPhotographerMedias) {
     
     const lsKey = "photographer_"+photographerJsonId
@@ -35,6 +38,7 @@ export function mediasLikesCounter(arrayOfPhotographerMedias) {
     totalLikesCounter()
 }
 
+// [TODO] duplicate cod photographer.js function sortArray]
 const selectElement = document.getElementById('sort')
 const defaultSort = document.getElementById('popularite')
 let type = defaultSort.textContent.toLocaleLowerCase()
@@ -42,6 +46,9 @@ selectElement.addEventListener("change", (e)=>{
     type = e.target.value.toLowerCase()
 })
 
+/**
+ * Overlay counter sum of all likes
+ */
 export function totalLikesCounter() {
     const counter = document.querySelector('.overlay_bottomRight_likesCounter')
     const likes = [...document.querySelectorAll('.medias_likes_counter')]

@@ -1,9 +1,14 @@
 import { getPhotographerMediaById, getPhotographerById } from "../api/API.js"
 import { DOMElement, photographerName, photographerCity, photographerTagline } from "../components/DomElement.js"
 import { photographerPicture, photographerPortrait,} from "../components/Portrait.js"
-import { mediasLikesCounter, totalLikesCounter } from "../utils/likesCounter.js"
+// import { lightBox } from "../utils/lightBox.js"
+import { mediasLikesCounter } from "../utils/likesCounter.js"
 
-// get the photographer's id from the url
+
+/**
+ * get the photographer's id from the url
+ * @returns id of photographer
+ */
 function getPhotographerID() {
     const findPhotographerID = (new URL(document.location)).searchParams
     return findPhotographerID.get('id')
@@ -14,7 +19,9 @@ if (!photographerJsonId) {
     window.location.href="./index.html"
 }
 
-
+/**
+ * retrival data from api.js
+ */
 async function retrivalData() {
     const photographer = await getPhotographerById(photographerJsonId) 
     getPhotographerPageHeaderDOM(photographer)
@@ -24,8 +31,12 @@ async function retrivalData() {
 }
 retrivalData()
 
-
-function getPhotographerPageHeaderDOM (photographer) {
+/**
+ * 
+ * @param {object} photographer personal infos and id from photographers.json
+ * @returns  
+*/
+function getPhotographerPageHeaderDOM (photographer) {;
     const { name, id, city, country, tagline, price, portrait } = photographer
     const photographHeaderContainer = document.querySelector('.photographHeader_container')
     const photographHeaderLeft = photographHeaderContainer.querySelector('.left')
@@ -69,8 +80,12 @@ function getPhotographerPageHeaderDOM (photographer) {
     return { name, id, city, country, tagline, price, portrait, getPhotographerPageHeaderDOM }
 }
 
-
+/**
+ * 
+ * @param {arrays} photographersMedias  arrays of objects for all photographers personal infos from photographers.json
+*/
 function getPhotographerMedias(photographersMedias) {
+    
     const arrayOfPhotographerMedias = []
     
     photographersMedias.forEach(photographerMedias => {
@@ -83,35 +98,40 @@ function getPhotographerMedias(photographersMedias) {
 
 /**
  * @param {Array} data array of media
- */
+*/
 export function getPhotographerPageMediasDOM(data) { 
     
     data.forEach(el => {
         const { id, image, video, title, likes, photographerId, date } = el
+        
         const photographer_medias_section = document.querySelector('.photographer_medias_section')
+        
         const article = document.createElement('article')
         article.id = id
         article.date = date
         article.title = title
+        article.setAttribute("data-photographer-id", photographerId)
+        article.setAttribute("data-type", image)
         article.setAttribute("id", "media_"+id)
         article.setAttribute("date", "media_"+date)
-        article.setAttribute("title", "media_"+title)
-        const aLink = document.createElement('a')
+        image ?  article.setAttribute("name", image) : ""
+        video ?  article.setAttribute("name", video) : ""
+        article.classList.add('photographer_media_container')
+        
         const mediaNameAndLikes = document.createElement('div')
         const mediaName = document.createElement('span')
         const mediaLikes = document.createElement('span')
         const mediaLikesCounter = document.createElement('span')
         const heartIcon = document.createElement('i')
         
-        article.classList.add('photographer_media_container')
         
         if (image) { 
             const img = document.createElement('img') 
             img.classList.add('media')
             img.setAttribute('src', `./assets/images/${photographerId}/${image}`)
-            aLink.appendChild(img)  
-            aLink.setAttribute('href', '#')
-            article.appendChild(aLink)
+            article.setAttribute("data-type", 'image')
+            img.setAttribute('onclick', 'displayLightBox()')
+            article.appendChild(img)  
         }
         
         if (video) { 
@@ -121,14 +141,14 @@ export function getPhotographerPageMediasDOM(data) {
             const videoMedia = document.createElement('source')
             
             video_container.classList.add('media')
+            article.setAttribute("data-type", 'video')
             video_container.setAttribute('controls', "controls")
             video_container.setAttribute('preload', "metadata")
             video_container.setAttribute('poster', `/assets/images/${photographerId}/${removeVideoExt}.jpg`)
+            video_container.setAttribute('onclick', 'displayLightBox()')
             video_container.appendChild(videoMedia)
             
-            aLink.appendChild(video_container)  
-            aLink.setAttribute('href', '#')
-            article.appendChild(aLink)
+            article.appendChild(video_container)  
             
             videoMedia.setAttribute('src', `./assets/images/${photographerId}/${video}`)
             videoMedia.setAttribute('type', 'video/mp4')
@@ -148,7 +168,7 @@ export function getPhotographerPageMediasDOM(data) {
         mediaNameAndLikes.appendChild(mediaLikes)
         mediaLikes.appendChild(mediaLikesCounter)
         mediaLikes.appendChild(heartIcon)
-
+        
         photographer_medias_section.appendChild(article)
     })
     mediasLikesCounter(data)
@@ -156,24 +176,22 @@ export function getPhotographerPageMediasDOM(data) {
 
 
 
-// let lastSort = ""
 const selectElement = document.getElementById('sort')
 selectElement.addEventListener("change", (e)=>{
     const name = e.target.value.toLowerCase()
     sortArray(name)
 })
 
-
 /**
  * Function for sort photographers medias by popularity, date and title
  * @param {string} type select/option VALUE
  * @param {boolean} force false when no localStorage 
- */
-
+*/
 export function sortArray (type) {
 
     const mediaContainer = document.querySelector(".photographer_medias_section")
     const medias = [...mediaContainer.querySelectorAll("article")]
+    console.log(medias);
     medias.map(m=>mediaContainer.removeChild(m))
 
     if (type ==="popularité") {
@@ -192,7 +210,6 @@ export function sortArray (type) {
 
     } else if (type === 'date (plus récents)'|| type === 'date (plus anciens)') {
         medias.sort((a,b) => {
-            console.log(a.date);
             const aDate = a.date
             const bDate = b.date
             const aNewDate = new Date(aDate)
@@ -206,20 +223,15 @@ export function sortArray (type) {
             
             
             
-
-
-
-            
-            
-            // //DEV START
-            // const arrayOfPhotographerMediasKeyValue = []
-            // function getKeyAndValue(photographerMedias, arrayOfPhotographerMediasKeyValue) {
+//  // //DEV START
+//     const arrayOfPhotographerMediasKeyValue = []
+//     function getKeyAndValue(photographerMedias, arrayOfPhotographerMediasKeyValue) {
 //     Object.entries(photographerMedias).forEach(([key, value]) => {
 //         arrayOfPhotographerMediasKeyValue.push({key, value})
 //     });
 // }
 
-// //DEV END
+// // //DEV END
 
 
 

@@ -1,0 +1,53 @@
+.lightbox{
+    height:100%;
+    width: 100%;
+    position: fixed;
+    left: 0;
+    bottom: 0;;
+    display:none;
+    justify-content: center;
+    align-items: center;
+    background: #fff;
+
+    &_modal{
+        height: 90%;
+        width:80%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(99, 99, 99, 0.671);
+    }  
+
+    &_modal_close{
+        width:42px;
+        height:42px;
+        position:absolute;
+        top:5%;
+        right:16.5%;
+        fill: $primary-color;
+    }
+
+    &_modal_before{
+        width:42px;
+        height:42px;
+        position:absolute;
+        top:47.5%;      //(50% - (5%/2))
+        left:16.5%;
+        fill: $primary-color;
+    }
+
+    &_modal_after{
+        width:42px;
+        height:42px;
+        position:absolute;
+        top:47.5%;
+        right:16.5%;
+        fill: $primary-color;
+    }
+
+    &_modal_media{
+        height:100%;
+        width:70%;
+        object-fit: cover;
+    }
+}

@@ -9,7 +9,7 @@
     align-items: center;
 }
 
-.modal {
+.modal_form {
     border-radius: 5px;
     background-color: #DB8876;
     width: 50%;
@@ -21,16 +21,16 @@
     margin: auto;
 }
 
-.modal header {
+.modal_form header {
     justify-content: space-between;
     width: 100%;
 }
 
-.modal header img {
+.modal_form header img {
     cursor: pointer;
 }
 
-.modal header h2 {
+.modal_form header h2 {
     font-size: 4em;
     font-weight: normal;
     text-align: center;

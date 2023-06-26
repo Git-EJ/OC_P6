@@ -234,7 +234,7 @@ header {
   margin-right: 1em;
 }
 .select_container select {
-  width: 170px;
+  width: fit-content;
   padding: 0.5em;
   outline: none;
   border: none;
@@ -335,7 +335,7 @@ header {
   align-items: center;
 }
 
-.modal {
+.modal_form {
   border-radius: 5px;
   background-color: #DB8876;
   width: 50%;
@@ -347,16 +347,16 @@ header {
   margin: auto;
 }
 
-.modal header {
+.modal_form header {
   justify-content: space-between;
   width: 100%;
 }
 
-.modal header img {
+.modal_form header img {
   cursor: pointer;
 }
 
-.modal header h2 {
+.modal_form header h2 {
   font-size: 4em;
   font-weight: normal;
   text-align: center;
@@ -421,6 +421,55 @@ input:invalid,
 textarea:invalid {
   border: red solid 2px;
   border-radius: 5px;
+}
+
+.lightbox {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+}
+.lightbox_modal {
+  height: 90%;
+  width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(99, 99, 99, 0.671);
+}
+.lightbox_modal_close {
+  width: 42px;
+  height: 42px;
+  position: absolute;
+  top: 5%;
+  right: 16.5%;
+  fill: #901C1C;
+}
+.lightbox_modal_before {
+  width: 42px;
+  height: 42px;
+  position: absolute;
+  top: 47.5%;
+  left: 16.5%;
+  fill: #901C1C;
+}
+.lightbox_modal_after {
+  width: 42px;
+  height: 42px;
+  position: absolute;
+  top: 47.5%;
+  right: 16.5%;
+  fill: #901C1C;
+}
+.lightbox_modal_media {
+  height: 100%;
+  width: 70%;
+  object-fit: cover;
 }
 
 /*# sourceMappingURL=style.css.map */
