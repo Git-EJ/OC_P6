@@ -25,6 +25,7 @@
         top:5%;
         right:16.5%;
         fill: $primary-color;
+        cursor: pointer;
     }
 
     &_modal_before{
@@ -34,6 +35,7 @@
         top:47.5%;      //(50% - (5%/2))
         left:16.5%;
         fill: $primary-color;
+        cursor: pointer;
     }
 
     &_modal_after{
@@ -43,6 +45,7 @@
         top:47.5%;
         right:16.5%;
         fill: $primary-color;
+        cursor: pointer;
     }
 
     &_modal_media{

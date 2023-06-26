@@ -449,6 +449,7 @@ textarea:invalid {
   top: 5%;
   right: 16.5%;
   fill: #901C1C;
+  cursor: pointer;
 }
 .lightbox_modal_before {
   width: 42px;
@@ -457,6 +458,7 @@ textarea:invalid {
   top: 47.5%;
   left: 16.5%;
   fill: #901C1C;
+  cursor: pointer;
 }
 .lightbox_modal_after {
   width: 42px;
@@ -465,6 +467,7 @@ textarea:invalid {
   top: 47.5%;
   right: 16.5%;
   fill: #901C1C;
+  cursor: pointer;
 }
 .lightbox_modal_media {
   height: 100%;

@@ -191,7 +191,6 @@ export function sortArray (type) {
 
     const mediaContainer = document.querySelector(".photographer_medias_section")
     const medias = [...mediaContainer.querySelectorAll("article")]
-    console.log(medias);
     medias.map(m=>mediaContainer.removeChild(m))
 
     if (type ==="popularité") {
