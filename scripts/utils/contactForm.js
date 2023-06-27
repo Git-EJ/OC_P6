@@ -8,7 +8,6 @@ const emailField = document.getElementById('email')
 
 
 const displayModal = () => {modal.style.display = "flex"}
-
 const closeModal = () => {modal.style.display = "none"}
 document.addEventListener('keydown', (e) => {e.key === 'Escape' ?  closeModal() : ''})
 

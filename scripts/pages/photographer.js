@@ -1,7 +1,7 @@
 import { getPhotographerMediaById, getPhotographerById } from "../api/API.js"
 import { DOMElement, photographerName, photographerCity, photographerTagline } from "../components/DomElement.js"
 import { photographerPicture, photographerPortrait,} from "../components/Portrait.js"
-// import { lightBox } from "../utils/lightBox.js"
+import { Lightbox } from "../utils/Lightbox.js"
 import { mediasLikesCounter } from "../utils/likesCounter.js"
 
 
@@ -31,17 +31,16 @@ async function retrivalData() {
     
     // Array of medias
     const medias = [...document.querySelectorAll('article')]
-    setLightboxMedias( medias.map(m=>{
-        return {
-            content: m.querySelector('.media'),
-            title: m.getAttribute('title'),
-            name: m.getAttribute('name'),
-            type: m.getAttribute('data-type'),
-            photographerID: m.getAttribute('data-photographer-id'),
-        }
+    
+    const lightbox = new Lightbox()
+    lightbox.open( medias.map(m=>{
+        const content = m.querySelector(".media")
+        const type = m.getAttribute('data-type')
+        const title = m.getAttribute('title')
+        const url = type === "video" ? content.querySelector("source").getAttribute("src") : content.getAttribute("src")
+        return { content, title, type, url }
     }))
 }
-retrivalData()
 
 /**
  * 
@@ -142,7 +141,7 @@ export function getPhotographerPageMediasDOM(data) {
             img.classList.add('media')
             img.setAttribute('src', `./assets/images/${photographerId}/${image}`)
             article.setAttribute("data-type", 'image')
-            img.setAttribute('onclick', 'displayLightBox()')
+            // img.setAttribute('onclick', 'displayLightBox()')
             article.appendChild(img)  
         }
         
@@ -157,7 +156,7 @@ export function getPhotographerPageMediasDOM(data) {
             video_container.setAttribute('controls', "controls")
             video_container.setAttribute('preload', "metadata")
             video_container.setAttribute('poster', `/assets/images/${photographerId}/${removeVideoExt}.jpg`)
-            video_container.setAttribute('onclick', 'displayLightBox()')
+            // video_container.setAttribute('onclick', 'displayLightBox()')
             video_container.appendChild(videoMedia)
             
             article.appendChild(video_container)  
@@ -188,11 +187,6 @@ export function getPhotographerPageMediasDOM(data) {
 
 
 
-const selectElement = document.getElementById('sort')
-selectElement.addEventListener("change", (e)=>{
-    const name = e.target.value.toLowerCase()
-    sortArray(name)
-})
 
 /**
  * Function for sort photographers medias by popularity, date and title
@@ -245,4 +239,14 @@ export function sortArray (type) {
 // // //DEV END
 
 
+window.onload = () => {
 
+    retrivalData()
+
+    const selectElement = document.getElementById('sort')
+    selectElement.addEventListener("change", (e)=>{
+        const name = e.target.value.toLowerCase()
+        sortArray(name)
+    })
+    
+}

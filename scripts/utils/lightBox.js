@@ -1,92 +1,178 @@
 // import { photographerCity } from "../components/DomElement"
 
-// #region - init lightbox html
-    const lightBox = document.querySelector('.lightbox') // lightbox = lb
-    const lbModal = document.querySelector('.lightbox_modal')
-    const lbBefore = document.querySelector('.lightbox_modal_before')
-    const lbAfter = document.querySelector('.lightbox_modal_after')
+export class Lightbox {
 
-    const lbImg = document.createElement('img')
-    lbImg.setAttribute("data-type", 'image')
-    lbImg.classList.add('lightbox_modal_media', "hidden")
+    constructor() {
+        this.medias = []
+        this.map = new Map()
+        this.index = -1
 
-    const lbVideo = document.createElement('video')
-    lbVideo.setAttribute('controls', "controls")
-    lbVideo.setAttribute('preload', "metadata")
-    lbVideo.setAttribute('type', 'video/mp4')
-    lbVideo.setAttribute("data-type", 'video')
-    lbVideo.classList.add('lightbox_modal_media', "hidden")
+        this.buildElements()
+        this.extractElements()
 
-    const lbTitle = document.querySelector('.lightbox_modal_title')
-    console.log(lbTitle);
-
-    lbModal.appendChild(lbImg)
-    lbModal.appendChild(lbVideo)
-// #endregion
-
-let medias = []
-let lbCurrentMediaIndex = null
-
-const setCurrentMedia = (index) => {
-
-    // const currentMedia = medias[index].content
-    const currentMediaTitle = medias[index].title
-    const currentMediaType = medias[index].type
-    const currentMediaPhotographerId = medias[index].photographerID
-    const currentMediaName = medias[index].name
-    
-    if (currentMediaType === 'image') {
-        lbImg.setAttribute('src', `/assets/images/${currentMediaPhotographerId}/${currentMediaName}`)
-        lbImg.classList.remove("hidden")
-        lbVideo.classList.add("hidden")
-
-    } else if (currentMediaType === 'video') {
-        lbVideo.setAttribute('src', `/assets/images/${currentMediaPhotographerId}/${currentMediaName}`)
-        const removeVideoExt = currentMediaName.split(".")[0]
-        lbVideo.setAttribute('poster', `/assets/images/${currentMediaPhotographerId}/${removeVideoExt}.jpg`);
-        lbVideo.classList.remove("hidden")
-        lbImg.classList.add("hidden")
+        this.init()
     }
-    lbTitle.textContent =`${currentMediaTitle}`
+
+    buildElements () {
+        const body = document.body
+        const div = document.createElement('div')
+        
+        this.container = div
+        this.container.classList.add("lightbox")
+        this.wrapper = document.createElement("div")
+        this.wrapper.classList.add("lightbox_modal")
+        this.wrapper.innerHTML = `
+            <svg class="lightbox_modal_close" viewBox="0 0 384 512"
+                alt="icone de fermeture lightBox media" aria-label="icone de fermeture carrousel photos et videos">
+                <path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 
+                            105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 
+                            12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 
+                            45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" />
+            </svg>
+
+            <svg class="lightbox_modal_before" viewBox="0 0 320 512" alt="icone media precedent lightBox media"
+                aria-label="icone media precedent lightBox media">
+                <path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 
+                            0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z" />
+            </svg>
+
+            <svg class="lightbox_modal_after" viewBox="0 0 320 512" alt="icone media suivant lightBox media"
+                aria-label="icone media suivant lightBox media">
+                <path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 
+                            12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 
+                            0-45.3s32.8-12.5 45.3 0l160 160z" />
+            </svg>`
+        this.container.style.display = "none"
+        body.appendChild(div)
+    }
+
+    extractElements() {
+        
+        this.closeBtn = this.wrapper.querySelector('.lightbox_modal_close')
+        this.beforeBtn = this.wrapper.querySelector('.lightbox_modal_before')
+        this.afterBtn = this.wrapper.querySelector('.lightbox_modal_after')
+
+        this.titleElement = document.createElement("div")
+        this.titleElement.classList.add("lightbox_modal_title")
+
+        this.imageElement = document.createElement('img')
+        this.imageElement.setAttribute("data-type", 'image')
+        this.imageElement.classList.add('lightbox_modal_media', "hidden")
+        
+        this.videoElement = document.createElement('video')
+        this.videoElement.setAttribute('controls', "controls")
+        this.videoElement.setAttribute('preload', "metadata")
+        this.videoElement.setAttribute('type', 'video/mp4')
+        this.videoElement.setAttribute("data-type", 'video')
+        this.videoElement.classList.add('lightbox_modal_media', "hidden")
+
+        this.wrapper.appendChild(this.imageElement)
+        this.wrapper.appendChild(this.videoElement)
+        this.wrapper.appendChild(this.titleElement)
+
+        this.container.appendChild(this.wrapper)
+    }
+
+    init() {
+        this.keyEscapeListener = (e) => {
+            if (e.key === "Escape") {
+                this.onClose()
+            }
+        }
+
+        this.onClickOut = (e)=>{
+            if (e.target === this.container) {
+                this.onClose()
+            }
+        }
+
+        this.onClose = () => {
+            this.container.style.display = "none"
+        }
+
+        this.onOpen = () => {
+            this.container.style.display = "flex"
+        }
+        
+        const that = this
+
+        this.onBefore = () => {
+            that.index = (that.index-1 + that.medias.length) % that.medias.length
+            that.updateMedia()
+        }
+
+        this.onAfter = () => {
+            that.index = (that.index+1) % that.medias.length
+            that.updateMedia()
+        }
+
+        this.onSelect = (e) => {
+            let elem = e.target
+            const media_index = +that.map.get(elem)
+            that.index = media_index
+            that.updateMedia()
+        }
+    }
+
+    updateMedia () {
+        const index = this.index
+        if (index<0) return
+
+        // const currentMedia = medias[index].content
+        const mediaTitle = this.medias[index].title
+        const mediaType = this.medias[index].type
+        const mediaUrl = this.medias[index].url
+    
+        if (mediaType === 'image') {
+            this.imageElement.setAttribute('src', mediaUrl)
+            this.imageElement.classList.remove("hidden")
+            this.videoElement.classList.add("hidden")
+            this.videoElement.setAttribute("src", '')
+        } else if (mediaType === 'video') {
+            this.videoElement.setAttribute('src', mediaUrl)
+            const removeVideoExt = mediaUrl.split(".").slice(0, -1).join('.')
+            this.videoElement.setAttribute('poster', `${removeVideoExt}.jpg`);
+            this.videoElement.classList.remove("hidden")
+            this.imageElement.classList.add("hidden")
+        }
+        this.titleElement.textContent =`${mediaTitle}`
+
+        this.onOpen()
+    }
+
+    addListeners () {
+        this.container.addEventListener("click", this.onClickOut)
+        this.closeBtn.addEventListener("click", this.onClose)
+        this.container.addEventListener("keydown",this.keyEscapeListener )
+        this.medias.forEach((m,i) => {
+            this.map.set(m.content, i)
+            m.content.addEventListener("click", this.onSelect)
+        })
+        this.beforeBtn.addEventListener("click", this.onBefore)
+        this.afterBtn.addEventListener("click", this.onAfter)
+    }
+
+    removeListeners() {
+        this.container.removeEventListener("click", this.onClickOut)
+        this.closeBtn.removeEventListener("click", this.onClose)
+        this.container.removeEventListener("keydown",this.keyEscapeListener )
+        this.medias.map(m=>m.content.removeEventListener("click", this.onSelect))
+        this.beforeBtn.removeListener("click", this.onBefore)
+        this.afterBtn.removeListener("click", this.onAfter)
+    }
+
+    open (medias) {
+        this.medias = medias
+        this.index = this.medias.length>0 ? 0 : -1
+        this.addListeners()
+    }
+
+    close () {
+        this.onClose()
+
+        this.removeListeners()
+        this.map.clear()
+        this.medias = []
+    }
+    
 }
-
-const onBefore = () => {
-    lbCurrentMediaIndex = (lbCurrentMediaIndex-1 + medias.length) % medias.length
-    setCurrentMedia(lbCurrentMediaIndex)
-}
-
-const onAfter = () => {
-    lbCurrentMediaIndex = (lbCurrentMediaIndex+1) % medias.length
-    setCurrentMedia(lbCurrentMediaIndex)
-}
-
-function onSelect (e) {
-    let elem = e.target
-    const media_index = elem.getAttribute("media_index")
-    lbCurrentMediaIndex = +media_index
-    setCurrentMedia(lbCurrentMediaIndex)
-}
-
-const setLightboxMedias = (m) => {
-    // remove old listeners
-    medias.forEach(m => m.removeEventListener("click", onSelect))
-    lbBefore.removeEventListener('click', onBefore)
-    lbAfter.removeEventListener('click', onAfter)
-
-    // set current media array
-    medias = m
-    lbCurrentMediaIndex = 0
-
-    // add new listeners
-    medias.forEach((m,i) => {
-        m.content.setAttribute("media_index", i)
-        m.content.addEventListener('click', onSelect)
-    })
-    lbBefore.addEventListener('click', onBefore)
-    lbAfter.addEventListener('click', onAfter)
-}
-
-
-const displayLightBox = () => {lightBox.style.display = 'flex'}
-const closeLightBox = () => {lightBox.style.display = 'none'}
-document.addEventListener('keydown', (e) => {e.key === 'Escape' ?  closeLightBox() : ''})

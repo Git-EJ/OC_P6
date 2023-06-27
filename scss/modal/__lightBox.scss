@@ -8,15 +8,16 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background: #fff;
+    background: #0004;
 
     &_modal{
         height: 90%;
         width:80%;
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
-        background: rgba(99, 99, 99, 0.671);
+        background: white;
     }  
 
     &_modal_close{

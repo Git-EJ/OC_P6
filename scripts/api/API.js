@@ -1,6 +1,6 @@
 let _data = null;
 
-async function getData() {
+async function _getData() {
     if (_data) return _data
     const ls = localStorage.getItem("photographers")
     if (!ls) {
@@ -20,12 +20,12 @@ async function getData() {
         _data = data
     } else {
         _data = JSON.parse(ls) // local storage string to json object
-        return _data
     }
+    return _data
 }
 
 export async function getPhotographers () {
-    const data = await getData()
+    const data = await _getData()
     return data.photographers
 }
 
@@ -35,7 +35,7 @@ export async function getPhotographerById (id) {
 }
 
 export async function getMedia () {
-    const data = await getData()
+    const data = await _getData()
     return data.media
 }
 
