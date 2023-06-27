@@ -8,7 +8,6 @@
   <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
   <script src="https://kit.fontawesome.com/bb7f86ceb6.js" crossorigin="anonymous"></script>
   <script src="/scripts/pages/photographer.js" type="module" defer></script>
-  <script src="./scripts/utils/contactForm.js" defer></script>
   <title>Fisheye - photographe </title>
 </head>
 
@@ -21,8 +20,7 @@
     <div class="photographHeader_container">
       <div class="photographHeader left"></div>
       <div class="photographHeader middle">
-        <button class="contact_button" id="photograph_contact_button_position"
-          onclick="displayModal()">Contactez-moi</button>
+        <button class="contact_button" id="photograph_contact_button_position">Contactez-moi</button>
       </div>
       <div class="photographHeader right"></div>
     </div>
@@ -50,7 +48,7 @@
     <div class="modal_form">
       <header>
         <h2>Contactez-moi</h2>
-        <img src="assets/icons/close.svg" onclick="closeModal()" alt="icone de fermeture formulaire"
+        <img id="contact_form_btn_close" src="assets/icons/close.svg" alt="icone de fermeture formulaire"
           aria-label="icone de fermeture formulaire" />
       </header>
 

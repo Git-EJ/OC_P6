@@ -1,7 +1,8 @@
 import { getPhotographerMediaById, getPhotographerById } from "../api/API.js"
 import { DOMElement, photographerName, photographerCity, photographerTagline } from "../components/DomElement.js"
 import { photographerPicture, photographerPortrait,} from "../components/Portrait.js"
-import { Lightbox } from "../utils/Lightbox.js"
+import { ContactForm } from "../utils/contactForm.js"
+import { Lightbox } from "../utils/lightBox.js"
 import { mediasLikesCounter } from "../utils/likesCounter.js"
 
 
@@ -44,8 +45,9 @@ async function retrivalData() {
 
 /**
  * 
- * @param {object} photographer personal infos and id from photographers.json
- * @returns  
+ * @param {object} photographer 
+ * personal infos and id from photographers.json
+ * @returns name, id, city, country, tagline, price, portrait
 */
 function getPhotographerPageHeaderDOM (photographer) {;
     const { name, id, city, country, tagline, price, portrait } = photographer
@@ -93,7 +95,8 @@ function getPhotographerPageHeaderDOM (photographer) {;
 
 /**
  * 
- * @param {arrays} photographersMedias  arrays of objects for all photographers personal infos from photographers.json
+ * @param {arrays} photographersMedias  
+ * arrays of objects for all photographers personal infos from photographers.json
 */
 function getPhotographerMedias(photographersMedias) {
     
@@ -101,7 +104,6 @@ function getPhotographerMedias(photographersMedias) {
     
     photographersMedias.forEach(photographerMedias => {
         arrayOfPhotographerMedias.push(photographerMedias)
-        // getKeyAndValue(photographerMedias) // DEV (end of page ===>  pages/photographers.js)
     });
     getPhotographerPageMediasDOM(arrayOfPhotographerMedias)
 }
@@ -186,8 +188,6 @@ export function getPhotographerPageMediasDOM(data) {
 }
 
 
-
-
 /**
  * Function for sort photographers medias by popularity, date and title
  * @param {string} type select/option VALUE
@@ -226,22 +226,12 @@ export function sortArray (type) {
     medias.map(m=>mediaContainer.appendChild(m))
 }
             
-            
-            
-//  // //DEV START
-//     const arrayOfPhotographerMediasKeyValue = []
-//     function getKeyAndValue(photographerMedias, arrayOfPhotographerMediasKeyValue) {
-//     Object.entries(photographerMedias).forEach(([key, value]) => {
-//         arrayOfPhotographerMediasKeyValue.push({key, value})
-//     });
-// }
-
-// // //DEV END
-
 
 window.onload = () => {
 
     retrivalData()
+    const contactForm = new ContactForm()
+    contactForm.open()
 
     const selectElement = document.getElementById('sort')
     selectElement.addEventListener("change", (e)=>{
