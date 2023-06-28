@@ -4,6 +4,7 @@
 <head>
   <link href="css/style.css" rel="stylesheet" type="text/css" />
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/png" href="assets/favicon.png">
   <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
   <script src="https://kit.fontawesome.com/bb7f86ceb6.js" crossorigin="anonymous"></script>
@@ -11,82 +12,81 @@
   <title>Fisheye - photographe </title>
 </head>
 
-
-  <header>
-    <a href="./index.html"><img src="assets/images/logo.png" class="logo" alt="Logo du site fisheye"
-        aria-label="Logo du site fisheye" /></a>
-  </header>
-  <main id="main">
-    <div class="photographHeader_container">
-      <div class="photographHeader left"></div>
-      <div class="photographHeader middle">
-        <button class="contact_button" id="photograph_contact_button_position">Contactez-moi</button>
-      </div>
-      <div class="photographHeader right"></div>
-    </div>
-  </main>
-
-  <div class="select_container">
-    <label for="sort">Trier par</label>
-    <select id="sort" name="sort"> 
-      <option value="Popularité" id="popularite">Popularité</option>
-      <option value="Date (plus récents)" id="dateNew">Date (plus récents)</option>
-      <option value="Date (plus anciens)" id="dateOld">Date (plus anciens)</option>
-      <option value="Titre" id="titre">Titre</option>
-    </select>
-  </div>
-
-  <section class="photographer_medias_section"></section>
-
-  <div class="overlay_bottomRight">
-    <span class="overlay_bottomRight_likesCounter"></span>
-    <i class="fa-solid fa-heart"></i>
-    <span class="overlay_bottomRight_pricePerDay"></span>
-  </div>
-
-  <div id="contact_modal">
-    <div class="modal_form">
+  <body>
+    <div class="page_body_wrapper">
       <header>
-        <h2>Contactez-moi</h2>
-        <img id="contact_form_btn_close" src="assets/icons/close.svg" alt="icone de fermeture formulaire"
-          aria-label="icone de fermeture formulaire" />
+        <a href="./index.html"><img src="assets/images/logo.png" class="logo" alt="Logo du site fisheye"
+            aria-label="Logo du site fisheye" /></a>
       </header>
+      <main class="photographBanner_container" id="main">
+          <div class="photographBanner left"></div>
+          <div class="photographBanner middle">
+            <button class="contact_button" id="photograph_contact_button_position">Contactez-moi</button>
+          </div>
+          <div class="photographBanner right"></div>
+      </main>
 
-      <form>
-        <div role="group" aria-label="Informations personnelles">
+      <div class="select_container">
+        <label for="sort">Trier par</label>
+        <select id="sort" name="sort"> 
+          <option value="Popularité" id="popularite">Popularité</option>
+          <option value="Date (plus récents)" id="dateNew">Date (plus récents)</option>
+          <option value="Date (plus anciens)" id="dateOld">Date (plus anciens)</option>
+          <option value="Titre" id="titre">Titre</option>
+        </select>
+      </div>
 
-          <label for="firstname" id="first-name">Prénom</label>
-          <input id="firstname" type="text" name="firstname" value="" aria-labelledby="first-name"
-            placeholder="Votre prénom ici" minlength="2" maxlength='40' spellcheck="false"
-            pattern="^[a-zA-ZÀ-ÿ][a-zA-ZÀ-ÿ\s\-]*[a-zA-ZÀ-ÿ]$" required />
+      <section class="photographer_medias_section"></section>
 
-          <label for="lastname" id="last-name">Nom</label>
-          <input id="lastname" type="text" name="lastname" value="" aria-labelledby="last-name"
-            placeholder="Votre nom ici" minlength="2" maxlength='40' spellcheck="false"
-            pattern="^[a-zA-ZÀ-ÿ][a-zA-ZÀ-ÿ\s\-]*[a-zA-ZÀ-ÿ]$" required />
+      <div class="overlay_bottomRight">
+        <span class="overlay_bottomRight_likesCounter"></span>
+        <i class="fa-solid fa-heart"></i>
+        <span class="overlay_bottomRight_pricePerDay"></span>
+      </div>
 
-          <label for="email" id="e-mail">Email</label>
-          <input id="email" type="email" name="email" value="" aria-labelledby="e-mail"
-            placeholder="Votre email ici: email@example.com" pattern="^[\w.%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}$"
-            required />
+      <div id="contact_modal">
+        <div class="modal_form">
+          <header>
+            <h2>Contactez-moi</h2>
+            <img id="contact_form_btn_close" src="assets/icons/close.svg" alt="icone de fermeture formulaire"
+              aria-label="icone de fermeture formulaire" />
+          </header>
 
+          <form>
+            <div role="group" aria-label="Informations personnelles">
+
+              <label for="firstname" id="first-name">Prénom</label>
+              <input id="firstname" type="text" name="firstname" value="" aria-labelledby="first-name"
+                placeholder="Votre prénom ici" minlength="2" maxlength='40' spellcheck="false"
+                pattern="^[a-zA-ZÀ-ÿ][a-zA-ZÀ-ÿ\s\-]*[a-zA-ZÀ-ÿ]$" required />
+
+              <label for="lastname" id="last-name">Nom</label>
+              <input id="lastname" type="text" name="lastname" value="" aria-labelledby="last-name"
+                placeholder="Votre nom ici" minlength="2" maxlength='40' spellcheck="false"
+                pattern="^[a-zA-ZÀ-ÿ][a-zA-ZÀ-ÿ\s\-]*[a-zA-ZÀ-ÿ]$" required />
+
+              <label for="email" id="e-mail">Email</label>
+              <input id="email" type="email" name="email" value="" aria-labelledby="e-mail"
+                placeholder="Votre email ici: email@example.com" pattern="^[\w.%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}$"
+                required />
+
+            </div>
+
+            <div role="group" aria-label="Message">
+
+              <label for="message" id="m-essage">Votre Message</label>
+              <textarea id="message" rows="15" class="form_message" name="message" value="" aria-labelledby="m-essage"
+                placeholder="Votre message ici" minlength="20" maxlength="600" pattern="^[a-zA-Z0-9\-_@#]+$"
+                required></textarea>
+
+            </div>
+
+            <label for="submit-button" id="s-ubmit-button" class="hidden">Envoyer</label>
+            <button id="submit-button" aria-labelledby="s-ubmit-button" class="contact_button">Envoyer</button>
+          </form>
         </div>
-
-        <div role="group" aria-label="Message">
-
-          <label for="message" id="m-essage">Votre Message</label>
-          <textarea id="message" rows="15" class="form_message" name="message" value="" aria-labelledby="m-essage"
-            placeholder="Votre message ici" minlength="20" maxlength="600" pattern="^[a-zA-Z0-9\-_@#]+$"
-            required></textarea>
-
-        </div>
-
-        <label for="submit-button" id="s-ubmit-button" class="hidden">Envoyer</label>
-        <button id="submit-button" aria-labelledby="s-ubmit-button" class="contact_button">Envoyer</button>
-      </form>
-    </div>
-  </div>
-  
+      </div>
+    </div> 
   </body>
 
 </html>

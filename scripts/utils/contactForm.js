@@ -1,10 +1,6 @@
 export class ContactForm {
     
     constructor() {
-
-        let timeout
-        timeout = this.timeout
-
         this.extractElements()
         this.init()
     }
@@ -24,13 +20,9 @@ export class ContactForm {
     
     
     init() {
-
         this.keyEscapeListener = (e) => { if (e.key === "Escape") { this.onClose() }}
-
         this.onClickOut = (e)=>{ if (e.target === this.modal) { this.onClose() }}
-
         this.onClose = () => { this.modal.style.display = "none" }
-
         this.onOpen = () => { this.modal.style.display = "flex" }
     }
 
@@ -87,7 +79,7 @@ export class ContactForm {
         //Only on textarea Field
         // Minimum length
         this.textareaField.addEventListener('input', (e) => {
-            console.log(`${textareaField.name}`, textareaField.value)        // SOUTENANCE                        
+            console.log(`${this.textareaField.name}`, this.textareaField.value)        // SOUTENANCE                        
             e.target.validity.tooShort ? (e.target.setCustomValidity('Veuillez saisir au minimum 20 caractères')) : e.target.setCustomValidity('')
         })
         
@@ -120,22 +112,11 @@ export class ContactForm {
 
 
     removeListeners() {
-        this.allFields.forEach(field => {
-            field.removeEventListener('input', null)
-        })
-
-        this.inputFields.forEach(field => {
-            field. removeEventListener('input', null)
-        })
-
+        this.allFields.forEach(field => { field.removeEventListener('input', null) })
+        this.inputFields.forEach(field => { field. removeEventListener('input', null) })
         this.textareaField.removeEventListener('input', null)
-
-        this.lastAndFirstnameFields.forEach(field => {
-            field.removeEventListener('input', null)
-        })
-
+        this.lastAndFirstnameFields.forEach(field => { field.removeEventListener('input', null) })
         this.emailField.removeEventListener('input', null)
-
         this.openBtn.removeEventListener('click', this.onOpen)
         this.closeBtn.removeEventListener('click', this.onClose)
         this.modal.removeEventListener('keydown',this.keyEscapeListener )

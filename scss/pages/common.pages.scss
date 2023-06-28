@@ -1,3 +1,4 @@
+
 .hidden {
     height: 1px;
     left: 0;
@@ -35,7 +36,7 @@
     }
 
     &_tagline {
-        font-size: 0.7em;
+        font-size: clamp(0.5em, 1vw, 0.7em);
     }
 
     &_price {
@@ -44,19 +45,16 @@
     }
 }
 
-.page {
-    &_name {font-size: 4em}
-    &_city {font-size: 1.5em}
-    &_tagline {font-size: 1.1em;}
-}
-
 .contact_button {
-    font-size: 1.3em;
+    width:fit-content;
+    height: 3.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: clamp(0.5em, 2vw, 1.3em);
     font-weight: bold;
     color: white;
-    padding: 11px;
-    width: 170px;
-    height: 70px;
+    padding: 15px;
     border: none;
     background-color: $primary-color;
     border-radius: 5px;

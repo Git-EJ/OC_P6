@@ -51,7 +51,7 @@ async function retrivalData() {
 */
 function getPhotographerPageHeaderDOM (photographer) {;
     const { name, id, city, country, tagline, price, portrait } = photographer
-    const photographHeaderContainer = document.querySelector('.photographHeader_container')
+    const photographHeaderContainer = document.querySelector('.photographBanner_container')
     const photographHeaderLeft = photographHeaderContainer.querySelector('.left')
     const photographHeaderRight = photographHeaderContainer.querySelector('.right')
     const photographContactButton = document.getElementById('photograph_contact_button_position')
@@ -77,7 +77,7 @@ function getPhotographerPageHeaderDOM (photographer) {;
     
     //Photographer img portrait
     const imgContainer = document.createElement('div')
-    imgContainer.classList.add('photographer_portrait_container')
+    imgContainer.classList.add('photographer_portrait_container', 'page_portrait')
     
     const picture = photographerPicture(photographer)
     photographerPortrait(photographer, picture, imgContainer)
@@ -230,6 +230,7 @@ export function sortArray (type) {
 window.onload = () => {
 
     retrivalData()
+    
     const contactForm = new ContactForm()
     contactForm.open()
 

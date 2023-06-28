@@ -1,13 +1,28 @@
+.home_body_wrapper {
+    margin: 0 100px;
+}
+
 .logo {
     height: 50px;
-    margin-left: 100px;
 }
+
+.our_photographers {
+    color: $primary-color;
+    transition: transform 0.5s cubic-bezier(0.2, 0.5, 0.3, 2);
+
+    // &:hover{
+    //     color: $secondary-color;
+    //     transform:scale(1.2);
+    // }
+}
+
 
 .photographer_section {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 70px;
-    margin-top: 100px;
+    grid-template-columns: auto auto auto;
+    gap: 4em 1%;
+    margin-top:100px;
+
 
     article {
         justify-self: center;
@@ -18,14 +33,74 @@
     }
 }
 
+.home {
+    &_name {
+        text-align: center;
+        font-size: clamp(2em, 3vw, 3em);
+        white-space: nowrap
+    }
 
-.our_photographers {
-    margin-right: 100px;
-    color: $primary-color;
-    transition: transform 0.5s cubic-bezier(0.2, 0.5, 0.3, 2);
+    &_city {
+        text-align: center;
+        white-space: nowrap
+    }
 
-    &:hover{
-        color: $secondary-color;
-        transform:scale(1.2);
+    &_tagline {
+        text-align: center;
+        white-space: nowrap
+    }
+
+    &_price {
+        text-align: center;
+        white-space: nowrap
     }
 }
+
+
+
+
+@media only screen and (max-width: 1050px) {
+
+    .photographer_section {
+         grid-template-columns: auto auto;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+
+    .home_body_wrapper {
+        margin: 0 50px;
+    }
+
+    .photographer_section {
+         grid-template-columns: auto auto;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .photographer_section  {
+        grid-template-columns: auto;
+    }
+
+    .home_header {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: 1em;
+    }
+
+    .our_photographers {
+        font-size: 1.5em;
+    }
+}
+
+
+@media only screen and (max-width: 400px) {
+
+    .home_body_wrapper {
+        margin: 0 20px;
+    }
+}
+
+
