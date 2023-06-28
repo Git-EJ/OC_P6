@@ -9,7 +9,7 @@ export class ContactForm {
     extractElements() {
         this.body = document.querySelector('body')
         this.modal = document.getElementById('contact_modal');
-        this.openBtn = document.getElementById('photograph_contact_button_position')
+        this.openBtn = document.getElementById('photograph_contact_button')
         this.closeBtn = document.getElementById('contact_form_btn_close')
         this.allFields = document.querySelectorAll('input, textarea')
         this.inputFields = document.querySelectorAll('input')

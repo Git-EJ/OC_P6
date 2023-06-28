@@ -51,41 +51,47 @@ async function retrivalData() {
 */
 function getPhotographerPageHeaderDOM (photographer) {;
     const { name, id, city, country, tagline, price, portrait } = photographer
-    const photographHeaderContainer = document.querySelector('.photographBanner_container')
-    const photographHeaderLeft = photographHeaderContainer.querySelector('.left')
-    const photographHeaderRight = photographHeaderContainer.querySelector('.right')
-    const photographContactButton = document.getElementById('photograph_contact_button_position')
+    const photographBannerContainer = document.querySelector('.photographBanner_container')
+    const photographBannerLeft = photographBannerContainer.querySelector('.left')
+    const photographBannerRight = photographBannerContainer.querySelector('.right')
+    const photographContactButton = document.getElementById('photograph_contact_button')
     const pricePerDay = document.querySelector('.overlay_bottomRight_pricePerDay')
+    
     
     // Photographer name
     const photographerName_payload = photographerName(photographer)
     photographerName_payload.classNames = photographerName_payload.classNames.concat(' ', 'page_name')
-    DOMElement(photographerName_payload, photographHeaderLeft)
-    
+    photographerName_payload.attributes.role = 'banner (h2)';
+    DOMElement(photographerName_payload, photographBannerLeft)
+
     
     //Photographer city & country
     const photographerCity_payload = photographerCity(photographer)
     photographerCity_payload.classNames = photographerCity_payload.classNames.concat(' ', 'page_city')
-    DOMElement(photographerCity_payload, photographHeaderLeft)
+    DOMElement(photographerCity_payload, photographBannerLeft)
     
+
     //Photographer tagline
-    
     const photographerTagline_payload = photographerTagline(photographer)
     photographerTagline_payload.classNames = photographerTagline_payload.classNames.concat(' ', 'page_Tagline')
-    DOMElement(photographerTagline_payload, photographHeaderLeft)
+    DOMElement(photographerTagline_payload, photographBannerLeft)
     
     
     //Photographer img portrait
     const imgContainer = document.createElement('div')
     imgContainer.classList.add('photographer_portrait_container', 'page_portrait')
+    photographBannerRight.appendChild(imgContainer)
     
     const picture = photographerPicture(photographer)
     photographerPortrait(photographer, picture, imgContainer)
     
-    photographHeaderRight.appendChild(imgContainer)
     
     //Photographer contact button
-    photographContactButton.classList.add('photograph_contact_button_position')
+    photographContactButton.classList.add('photograph_contact_button')
+    
+    //Photographer portrait
+    const photographerPagePortrait = document.querySelector('.photographer_portrait')
+    photographerPagePortrait.setAttribute("role", 'image')
     
     // Photographer pricePerDay in overlay
     pricePerDay.textContent = `${price}\u20AC / jour`
@@ -106,6 +112,7 @@ function getPhotographerMedias(photographersMedias) {
         arrayOfPhotographerMedias.push(photographerMedias)
     });
     getPhotographerPageMediasDOM(arrayOfPhotographerMedias)
+    console.log();
 }
 
 
@@ -115,8 +122,7 @@ function getPhotographerMedias(photographersMedias) {
 export function getPhotographerPageMediasDOM(data) { 
     
     data.forEach(el => {
-        const { id, image, video, title, likes, photographerId, date } = el
-        
+        const { id, image, video, title, likes, photographerId, date, ariaLabel} = el
         const photographer_medias_section = document.querySelector('.photographer_medias_section')
         
         const article = document.createElement('article')
@@ -142,6 +148,9 @@ export function getPhotographerPageMediasDOM(data) {
             const img = document.createElement('img') 
             img.classList.add('media')
             img.setAttribute('src', `./assets/images/${photographerId}/${image}`)
+            img.setAttribute('alt', `${title}`)
+            img.setAttribute('role', 'image link')
+            img.setAttribute('aria-label', `${ariaLabel}`)
             article.setAttribute("data-type", 'image')
             // img.setAttribute('onclick', 'displayLightBox()')
             article.appendChild(img)  
@@ -153,7 +162,10 @@ export function getPhotographerPageMediasDOM(data) {
             const video_container = document.createElement('video') 
             const videoMedia = document.createElement('source')
             
-            video_container.classList.add('media')
+            video_container.classList.add('media')   
+            video_container.setAttribute('alt', `${title}`)
+            video_container.setAttribute('role', 'video link')
+            video_container.setAttribute('aria-label', 'closeup view')
             article.setAttribute("data-type", 'video')
             video_container.setAttribute('controls', "controls")
             video_container.setAttribute('preload', "metadata")
@@ -168,13 +180,23 @@ export function getPhotographerPageMediasDOM(data) {
         }   
         
         mediaNameAndLikes.classList.add('media_description')
+        
         mediaName.classList.add('media_description_name')
+        mediaName.textContent = `${title}`
+       
         mediaLikes.classList.add('media_description_likes_container')
+        
         mediaLikesCounter.classList.add('media_description_likes_counter')
+        mediaLikesCounter.textContent = `${likes}`
+        mediaLikesCounter.setAttribute('role', 'text')
+        mediaLikesCounter.setAttribute('aria-label', 'number of likes')
+        
+        
         heartIcon.classList.add('fa-solid', 'fa-heart')
         heartIcon.classList.add('heartButton')
-        mediaName.textContent = `${title}`
-        mediaLikesCounter.textContent = `${likes}`
+        heartIcon.setAttribute('role', 'button  ')
+        heartIcon.setAttribute('aria-label', 'like button  ')
+       
         
         article.appendChild(mediaNameAndLikes)
         mediaNameAndLikes.appendChild(mediaName)

@@ -28,18 +28,18 @@
 
     .page {
         &_name {
-            font-size: clamp(0.8em, 3vw, 3em);
+            font-size: clamp(1.6em, 3vw, 3em);
+            white-space: nowrap;
+            cursor: default;
         }
         &_city {
-            font-size: clamp(0.6em, 2vw, 1.7em);
-        }
-        &_tagline {
-            font-size: 1.5em;
+            font-size: clamp(1em, 2vw, 1.7em);
+            white-space: nowrap
         }
     }
 }
 
-.photograph_contact_button_position {
+.photograph_contact_button {
     display:flex;
     justify-content: center;
     align-items: center;
@@ -244,42 +244,6 @@
         bottom: 0%;
     }
 }
-
-
-
-
-// @media only screen and (max-width: 900px) {
-
-//     .page_body_wrapper {
-//         margin: 0 20px;
-//     }
-
-//     .photographBanner {
-//         &.right{
-//             padding:2px;
-//         }
-//     } 
-// }
-
-// @media only screen and (max-width: 900px) {
-
-//     .page_body_wrapper {
-//         margin: 0 20px;
-//     }
-
-//     .photographBanner {
-//         &.right{
-//             padding:0px;
-//         }
-//     } 
-// }
-
-// @media only screen and (max-width: 900px) {
-
-//     .photographBanner_container{
-//         flex-direction: column-reverse;
-//     }
-// }
 
 
 

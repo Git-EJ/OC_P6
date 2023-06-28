@@ -1,4 +1,4 @@
-// import { photographerCity } from "../components/DomElement"
+ // import { photographerCity } from "../components/DomElement"
 
 export class Lightbox {
 
@@ -21,8 +21,10 @@ export class Lightbox {
         this.container.classList.add("lightbox")
         this.wrapper = document.createElement("div")
         this.wrapper.classList.add("lightbox_modal")
+        this.wrapper.setAttribute('role', 'dialog') 
+        this.wrapper.setAttribute('aria-label', 'media closeup view')
         this.wrapper.innerHTML = `
-            <svg class="lightbox_modal_close" viewBox="0 0 384 512"
+            <svg class="lightbox_modal_close" viewBox="0 0 384 512" role="button"  aria-label="closeup dialog"
                 alt="icone de fermeture lightBox media" aria-label="icone de fermeture carrousel photos et videos">
                 <path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 
                             105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 
@@ -30,13 +32,13 @@ export class Lightbox {
                             45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" />
             </svg>
 
-            <svg class="lightbox_modal_before" viewBox="0 0 320 512" alt="icone media precedent lightBox media"
+            <svg class="lightbox_modal_before" viewBox="0 0 320 512" alt="icone media precedent lightBox media  role="link"  aria-label="va à l'image précédente"
                 aria-label="icone media precedent lightBox media">
                 <path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 
                             0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z" />
             </svg>
 
-            <svg class="lightbox_modal_after" viewBox="0 0 320 512" alt="icone media suivant lightBox media"
+            <svg class="lightbox_modal_after" viewBox="0 0 320 512" alt="icone media suivant lightBox media"  role="link"  aria-label="va à l'image suivante"
                 aria-label="icone media suivant lightBox media">
                 <path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 
                             12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 
@@ -45,26 +47,31 @@ export class Lightbox {
         this.container.style.display = "none"
         body.appendChild(div)
     }
-
+ 
     extractElements() {
         
         this.closeBtn = this.wrapper.querySelector('.lightbox_modal_close')
         this.beforeBtn = this.wrapper.querySelector('.lightbox_modal_before')
         this.afterBtn = this.wrapper.querySelector('.lightbox_modal_after')
-
-        this.titleElement = document.createElement("div")
-        this.titleElement.classList.add("lightbox_modal_title")
-
+        
         this.imageElement = document.createElement('img')
-        this.imageElement.setAttribute("data-type", 'image')
         this.imageElement.classList.add('lightbox_modal_media', "hidden")
+        this.imageElement.setAttribute("data-type", 'image')
+        this.imageElement.setAttribute("role", 'image closeup view') 
+        this.imageElement.setAttribute("aria-label", 'image closeup view') 
         
         this.videoElement = document.createElement('video')
+        this.videoElement.classList.add('lightbox_modal_media', "hidden")
         this.videoElement.setAttribute('controls', "controls")
         this.videoElement.setAttribute('preload', "metadata")
         this.videoElement.setAttribute('type', 'video/mp4')
         this.videoElement.setAttribute("data-type", 'video')
-        this.videoElement.classList.add('lightbox_modal_media', "hidden")
+        this.videoElement.setAttribute("role", 'video')
+        this.videoElement.setAttribute("aria-label", 'video close up view')
+        
+        this.titleElement = document.createElement("div")     
+        this.titleElement.classList.add("lightbox_modal_title")
+        this.titleElement.setAttribute('role', 'text')
 
         this.wrapper.appendChild(this.imageElement)
         this.wrapper.appendChild(this.videoElement)

@@ -11,12 +11,17 @@ export function photographerTemplate(data) {
         article.setAttribute("role", "group")
         article.setAttribute("aria-label", "Description du photographe")
         
-        //Photographer img Portrait Link (is a link and the container of the img portrait)
+        //Photographer img Portrait Link
         const imgContainerLink = document.createElement('a')
         imgContainerLink.setAttribute("href", `./photographer.html?id=${id}` )
         imgContainerLink.classList.add('photographer_portrait_container')
         
+
+        //Photographer  name Link 
+        const nameContainerLink = document.createElement('a')
+        nameContainerLink.setAttribute("href", `./photographer.html?id=${id}` )
         
+
         //Photographer img portrait
         const picture = photographerPicture(data)
         photographerPortrait(data, picture, imgContainerLink)
@@ -24,18 +29,23 @@ export function photographerTemplate(data) {
         
         //Photographer Name
         const photographerName_payload = photographerName(data)
-        DOMElement(photographerName_payload, article)
+        photographerName_payload.classNames = photographerName_payload.classNames.concat(' ', 'home_name')
+        DOMElement(photographerName_payload, nameContainerLink)
+        article.appendChild(nameContainerLink)
         
         // Photographer City & Country
         const photographerCity_payload = photographerCity(data)
+        photographerCity_payload.classNames = photographerCity_payload.classNames.concat(' ', 'home_city')
         DOMElement(photographerCity_payload, article)
         
         // Photographer Tagline
         const photographerTagline_payload = photographerTagline(data)
+        photographerTagline_payload.classNames = photographerTagline_payload.classNames.concat(' ', 'home_tagline')
         DOMElement(photographerTagline_payload, article)
         
         // Photographer Price per day
         const photographerPrice_payload = photographerPrice(data)
+        photographerPrice_payload.classNames = photographerPrice_payload.classNames.concat(' ', 'home_price')
         DOMElement(photographerPrice_payload, article)
         
         return (article);

@@ -18,8 +18,9 @@ export function photographerName(photographers) {
     const photographerName_payload= {
         tag: "h2",
         textContent: name,
-        classNames: 'photographer_name home_name',
+        classNames: 'photographer_name',
         attributes: {
+            "role": 'Link (h2)', //for home Page - for page in pages/photographers.js
             "aria-label": `nom du photographe: ${name}`
         }
     }
@@ -31,9 +32,10 @@ export function photographerCity(photographers) {
     const photographerCity_payload= { 
         tag: "span",
         textContent: (`${city}, ${country}`),
-        classNames: 'photographer_city home_city',
+        classNames: 'photographer_city',
         attributes: {
-            "aria-label": `ville et pays du photographe: ${city} ${country}`
+            "aria-label": `ville et pays du photographe: ${city} ${country}`,
+            "role": 'text paragraph',
         }
     }
     return photographerCity_payload
@@ -44,9 +46,10 @@ export function photographerTagline(photographers) {
     const photographerTagline_payload= {
         tag: "span",
         textContent: tagline,
-        classNames: 'photographer_tagline home_tagline',
+        classNames: 'photographer_tagline',
         attributes: {
-            "aria-label": `devise du photographe: ${tagline}`
+            "aria-label": `devise du photographe: ${tagline}`,
+            "role": 'text paragraph',
         }
     }
     return photographerTagline_payload
@@ -57,9 +60,10 @@ export function photographerPrice(photographers) {
     const photographerPrice_payload= {
         tag: "span",
         textContent: (`${price}\u20AC/jour`),
-        classNames: 'photographer_price home_price',
+        classNames: 'photographer_price',
         attributes: {
-            "aria-label": `prix du photographe: ${price}\u20AC/jour`
+            "aria-label": `prix du photographe: ${price}\u20AC/jour`,
+            "role": 'text paragraph',
         }
     }
     return photographerPrice_payload

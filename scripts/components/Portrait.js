@@ -16,6 +16,7 @@ export function DOMPortrait(picture, altText, className, parent=null) {
     const portrait = document.createElement('img')
     portrait.setAttribute("src", picture)
     portrait.setAttribute("alt", altText)
+    portrait.setAttribute("role", 'link image') //for home Page - for page in pages/photographers.js
     portrait.setAttribute("aria-label", altText)
     portrait.classList.add(className)
     parent && parent.appendChild(portrait)
@@ -26,7 +27,7 @@ export function photographerPortrait (data, picture, imgContainer ) {
     const name = data.name
     DOMPortrait(
         picture,
-        `${name} photographer portrait`,
+        `Photographe portrait: ${name}`,
         'photographer_portrait',
         imgContainer
     )       
