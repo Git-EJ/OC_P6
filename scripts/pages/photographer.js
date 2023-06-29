@@ -32,14 +32,22 @@ async function retrivalData() {
     
     // Array of medias
     const medias = [...document.querySelectorAll('article')]
-    
+
+    const mediasAriaLabel = [...document.querySelectorAll('article img[aria-label], article video[aria-label]' )];
+   
+    mediasAriaLabel.forEach((el,i)=>{
+        const arrayOfMediaAriaLabel = el.getAttribute('aria-label')
+        medias[i].arialabel = arrayOfMediaAriaLabel
+    })
+
     const lightbox = new Lightbox()
-    lightbox.open( medias.map(m=>{
+    lightbox.open(medias.map(m=>{
         const content = m.querySelector(".media")
         const type = m.getAttribute('data-type')
         const title = m.getAttribute('title')
         const url = type === "video" ? content.querySelector("source").getAttribute("src") : content.getAttribute("src")
-        return { content, title, type, url }
+        const ariaLabel = m.arialabel
+        return { content, title, type, url, ariaLabel }
     }))
 }
 
@@ -141,7 +149,7 @@ export function getPhotographerPageMediasDOM(data) {
         const mediaName = document.createElement('span')
         const mediaLikes = document.createElement('span')
         const mediaLikesCounter = document.createElement('span')
-        const heartIcon = document.createElement('i')
+        const heartIcon = document.createElement('em')
         
         
         if (image) { 
@@ -165,7 +173,7 @@ export function getPhotographerPageMediasDOM(data) {
             video_container.classList.add('media')   
             video_container.setAttribute('alt', `${title}`)
             video_container.setAttribute('role', 'video link')
-            video_container.setAttribute('aria-label', 'closeup view')
+            video_container.setAttribute('aria-label', `${ariaLabel}`)
             article.setAttribute("data-type", 'video')
             video_container.setAttribute('controls', "controls")
             video_container.setAttribute('preload', "metadata")

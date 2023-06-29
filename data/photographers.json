@@ -349,7 +349,8 @@
 			"image": "Travel_Lonesome.jpg",
 			"likes": 88,
 			"date": "2019-02-03",
-			"price": 45
+			"price": 45,
+			"ariaLabel": "paysage montagneux verdoyant, avec une silhouette solitaire sur une crete rocheuse"
 		},
 		{
 			"id": 625025343,
@@ -540,7 +541,7 @@
 			"likes": 54,
 			"date": "2020-05-05",
 			"price": 60,
-			"aria-label": "immeuble parisien sur la colline de Montmartre"
+			"ariaLabel": "immeuble parisien sur la colline de Montmartre"
 		},
 		{
 			"id": 952343423,
@@ -559,7 +560,7 @@
 			"likes": 101,
 			"date": "2018-03-05",
 			"price": 65,
-			"aria-label": "femme partiquant la varappe, agripée à une paroie"
+			"ariaLabel": "femme partiquant la varappe, agripée à une paroie"
 		},
 		{
 			"id": 235343222,
@@ -569,7 +570,7 @@
 			"likes": 103,
 			"date": "2018-03-10",
 			"price": 70,
-			"aria-label": "surfer passant dans un rouleau de vague"
+			"ariaLabel": "surfer passant dans un rouleau de vague"
 		},
 		{
 			"id": 7775342343,
@@ -579,7 +580,7 @@
 			"likes": 77,
 			"date": "2018-04-16",
 			"price": 50,
-			"aria-label": "skieur, dans les air croisant ses skis"
+			"ariaLabel": "skieur, dans les air croisant ses skis"
 		},
 		{
 			"id": 9253445784,
@@ -589,7 +590,7 @@
 			"likes": 88,
 			"date": "2018-04-22",
 			"price": 65,
-			"aria-label": "femmes sprinteuse sur une piste d'athlétisme, entrain de s'affronter "
+			"ariaLabel": "femmes sprinteuse sur une piste d'athlétisme, entrain de s'affronter "
 		},
 		{
 			"id": 22299394,
@@ -599,7 +600,7 @@
 			"likes": 95,
 			"date": "2018-04-27",
 			"price": 70,
-			"aria-label": "skateur dans un bole de skatepark, effectuant une figure dans les airs "
+			"ariaLabel": "skateur dans un bole de skatepark, effectuant une figure dans les airs "
 		},
 		{
 			"id": 3452342633,
@@ -609,7 +610,7 @@
 			"likes": 52,
 			"date": "2018-05-03",
 			"price": 75,
-			"aria-label": "interieur d'un building, point de vue vers le ciel à travers un dome en verre, l'interieur est d'un blanc immaculé"
+			"ariaLabel": "interieur d'un building, point de vue vers le ciel à travers un dome en verre, l'interieur est d'un blanc immaculé"
 		},
 		{
 			"id": 939234243,
@@ -619,7 +620,7 @@
 			"likes": 55,
 			"date": "2018-05-10",
 			"price": 72,
-			"aria-label": "building d'architecte, hyper moderne, avec au premier plan une étendue d'eau artificiel, le building laisse immaginé une vague"
+			"ariaLabel": "building d'architecte, hyper moderne, avec au premier plan une étendue d'eau artificiel, le building laisse immaginé une vague"
 		},
 		{
 			"id": 222959233,
@@ -629,7 +630,7 @@
 			"likes": 85,
 			"date": "2018-05-15",
 			"price": 71,
-			"aria-label": "en noir et blanc, building en forme de cercle presque fermée, vue de l'interieur du cercle poitant vers le ciel"
+			"ariaLabel": "en noir et blanc, building en forme de cercle presque fermée, vue de l'interieur du cercle poitant vers le ciel"
 		},
 		{
 			"id": 965933434,
@@ -639,7 +640,7 @@
 			"likes": 66,
 			"date": "2018-05-20",
 			"price": 58,
-			"aria-label": "vue vers le ciel, deux immeubles espacés, l'espace entre immeubles forme une croix"
+			"ariaLabel": "vue vers le ciel, deux immeubles espacés, l'espace entre immeubles forme une croix"
 		},
 		{
 			"id": 777723343,
@@ -649,7 +650,7 @@
 			"likes": 79,
 			"date": "2018-05-21",
 			"price": 80,
-			"aria-label": "immeuble au forme incurvée, composé de bleu et de blanc surperposé, faisant penser à des strates"
+			"ariaLabel": "immeuble au forme incurvée, composé de bleu et de blanc surperposé, faisant penser à des strates"
 		}
 	]
 }

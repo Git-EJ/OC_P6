@@ -34,8 +34,8 @@ export function photographerCity(photographers) {
         textContent: (`${city}, ${country}`),
         classNames: 'photographer_city',
         attributes: {
-            "aria-label": `ville et pays du photographe: ${city} ${country}`,
             "role": 'text paragraph',
+            "aria-label": `ville et pays du photographe: ${city} ${country}`,
         }
     }
     return photographerCity_payload
@@ -48,8 +48,8 @@ export function photographerTagline(photographers) {
         textContent: tagline,
         classNames: 'photographer_tagline',
         attributes: {
-            "aria-label": `devise du photographe: ${tagline}`,
             "role": 'text paragraph',
+            "aria-label": `devise du photographe: ${tagline}`,
         }
     }
     return photographerTagline_payload
@@ -62,8 +62,8 @@ export function photographerPrice(photographers) {
         textContent: (`${price}\u20AC/jour`),
         classNames: 'photographer_price',
         attributes: {
-            "aria-label": `prix du photographe: ${price}\u20AC/jour`,
             "role": 'text paragraph',
+            "aria-label": `prix du photographe: ${price}\u20AC/jour`,
         }
     }
     return photographerPrice_payload

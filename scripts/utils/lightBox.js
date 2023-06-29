@@ -57,8 +57,7 @@ export class Lightbox {
         this.imageElement = document.createElement('img')
         this.imageElement.classList.add('lightbox_modal_media', "hidden")
         this.imageElement.setAttribute("data-type", 'image')
-        this.imageElement.setAttribute("role", 'image closeup view') 
-        this.imageElement.setAttribute("aria-label", 'image closeup view') 
+        this.imageElement.setAttribute("role", 'image') 
         
         this.videoElement = document.createElement('video')
         this.videoElement.classList.add('lightbox_modal_media', "hidden")
@@ -67,7 +66,6 @@ export class Lightbox {
         this.videoElement.setAttribute('type', 'video/mp4')
         this.videoElement.setAttribute("data-type", 'video')
         this.videoElement.setAttribute("role", 'video')
-        this.videoElement.setAttribute("aria-label", 'video close up view')
         
         this.titleElement = document.createElement("div")     
         this.titleElement.classList.add("lightbox_modal_title")
@@ -129,14 +127,18 @@ export class Lightbox {
         const mediaTitle = this.medias[index].title
         const mediaType = this.medias[index].type
         const mediaUrl = this.medias[index].url
-    
+        const mediaAriaLabel = this.medias[index].ariaLabel
+     
         if (mediaType === 'image') {
             this.imageElement.setAttribute('src', mediaUrl)
+            this.imageElement.setAttribute("aria-label", `${mediaAriaLabel}`) 
             this.imageElement.classList.remove("hidden")
             this.videoElement.classList.add("hidden")
-            this.videoElement.setAttribute("src", '')
+            
+
         } else if (mediaType === 'video') {
             this.videoElement.setAttribute('src', mediaUrl)
+            this.videoElement.setAttribute("aria-label", `${mediaAriaLabel}`) 
             const removeVideoExt = mediaUrl.split(".").slice(0, -1).join('.')
             this.videoElement.setAttribute('poster', `${removeVideoExt}.jpg`);
             this.videoElement.classList.remove("hidden")
@@ -170,6 +172,7 @@ export class Lightbox {
 
     open (medias) {
         this.medias = medias
+        console.log(this.medias);
         this.index = this.medias.length>0 ? 0 : -1
         this.addListeners()
     }
