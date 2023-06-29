@@ -17,6 +17,7 @@ export class Lightbox {
         const body = document.body
         const div = document.createElement('div')
         
+        this.body = body
         this.container = div
         this.container.classList.add("lightbox")
         this.wrapper = document.createElement("div")
@@ -85,7 +86,19 @@ export class Lightbox {
             }
         }
 
-        this.onClickOut = (e)=>{
+        this.keyLeftListener = (e) => {
+            if(e.key === "ArrowLeft") {
+                this.onBefore()
+            }
+        }
+
+        this.keyRightListener = (e) => {
+            if(e.key === "ArrowRight") {
+                this.onAfter()
+            }
+        }
+
+        this.onClickOut = (e) =>{
             if (e.target === this.container) {
                 this.onClose()
             }
@@ -150,24 +163,34 @@ export class Lightbox {
     }
 
     addListeners () {
+        this.body.addEventListener("keydown",this.keyEscapeListener )
         this.container.addEventListener("click", this.onClickOut)
         this.closeBtn.addEventListener("click", this.onClose)
-        this.container.addEventListener("keydown",this.keyEscapeListener )
+       
+        this.body.addEventListener("keydown", this.keyLeftListener )
+        this.beforeBtn.addEventListener("click", this.onBefore)
+        
+        this.body.addEventListener("keydown", this.keyRightListener )
+        this.afterBtn.addEventListener("click", this.onAfter)
+       
         this.medias.forEach((m,i) => {
             this.map.set(m.content, i)
             m.content.addEventListener("click", this.onSelect)
-        })
-        this.beforeBtn.addEventListener("click", this.onBefore)
-        this.afterBtn.addEventListener("click", this.onAfter)
+        })  
     }
 
     removeListeners() {
-        this.container.removeEventListener("click", this.onClickOut)
+        this.body.removeEventListener("keydown",this.keyEscapeListener )
         this.closeBtn.removeEventListener("click", this.onClose)
-        this.container.removeEventListener("keydown",this.keyEscapeListener )
-        this.medias.map(m=>m.content.removeEventListener("click", this.onSelect))
+        
+        this.body.removeListener("keydown", this.keyLeftListener )
         this.beforeBtn.removeListener("click", this.onBefore)
+        
+        this.body.removeListener("keydown", this.keyRightListener )
         this.afterBtn.removeListener("click", this.onAfter)
+        
+        this.container.removeEventListener("click", this.onClickOut)
+        this.medias.map(m=>m.content.removeEventListener("click", this.onSelect))
     }
 
     open (medias) {
