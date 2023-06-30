@@ -15,11 +15,13 @@ export function photographerTemplate(data) {
         const imgContainerLink = document.createElement('a')
         imgContainerLink.setAttribute("href", `./photographer.html?id=${id}` )
         imgContainerLink.classList.add('photographer_portrait_container')
+        imgContainerLink.setAttribute("tabindex", '3')
         
 
         //Photographer  name Link 
         const nameContainerLink = document.createElement('a')
         nameContainerLink.setAttribute("href", `./photographer.html?id=${id}` )
+        nameContainerLink.setAttribute("tabindex", '3')
         
 
         //Photographer img portrait
@@ -36,16 +38,19 @@ export function photographerTemplate(data) {
         // Photographer City & Country
         const photographerCity_payload = photographerCity(data)
         photographerCity_payload.classNames = photographerCity_payload.classNames.concat(' ', 'home_city')
+        photographerCity_payload.attributes.tabindex = '3'
         DOMElement(photographerCity_payload, article)
         
         // Photographer Tagline
         const photographerTagline_payload = photographerTagline(data)
         photographerTagline_payload.classNames = photographerTagline_payload.classNames.concat(' ', 'home_tagline')
+        photographerTagline_payload.attributes.tabindex = '3'
         DOMElement(photographerTagline_payload, article)
         
         // Photographer Price per day
         const photographerPrice_payload = photographerPrice(data)
         photographerPrice_payload.classNames = photographerPrice_payload.classNames.concat(' ', 'home_price')
+        photographerPrice_payload.attributes.tabindex = '3'
         DOMElement(photographerPrice_payload, article)
         
         return (article);

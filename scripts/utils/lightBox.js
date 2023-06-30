@@ -49,6 +49,7 @@ export class Lightbox {
     }
  
     extractElements() {
+        this.wrapper.setAttribute("tabindex", 1)
         
         this.closeBtn = this.wrapper.querySelector('.lightbox_modal_close')
         this.beforeBtn = this.wrapper.querySelector('.lightbox_modal_before')
@@ -57,7 +58,8 @@ export class Lightbox {
         this.imageElement = document.createElement('img')
         this.imageElement.classList.add('lightbox_modal_media', "hidden")
         this.imageElement.setAttribute("data-type", 'image')
-        this.imageElement.setAttribute("role", 'image') 
+        this.imageElement.setAttribute("role", 'image')
+        this.imageElement.setAttribute("tabindex", '2')
         
         this.videoElement = document.createElement('video')
         this.videoElement.classList.add('lightbox_modal_media', "hidden")
@@ -66,10 +68,16 @@ export class Lightbox {
         this.videoElement.setAttribute('type', 'video/mp4')
         this.videoElement.setAttribute("data-type", 'video')
         this.videoElement.setAttribute("role", 'video')
+        this.videoElement.setAttribute("tabindex", '2')
         
         this.titleElement = document.createElement("div")     
         this.titleElement.classList.add("lightbox_modal_title")
-        this.titleElement.setAttribute('role', 'text')
+        this.titleElement.setAttribute("role", 'text')
+        this.titleElement.setAttribute("tabindex", '3')
+
+        this.beforeBtn.setAttribute("tabindex", 4)
+        this.afterBtn.setAttribute("tabindex", 5)
+        this.closeBtn.setAttribute("tabindex", 6)
 
         this.wrapper.appendChild(this.imageElement)
         this.wrapper.appendChild(this.videoElement)

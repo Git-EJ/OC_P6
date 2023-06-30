@@ -25,6 +25,8 @@ export class ContactForm {
         this.name = this.getName.textContent
         this.modal.setAttribute("aria-label", `Contact me ${this.name}`)
         this.contactMe.innerHTML = 'Contactez-moi<br>' + this.name
+
+        
     }
 
     init() {
@@ -89,10 +91,10 @@ export class ContactForm {
         this.textareaField.addEventListener('input', (e) => {
             console.log(`${this.textareaField.name}`, this.textareaField.value)        // SOUTENANCE
             
-            const regex = /^[a-zA-Z0-9\-_@#,;!%():."=+*/éèà]+$/
-            !regex.test(e.target.value) ? e.target.setCustomValidity('Caractère(s) non autorisé(s)') : e.target.setCustomValidity('');
+            const regex = /^[a-zA-Z0-9\ -_@#,;!%():."=+*/éèà]+$/
+            !regex.test(e.target.value) ? e.target.setCustomValidity('Caractère(s) non autorisé(s)') : e.target.setCustomValidity('')
             
-            //     // e.target.validity.tooShort ? e.target.setCustomValidity('Veuillez saisir au minimum 20 caractères') : e.target.setCustomValidity('')
+            // e.target.validity.tooShort ? e.target.setCustomValidity('Veuillez saisir au minimum 20 caractères') : e.target.setCustomValidity('')
         })
 
 
