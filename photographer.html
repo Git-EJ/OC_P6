@@ -8,7 +8,7 @@
   <link rel="icon" type="image/png" href="assets/favicon.png">
   <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
   <script src="https://kit.fontawesome.com/bb7f86ceb6.js" crossorigin="anonymous"></script>
-  <script src="/scripts/pages/photographer.js" type="module" defer></script>
+  <script src="./scripts/pages/photographer.js" type="module" defer></script>
   <title>Fisheye - photographe </title>
 </head>
 
@@ -43,45 +43,42 @@
         <span class="overlay_bottomRight_pricePerDay" role="text" aria-label="prix par jour"></span>
       </div>
 
-      <div id="contact_modal">
+      <div id="contact_modal" role="dialog">
         <div class="modal_form"> 
-          <header>
-            <h2>Contactez-moi</h2>
+          <header class="modal_form_header">
+            <h2 class="modal_form_header_title" role="Heading(h2)" aria-labelledby="contact_modal">Contactez-moi</h2>
             <img id="contact_form_btn_close" src="assets/icons/close.svg" alt="icone de fermeture formulaire"
-              aria-label="icone de fermeture formulaire" />
+              role="button" aria-label="close" />
           </header>
 
           <form>
             <div role="group" aria-label="Informations personnelles">
 
-              <label for="firstname" id="first-name">Prénom</label>
-              <input id="firstname" type="text" name="firstname" value="" aria-labelledby="first-name"
+              <label for="firstname" id="first-name" role="label">Prénom</label>
+              <input id="firstname" type="text" name="firstname" value="" aria-labelledby="first-name" role="textfield" aria-label="firstname"
                 placeholder="Votre prénom ici" minlength="2" maxlength='40' spellcheck="false"
                 pattern="^[a-zA-ZÀ-ÿ][a-zA-ZÀ-ÿ\s\-]*[a-zA-ZÀ-ÿ]$" required />
 
-              <label for="lastname" id="last-name">Nom</label>
-              <input id="lastname" type="text" name="lastname" value="" aria-labelledby="last-name"
+              <label for="lastname" id="last-name" role="label">Nom</label>
+              <input id="lastname" type="text" name="lastname" value="" aria-labelledby="last-name" role="textfield" aria-label="lastname"
                 placeholder="Votre nom ici" minlength="2" maxlength='40' spellcheck="false"
                 pattern="^[a-zA-ZÀ-ÿ][a-zA-ZÀ-ÿ\s\-]*[a-zA-ZÀ-ÿ]$" required />
 
-              <label for="email" id="e-mail">Email</label>
-              <input id="email" type="email" name="email" value="" aria-labelledby="e-mail"
+              <label for="email" id="e-mail" role="label">Email</label>
+              <input id="email" type="email" name="email" value="" aria-labelledby="e-mail" role="textfield" aria-label="email"
                 placeholder="Votre email ici: email@example.com" pattern="^[\w.%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}$"
                 required />
-
             </div>
 
             <div role="group" aria-label="Message">
-
-              <label for="message" id="m-essage">Votre Message</label>
-              <textarea id="message" rows="15" class="form_message" name="message" value="" aria-labelledby="m-essage"
+              <label for="message" id="m-essage" role="label">Votre Message</label>
+              <textarea id="message" rows="12" class="form_message" name="message" value="" aria-labelledby="m-essage" role="textfield" aria-label="your message"
                 placeholder="Votre message ici" minlength="20" maxlength="600" pattern="^[a-zA-Z0-9\-_@#]+$"
                 required></textarea>
-
             </div>
 
             <label for="submit-button" id="s-ubmit-button" class="hidden">Envoyer</label>
-            <button id="submit-button" aria-labelledby="s-ubmit-button" arai-label= "Send" class="contact_button">Envoyer</button>
+            <button id="submit-button" aria-labelledby="s-ubmit-button" role="button" aria-label= "Send" class="contact_button">Envoyer</button>
           </form>
         </div>
       </div>

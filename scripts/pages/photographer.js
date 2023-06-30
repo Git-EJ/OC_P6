@@ -103,6 +103,10 @@ function getPhotographerPageHeaderDOM (photographer) {;
     
     // Photographer pricePerDay in overlay
     pricePerDay.textContent = `${price}\u20AC / jour`
+
+    //Call contact Form for photographer name 
+    const contactForm = new ContactForm()
+    contactForm.open()
     
     return { name, id, city, country, tagline, price, portrait, getPhotographerPageHeaderDOM }
 }
@@ -255,14 +259,11 @@ export function sortArray (type) {
     }
     medias.map(m=>mediaContainer.appendChild(m))
 }
-            
+
 
 window.onload = () => {
-
-    retrivalData()
     
-    const contactForm = new ContactForm()
-    contactForm.open()
+    retrivalData()
 
     const selectElement = document.getElementById('sort')
     selectElement.addEventListener("change", (e)=>{

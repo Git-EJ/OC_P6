@@ -1,4 +1,3 @@
- // import { photographerCity } from "../components/DomElement"
 
 export class Lightbox {
 
@@ -195,7 +194,6 @@ export class Lightbox {
 
     open (medias) {
         this.medias = medias
-        console.log(this.medias);
         this.index = this.medias.length>0 ? 0 : -1
         this.addListeners()
     }

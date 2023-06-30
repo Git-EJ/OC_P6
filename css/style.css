@@ -448,7 +448,7 @@ header {
   height: 100%;
   position: fixed;
   left: 0;
-  bottom: 0;
+  top: 0;
   display: none;
   justify-content: center;
   align-items: center;
@@ -458,29 +458,25 @@ header {
 .modal_form {
   border-radius: 5px;
   background-color: #DB8876;
-  width: 50%;
+  width: 40%;
+  height: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: 20px 35px;
+  padding: 10px 35px 20px 35px;
   margin: auto;
 }
-
-.modal_form header {
+.modal_form_header {
   justify-content: space-between;
   width: 100%;
+  height: 160px;
 }
-
-.modal_form header img {
-  cursor: pointer;
-}
-
-.modal_form header h2 {
-  font-size: clamp(1.5em, 4vw, 3em);
+.modal_form_header_title {
+  font-size: clamp(1.5em, 3vw, 3em);
   font-weight: normal;
-  text-align: center;
   padding-right: 1em;
+  margin: 0.5em 0 1em 0;
 }
 
 form {
@@ -489,12 +485,10 @@ form {
   flex-direction: column;
   align-items: flex-start;
 }
-
 form label {
   color: #312E2E;
-  font-size: clamp(1em, 2.5vw, 2em);
+  font-size: clamp(1.4em, 1.5vw, 2em);
 }
-
 form div {
   display: flex;
   flex-direction: column;
@@ -502,10 +496,9 @@ form div {
   align-items: self-start;
   margin-bottom: 26px;
 }
-
 form input {
   width: 100%;
-  height: 68px;
+  height: 60px;
   border: none;
   border-radius: 5px;
   appearance: none;
@@ -515,21 +508,21 @@ form input:focus-visible {
 }
 form input::placeholder {
   padding-left: 0.5em;
-  font-size: clamp(0.8em, 1.3vw, 1.5em);
+  font-size: clamp(0.8em, 1vw, 1.2em);
 }
-
-.form_message {
+form .form_message {
   width: 100%;
   resize: none;
   border: none;
   border-radius: 5px;
 }
-.form_message:focus-visible {
+form .form_message:focus-visible {
   outline: none;
 }
-.form_message::placeholder {
+form .form_message::placeholder {
   padding: 1em 0 0 0.5em;
-  font-size: 1.2em;
+  font-family: "DM Sans", sans-serif;
+  font-size: clamp(0.8em, 1vw, 1.2em);
 }
 
 input:not(:focus):valid,
@@ -554,10 +547,26 @@ textarea:invalid {
   border-radius: 5px;
 }
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 1100px) {
+  .modal_form {
+    width: 70%;
+  }
+}
+@media only screen and (max-width: 500px) {
   .modal_form {
     width: 90%;
-    padding: 20px 10px;
+  }
+  #contact_form_btn_close {
+    width: 30px;
+    height: 30px;
+    margin-bottom: 5em;
+  }
+}
+@media only screen and (max-width: 400px) {
+  #contact_form_btn_close {
+    width: 25px;
+    height: 25px;
+    margin-bottom: 6.5em;
   }
 }
 .lightbox {
@@ -574,13 +583,14 @@ textarea:invalid {
   backdrop-filter: blur(5px);
 }
 .lightbox_modal {
-  height: 90%;
+  height: 100%;
   width: 70%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   background: white;
+  padding: 1.5em 0 0 0;
 }
 .lightbox_modal_media {
   height: 90%;
@@ -620,7 +630,6 @@ textarea:invalid {
 .lightbox_modal_title {
   color: #901C1C;
   font-size: 1.5em;
-  margin-top: 0.5em;
   width: 70%;
 }
 

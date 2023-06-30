@@ -1,7 +1,7 @@
 export class ContactForm {
-    
     constructor() {
         this.extractElements()
+        this.buildElements()
         this.init()
     }
 
@@ -16,9 +16,19 @@ export class ContactForm {
         this.textareaField = document.querySelector('textarea')
         this.lastAndFirstnameFields = [document.getElementById('lastname'), document.getElementById('firstname')]
         this.emailField = document.getElementById('email')
+        this.getName = document.querySelector('.photographer_name.page_name')
+        this.contactMe = document.querySelector('.modal_form_header_title')
     }
-    
-    
+
+    buildElements() {
+        this.name = this.getName.textContent
+        this.modal.setAttribute("aria-label", `Contact me ${this.name}`)
+        this.contactMe.innerHTML = 'Contactez-moi<br>'+this.name
+
+
+
+    }
+
     init() {
         this.keyEscapeListener = (e) => { if (e.key === "Escape") { this.onClose() }}
         this.onClickOut = (e)=>{ if (e.target === this.modal) { this.onClose() }}
@@ -104,8 +114,8 @@ export class ContactForm {
 
         //open && close modal
         this.openBtn.addEventListener('click', this.onOpen)
-        this.body.addEventListener("keydown",this.keyEscapeListener )
         this.closeBtn.addEventListener("click", this.onClose)
+        this.body.addEventListener("keydown",this.keyEscapeListener )
         this.modal.addEventListener("click", this.onClickOut)
     
     }
