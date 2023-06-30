@@ -18,20 +18,18 @@ export class ContactForm {
         this.emailField = document.getElementById('email')
         this.getName = document.querySelector('.photographer_name.page_name')
         this.contactMe = document.querySelector('.modal_form_header_title')
+        this.window = window
     }
 
     buildElements() {
         this.name = this.getName.textContent
         this.modal.setAttribute("aria-label", `Contact me ${this.name}`)
-        this.contactMe.innerHTML = 'Contactez-moi<br>'+this.name
-
-
-
+        this.contactMe.innerHTML = 'Contactez-moi<br>' + this.name
     }
 
     init() {
-        this.keyEscapeListener = (e) => { if (e.key === "Escape") { this.onClose() }}
-        this.onClickOut = (e)=>{ if (e.target === this.modal) { this.onClose() }}
+        this.keyEscapeListener = (e) => { if (e.key === "Escape") { this.onClose() } }
+        this.onClickOut = (e) => { if (e.target === this.modal) { this.onClose() } }
         this.onClose = () => { this.modal.style.display = "none" }
         this.onOpen = () => { this.modal.style.display = "flex" }
     }
@@ -39,29 +37,28 @@ export class ContactForm {
     /**
      * check if fields are empty before user entry
      */
-    checkFieldsBeforeEntry () {
+    checkFieldsBeforeEntry() {
         this.allFields.forEach(field => {
-            field.value ==="" ? field.setCustomValidity('Veuillez renseigner ce champ') : field.setCustomValidity('')
-        })  
+            field.value === "" ? field.setCustomValidity('Veuillez renseigner ce champ') : field.setCustomValidity('')
+        })
     }
 
-
-    addListeners () {
+    addListeners() {
 
         //all Fields
         this.allFields.forEach(field => {
 
             // check if fields are empty
             field.addEventListener('input', () => {
-                field.value ==="" ? field.setCustomValidity('Veuillez renseigner ce champ') : field.setCustomValidity('')
+                field.value === "" ? field.setCustomValidity('Veuillez renseigner ce champ') : field.setCustomValidity('')
 
                 //No space at the beginning or at the end of the fields
                 clearTimeout(this.timeout) //cancel the previous setTimeout
                 this.timeout = setTimeout(() => {
                     const trimmedValue = field.value.trim();
                     field.value !== trimmedValue //without like an "infinite loop" ==>dispatchEvent
-                    ? (field.value = trimmedValue, field.dispatchEvent(new Event('input')))
-                    :''
+                        ? (field.value = trimmedValue, field.dispatchEvent(new Event('input')))
+                        : ''
                 }, 1000)
             })
         })
@@ -73,11 +70,11 @@ export class ContactForm {
             // allowed characters (regex) + Minimum length
             field.addEventListener('input', (e) => {
                 console.log(`${field.name}`, field.value)           // SOUTENANCE 
-                if(e.target.validity.tooShort) { 
+                if (e.target.validity.tooShort) {
                     e.target.setCustomValidity('Veuillez saisir au minimum 2 caratères')
                     e.stopPropagation()
-                } else if(field.type != 'email' && e.target.validity.patternMismatch) {
-                    e.target.setCustomValidity('Caractères non Autorisés')
+                } else if (field.type != 'email' && e.target.validity.patternMismatch) {
+                    e.target.setCustomValidity('Caractère(s) non Autorisé(s)')
                     e.stopPropagation()
                 } else {
                     e.target.setCustomValidity('')
@@ -87,13 +84,19 @@ export class ContactForm {
 
 
         //Only on textarea Field
+        // Regex 
         // Minimum length
         this.textareaField.addEventListener('input', (e) => {
-            console.log(`${this.textareaField.name}`, this.textareaField.value)        // SOUTENANCE                        
-            e.target.validity.tooShort ? (e.target.setCustomValidity('Veuillez saisir au minimum 20 caractères')) : e.target.setCustomValidity('')
+            console.log(`${this.textareaField.name}`, this.textareaField.value)        // SOUTENANCE
+            
+            const regex = /^[a-zA-Z0-9\-_@#,;!%():."=+*/éèà]+$/
+            !regex.test(e.target.value) ? e.target.setCustomValidity('Caractère(s) non autorisé(s)') : e.target.setCustomValidity('');
+            
+            //     // e.target.validity.tooShort ? e.target.setCustomValidity('Veuillez saisir au minimum 20 caractères') : e.target.setCustomValidity('')
         })
-        
 
+
+        
         //Only on first and lastname fields
         this.lastAndFirstnameFields.forEach(field => {
             //only one dash 
@@ -103,42 +106,43 @@ export class ContactForm {
                 value.length != newValue.length ? e.target.value = newValue : ''
 
                 field.value.startsWith('-') || field.value.endsWith('-')
-                ? (field.setCustomValidity("Pas de trait d'union au début ou à la fin de ce champ"), e.stopPropagation())
-                : ''
+                    ? (field.setCustomValidity("Pas de trait d'union au début ou à la fin de ce champ"), e.stopPropagation())
+                    : ''
             })
         })
 
         //space can't be enter even if it's press
-        this.emailField.addEventListener('keydown', (e) => {e.key === ' ' ? e.preventDefault() : '' })
+        this.emailField.addEventListener('keydown', (e) => { e.key === ' ' ? e.preventDefault() : '' })
 
 
         //open && close modal
         this.openBtn.addEventListener('click', this.onOpen)
         this.closeBtn.addEventListener("click", this.onClose)
-        this.body.addEventListener("keydown",this.keyEscapeListener )
+        this.body.addEventListener("keydown", this.keyEscapeListener)
         this.modal.addEventListener("click", this.onClickOut)
-    
+
     }
 
 
     removeListeners() {
         this.allFields.forEach(field => { field.removeEventListener('input', null) })
-        this.inputFields.forEach(field => { field. removeEventListener('input', null) })
+        this.inputFields.forEach(field => { field.removeEventListener('input', null) })
         this.textareaField.removeEventListener('input', null)
         this.lastAndFirstnameFields.forEach(field => { field.removeEventListener('input', null) })
         this.emailField.removeEventListener('input', null)
         this.openBtn.removeEventListener('click', this.onOpen)
         this.closeBtn.removeEventListener('click', this.onClose)
-        this.modal.removeEventListener('keydown',this.keyEscapeListener )
+        this.modal.removeEventListener('keydown', this.keyEscapeListener)
         this.modal.removeEventListener('click', this.onClickOut)
-    }  
+    }
 
 
-    open () { 
+    open() {
         this.checkFieldsBeforeEntry()
-        this.addListeners() }
+        this.addListeners()
+    }
 
-    close () {
+    close() {
         this.onClose()
         this.removeListeners()
     }

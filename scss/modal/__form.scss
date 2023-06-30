@@ -62,6 +62,7 @@ form {
         border: none;
         border-radius: 5px;
         appearance: none;
+        font-size: clamp(1em, 2vw, 1.5em);
 
         &:focus-visible {
             outline: none;
@@ -78,13 +79,14 @@ form {
         resize: none;
         border: none;
         border-radius: 5px;
+        font-size: clamp(1em, 2vw, 1.5em);
+        padding:1em;
 
         &:focus-visible {
             outline: none;
         }
 
         &::placeholder{
-            padding:1em 0 0 0.5em;
             font-family: "DM Sans", sans-serif;
             font-size: clamp(0.8em, 1vw, 1.2em);
         }
