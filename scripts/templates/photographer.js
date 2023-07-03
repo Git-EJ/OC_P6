@@ -57,17 +57,3 @@ export function photographerTemplate(data) {
     }
     return { name, id, city, country, tagline, price, portrait, getUserCardDOM }
 }
-
-
-// DEV IN PROGRESS 🤯🤯🤯
-
-// export const photographersHomeSection = function(holder, data) {
-//     console.log(data)
-//     Object.keys(data).map(k=>{
-//         const key1stLetterToUpperCase = k.charAt(0).toUpperCase() + k.slice(1) // name ==> Name
-//         holder[`photographer${key1stLetterToUpperCase.split(' ').join('')}`] = data[k]
-//     })
-//     return holder
-// };
-    
-///////////////////:

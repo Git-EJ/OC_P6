@@ -126,21 +126,21 @@ function getPhotographerPageHeaderDOM (photographer) {;
     //Photographer city & country
     const photographerCity_payload = photographerCity(photographer)
     photographerCity_payload.classNames = photographerCity_payload.classNames.concat(' ', 'page_city')
-    photographerCity_payload.attributes.tabindex= '3'
+    photographerCity_payload.attributes.tabindex= '2'
     DOMElement(photographerCity_payload, photographBannerLeft)
     
 
     //Photographer tagline
     const photographerTagline_payload = photographerTagline(photographer)
     photographerTagline_payload.classNames = photographerTagline_payload.classNames.concat(' ', 'page_Tagline')
-    photographerTagline_payload.attributes.tabindex= '3'
+    photographerTagline_payload.attributes.tabindex= '2'
     DOMElement(photographerTagline_payload, photographBannerLeft)
     
     
     //Photographer img portrait container
     const imgContainer = document.createElement('div')
     imgContainer.classList.add('photographer_portrait_container', 'page_portrait')
-    imgContainer.setAttribute("tabindex", '5')
+    imgContainer.setAttribute("tabindex", '4')
     photographBannerRight.appendChild(imgContainer)
     
     const picture = photographerPicture(photographer)
@@ -149,7 +149,7 @@ function getPhotographerPageHeaderDOM (photographer) {;
     
     //Photographer contact button
     photographContactButton.classList.add('photograph_contact_button')
-    photographContactButton.setAttribute("tabindex", '4')
+    photographContactButton.setAttribute("tabindex", '3')
     
     //Photographer portrait
     const photographerPagePortrait = document.querySelector('.photographer_portrait')
@@ -245,7 +245,7 @@ export function getPhotographerPageMediasDOM(data) {
         
         mediaName.classList.add('media_description_name')
         mediaName.textContent = `${title}`
-        mediaName.setAttribute("tabindex", '11')
+        mediaName.setAttribute("tabindex", '9')
        
         mediaLikes.classList.add('media_description_likes_container')
         
@@ -253,7 +253,7 @@ export function getPhotographerPageMediasDOM(data) {
         mediaLikesCounter.textContent = `${likes}`
         mediaLikesCounter.setAttribute('role', 'text')
         mediaLikesCounter.setAttribute('aria-label', 'number of likes')
-        mediaLikesCounter.setAttribute('tabindex', '12')
+        mediaLikesCounter.setAttribute('tabindex', '9')
         
         
         heartIcon.classList.add('fa-solid', 'fa-heart')

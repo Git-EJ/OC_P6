@@ -11,7 +11,7 @@ export function mediasLikesCounter(arrayOfPhotographerMedias) {
     const likedItems = lsValue ? JSON.parse(lsValue): []
 
 
-    arrayOfPhotographerMedias.forEach( media  => {
+    arrayOfPhotographerMedias.forEach((media)  => {
         const article = document.getElementById("media_"+media.id)
         const button = article.querySelector(".heartButton")
         const heart = article.querySelector(".media_description_likes_counter")
@@ -40,17 +40,17 @@ export function mediasLikesCounter(arrayOfPhotographerMedias) {
 
         heart.addEventListener(('keydown'), (e) => {
             if (e.code === "Enter" || e.code === "Space") {
+                console.log(e.target);
                 callbackLike()
                 e.preventDefault()
-                e.stopPropagation()
+                e.target.focus()
+                e.stopPropagation()         
             }
         })
     })
-    totalLikesCounter()
+    totalLikesCounter() 
 }
 
-
-// [TODO] duplicate cod photographer.js function sortArray]
 const selectElement = document.getElementById('sort')
 const defaultSort = document.getElementById('popularite')
 let type = defaultSort.textContent.toLocaleLowerCase()
