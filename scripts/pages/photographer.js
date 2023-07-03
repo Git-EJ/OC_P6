@@ -232,7 +232,7 @@ export function getPhotographerPageMediasDOM(data) {
             article.setAttribute("data-type", 'video')
             video_container.setAttribute('controls', "controls")
             video_container.setAttribute('preload', "metadata")
-            video_container.setAttribute('poster', `/assets/images/${photographerId}/${removeVideoExt}.jpg`)
+            video_container.setAttribute('poster', `./assets/images/${photographerId}/${removeVideoExt}.jpg`)
             video_container.appendChild(videoMedia)
             
             article.appendChild(video_container)  
