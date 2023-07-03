@@ -45,16 +45,14 @@
 .contact_button {
     width:fit-content;
     height: 3.5em;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include flex_center;
     font-size: clamp(0.7em, 2vw, 1.3em);
     font-weight: bold;
     color: white;
     padding: 15px;
     border: none;
     background-color: $primary-color;
-    border-radius: 5px;
+    border-radius:$primary-border-radius;
     cursor: pointer;
 
     &:hover{

@@ -40,7 +40,6 @@ export function mediasLikesCounter(arrayOfPhotographerMedias) {
 
         heart.addEventListener(('keydown'), (e) => {
             if (e.code === "Enter" || e.code === "Space") {
-                console.log(e.target);
                 callbackLike()
                 e.preventDefault()
                 e.target.focus()

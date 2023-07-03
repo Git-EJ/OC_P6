@@ -4,17 +4,13 @@
 
 .photographBanner_container {
     height: 300px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include flex_center;
     background-color: #FAFAFA;
 }
 
 .photographBanner {
         width:33.33%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        @include flex_center;
         
         &.left{
             flex-direction: column;
@@ -40,9 +36,7 @@
 }
 
 .photograph_contact_button {
-    display:flex;
-    justify-content: center;
-    align-items: center;
+    @include flex_center;
 }
 
 .select_container {
@@ -59,7 +53,7 @@
         padding: 0.5em;
         outline:none;
         border:none;
-        border-radius: 5px;
+        border-radius:$primary-border-radius;
         color: #FAFAFA;
         font-size: clamp(0.8em, 2vw, 1.2em);
         background: $primary-color;
@@ -87,7 +81,7 @@
     &_media_container{
         width: 350px;
         height: 300px;
-        border-radius: 5px;
+
     }
 }
 
@@ -97,6 +91,7 @@
     width:100%;
     height:100%;
     object-fit: cover;
+    border-radius:$primary-border-radius;
             
     &:hover {
         cursor: pointer;
@@ -147,10 +142,11 @@
     position: sticky;
     bottom:0;
     left: 100%;
-    font-size: clamp(1em, 3vw, 1.5em);
-    background: $secondary-color;
     display:flex;
     justify-content: space-between;
+    border-radius: $border-radius_photographer_overlay;
+    font-size: clamp(1em, 3vw, 1.5em);
+    background: $secondary-color;
     cursor: default;
 
     &_likesCounter {
@@ -188,7 +184,7 @@
         bottom: 0%;
         left: 50%;
         transform: translate(-50%, 0);
-        border-radius: 5px;
+        border-radius: $border-radius_photographer_overlay;
         padding: 5px 0;
     }
 }
@@ -211,7 +207,6 @@
     .photographer {
         &_medias_section{
             grid-template-columns: auto;
-            // justify-content: space-around;
         }
     }
 

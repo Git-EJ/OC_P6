@@ -11,13 +11,11 @@
 }
 
 .modal_form {
-    border-radius: 5px;
+    border-radius:$primary-border-radius;
     background-color: #DB8876;
     width: 40%;
     height: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    @include flex_center_column;
     justify-content: space-between;
     padding: 10px 35px 20px 35px;
     margin: auto;
@@ -37,9 +35,8 @@
 }
 
 form {
-    display: flex;
     width: 100%;
-    flex-direction: column;
+    @include flex_center_column;
     align-items: flex-start;
 
 
@@ -49,10 +46,9 @@ form {
     }
 
     & div {
-        display: flex;
-        flex-direction: column;
         width: 100%;
-        align-items: self-start;
+        @include flex_center_column;
+        align-items: flex-start;
         margin-bottom: 26px;
     }
 
@@ -60,9 +56,9 @@ form {
         width: 100%;
         height: 60px;
         border: none;
-        border-radius: 5px;
+        border-radius:$primary-border-radius;
         appearance: none;
-        font-size: clamp(1em, 2vw, 1.5em);
+        font-size: $form_input_message;
 
         &:focus-visible {
             outline: none;
@@ -70,7 +66,7 @@ form {
 
         &::placeholder {
             padding-left: 0.5em;
-            font-size: clamp(0.8em, 1vw, 1.2em);
+            font-size: $form_placeholder;
         }
     }
 
@@ -78,8 +74,8 @@ form {
         width : 100%;
         resize: none;
         border: none;
-        border-radius: 5px;
-        font-size: clamp(1em, 2vw, 1.5em);
+        border-radius:$primary-border-radius;
+        font-size: $form_input_message;
         padding:1em;
 
         &:focus-visible {
@@ -87,8 +83,8 @@ form {
         }
 
         &::placeholder{
-            font-family: "DM Sans", sans-serif;
-            font-size: clamp(0.8em, 1vw, 1.2em);
+            font-family: $font;
+            font-size: $form_placeholder;
         }
     }
 }
@@ -111,13 +107,13 @@ textarea:not(:focus):invalid {
 input:valid,
 textarea:valid {
     border: green solid 2px;
-    border-radius: 5px;
+    border-radius:$primary-border-radius;
 }
 
 input:invalid,
 textarea:invalid{
     border: red solid 2px;
-    border-radius: 5px;
+    border-radius:$primary-border-radius;
 } 
 
 
@@ -141,7 +137,6 @@ textarea:invalid{
 }
 
 @media only screen and (max-width: 400px) {
-
     #contact_form_btn_close {
         width:25px;
         height:25px;

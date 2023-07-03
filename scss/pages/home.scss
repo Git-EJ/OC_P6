@@ -8,12 +8,6 @@
 
 .our_photographers {
     color: $primary-color;
-    transition: transform 0.5s cubic-bezier(0.2, 0.5, 0.3, 2);
-
-    // &:hover{
-    //     color: $secondary-color;
-    //     transform:scale(1.2);
-    // }
 }
 
 
@@ -25,32 +19,16 @@
 
 
     article {
-        justify-self: center;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
+        @include flex_center_column;
     }
 }
 
 .home {
     &_name {
-        text-align: center;
         font-size: clamp(2em, 3vw, 3em);
-        white-space: nowrap
     }
 
-    &_city {
-        text-align: center;
-        white-space: nowrap
-    }
-
-    &_tagline {
-        text-align: center;
-        white-space: nowrap
-    }
-
-    &_price {
+    &_name, &_city, &_tagline, &_price  {
         text-align: center;
         white-space: nowrap
     }
