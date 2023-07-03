@@ -49,6 +49,54 @@ async function retrivalData() {
         const ariaLabel = m.arialabel
         return { content, title, type, url, ariaLabel }
     }))
+
+    //Call contact Form for photographer name 
+    const contactForm = new ContactForm()
+    contactForm.open()
+    
+
+    let originalTabIndex = []
+    
+    lightbox.callbackOnOpen = () => {
+        const notModal= document.querySelector('.not_modal')
+        const notModalTabIndex = [...notModal.querySelectorAll('[tabindex]')]
+        notModalTabIndex.forEach(el => {
+            originalTabIndex.push(el.getAttribute('tabindex'))
+            el.setAttribute("tabindex", "-1")
+        })
+        notModal.setAttribute('aria-hidden','true')
+    }
+
+    contactForm.callbackOnOpen = () => {
+        const notModal= document.querySelector('.not_modal')
+        const notModalTabIndex = [...notModal.querySelectorAll('[tabindex]')]
+        notModalTabIndex.forEach(el => {
+            originalTabIndex.push(el.getAttribute('tabindex'))
+            el.setAttribute("tabindex", "-1")
+        })
+        notModal.setAttribute('aria-hidden','true')
+    }
+    
+
+    lightbox.callbackOnClose = () => {
+        const notModal= document.querySelector('.not_modal')
+        const notModalTabIndex = [...notModal.querySelectorAll('[tabindex]')]
+        notModalTabIndex.forEach((el,i) => {
+            el.setAttribute("tabindex", originalTabIndex[i])
+        })
+        notModal.setAttribute('aria-hidden','false')
+        originalTabIndex = []
+    }
+
+   contactForm.callbackOnClose = () => {
+        const notModal= document.querySelector('.not_modal')
+        const notModalTabIndex = [...notModal.querySelectorAll('[tabindex]')]
+        notModalTabIndex.forEach((el,i) => {
+            el.setAttribute("tabindex", originalTabIndex[i])
+        })
+        notModal.setAttribute('aria-hidden','false')
+        originalTabIndex = []
+    }
 }
 
 /**
@@ -57,6 +105,7 @@ async function retrivalData() {
  * personal infos and id from photographers.json
  * @returns name, id, city, country, tagline, price, portrait
 */
+
 function getPhotographerPageHeaderDOM (photographer) {;
     const { name, id, city, country, tagline, price, portrait } = photographer
     const photographBannerContainer = document.querySelector('.photographBanner_container')
@@ -77,7 +126,7 @@ function getPhotographerPageHeaderDOM (photographer) {;
     //Photographer city & country
     const photographerCity_payload = photographerCity(photographer)
     photographerCity_payload.classNames = photographerCity_payload.classNames.concat(' ', 'page_city')
-    photographerCity_payload.attributes.tabindex= '3    '
+    photographerCity_payload.attributes.tabindex= '3'
     DOMElement(photographerCity_payload, photographBannerLeft)
     
 
@@ -109,10 +158,6 @@ function getPhotographerPageHeaderDOM (photographer) {;
     // Photographer pricePerDay in overlay
     pricePerDay.textContent = `${price}\u20AC / jour`
 
-    //Call contact Form for photographer name 
-    const contactForm = new ContactForm()
-    contactForm.open()
-    
     return { name, id, city, country, tagline, price, portrait, getPhotographerPageHeaderDOM }
 }
 
@@ -141,7 +186,7 @@ export function getPhotographerPageMediasDOM(data) {
     data.forEach(el => {
         const { id, image, video, title, likes, photographerId, date, ariaLabel} = el
         const photographer_medias_section = document.querySelector('.photographer_medias_section')
-        
+
         const article = document.createElement('article')
         article.id = id
         article.date = date
@@ -167,10 +212,9 @@ export function getPhotographerPageMediasDOM(data) {
             img.setAttribute('src', `./assets/images/${photographerId}/${image}`)
             img.setAttribute('alt', `${title}`)
             img.setAttribute('role', 'image link')
-            img.setAttribute('aria-label', `${ariaLabel}`)
+            img.setAttribute('aria-label', `${ariaLabel??title}`)
             img.setAttribute("tabindex", 9)
             article.setAttribute("data-type", 'image')
-            // img.setAttribute('onclick', 'displayLightBox()')
             article.appendChild(img)  
         }
         
@@ -183,13 +227,12 @@ export function getPhotographerPageMediasDOM(data) {
             video_container.classList.add('media')   
             video_container.setAttribute('alt', `${title}`)
             video_container.setAttribute('role', 'video link')
-            video_container.setAttribute('aria-label', `${ariaLabel}`)
+            video_container.setAttribute('aria-label', `${ariaLabel??title}`)
             video_container.setAttribute("tabindex", 9)
             article.setAttribute("data-type", 'video')
             video_container.setAttribute('controls', "controls")
             video_container.setAttribute('preload', "metadata")
             video_container.setAttribute('poster', `/assets/images/${photographerId}/${removeVideoExt}.jpg`)
-            // video_container.setAttribute('onclick', 'displayLightBox()')
             video_container.appendChild(videoMedia)
             
             article.appendChild(video_container)  

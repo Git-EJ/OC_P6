@@ -93,6 +93,10 @@ form {
     }
 }
 
+#contact_form_btn_close{
+    cursor:pointer;
+}
+
 input:not(:focus):valid,
 textarea:not(:focus):valid {
     border: none;

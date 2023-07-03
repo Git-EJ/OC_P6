@@ -10,17 +10,18 @@ export function mediasLikesCounter(arrayOfPhotographerMedias) {
     const lsValue = localStorage.getItem(lsKey)
     const likedItems = lsValue ? JSON.parse(lsValue): []
 
+
     arrayOfPhotographerMedias.forEach( media  => {
         const article = document.getElementById("media_"+media.id)
         const button = article.querySelector(".heartButton")
         const heart = article.querySelector(".media_description_likes_counter")
-
+        
         let isLiked = likedItems.includes(media.id)
         heart.textContent = media.likes + (isLiked?1:0)
         
         if (isLiked) button.classList.add('isLiked')
         
-        button.addEventListener(('click'), () => {
+        const callbackLike = () => {
             if (!isLiked) {
                 likedItems.push(media.id)
                 button.classList.add('isLiked')
@@ -33,10 +34,21 @@ export function mediasLikesCounter(arrayOfPhotographerMedias) {
             heart.textContent = media.likes + (isLiked?1:0)
             localStorage.setItem(lsKey, JSON.stringify(likedItems))
             totalLikesCounter ()
+        }
+
+        button.addEventListener(('click'), callbackLike)
+
+        heart.addEventListener(('keydown'), (e) => {
+            if (e.code === "Enter" || e.code === "Space") {
+                callbackLike()
+                e.preventDefault()
+                e.stopPropagation()
+            }
         })
     })
     totalLikesCounter()
 }
+
 
 // [TODO] duplicate cod photographer.js function sortArray]
 const selectElement = document.getElementById('sort')
@@ -53,6 +65,6 @@ export function totalLikesCounter() {
     const counter = document.querySelector('.overlay_bottomRight_likesCounter')
     const likes = [...document.querySelectorAll('.media_description_likes_counter')]
     counter.textContent = likes.reduce((t,el) => { return t+ +el.textContent }, 0)
-    type === "popularité" ? sortArray("popularité") : ""
+    type === "popularité" && sortArray("popularité")
 }
 

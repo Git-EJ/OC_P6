@@ -104,12 +104,7 @@ header {
 }
 
 .hidden {
-  height: 1px;
-  left: 0;
-  overflow: hidden;
-  position: absolute;
-  top: -10000px;
-  width: 1px;
+  display: none !important;
 }
 
 .photographer_name {
@@ -302,6 +297,9 @@ header {
   color: #FAFAFA;
   font-size: clamp(0.8em, 2vw, 1.2em);
   background: #901C1C;
+}
+.select_container select:focus {
+  outline: 2px solid black;
 }
 .select_container select option:checked {
   background: #D3573C;
@@ -527,6 +525,10 @@ form .form_message::placeholder {
   font-size: clamp(0.8em, 1vw, 1.2em);
 }
 
+#contact_form_btn_close {
+  cursor: pointer;
+}
+
 input:not(:focus):valid,
 textarea:not(:focus):valid {
   border: none;
@@ -630,9 +632,10 @@ textarea:invalid {
   cursor: pointer;
 }
 .lightbox_modal_title {
-  color: #901C1C;
-  font-size: 1.5em;
   width: 70%;
+  font-size: 1.5em;
+  color: #901C1C;
+  cursor: default;
 }
 
 @media only screen and (max-width: 800px) {

@@ -1,40 +1,67 @@
 export class ContactForm {
-    constructor() {
+    constructor(callbackOnOpen, callbackOnClose) {
         this.extractElements()
         this.buildElements()
         this.init()
+        this.callbackOnOpen = callbackOnOpen;
+        this.callbackOnClose = callbackOnClose;
     }
 
 
     extractElements() {
         this.body = document.querySelector('body')
-        this.modal = document.getElementById('contact_modal');
+        this.modal = document.getElementById('contact_modal')
         this.openBtn = document.getElementById('photograph_contact_button')
         this.closeBtn = document.getElementById('contact_form_btn_close')
-        this.allFields = document.querySelectorAll('input, textarea')
         this.inputFields = document.querySelectorAll('input')
         this.textareaField = document.querySelector('textarea')
+        this.allFields = [...this.inputFields, this.textareaField]
         this.lastAndFirstnameFields = [document.getElementById('lastname'), document.getElementById('firstname')]
         this.emailField = document.getElementById('email')
-        this.getName = document.querySelector('.photographer_name.page_name')
+        this.name = document.querySelector('.photographer_name.page_name').textContent
         this.contactMe = document.querySelector('.modal_form_header_title')
-        this.window = window
     }
+
 
     buildElements() {
-        this.name = this.getName.textContent
         this.modal.setAttribute("aria-label", `Contact me ${this.name}`)
-        this.contactMe.innerHTML = 'Contactez-moi<br>' + this.name
-
-        
+        this.contactMe.innerHTML = 'Contactez-moi<br>' + this.name  
     }
+
 
     init() {
-        this.keyEscapeListener = (e) => { if (e.key === "Escape") { this.onClose() } }
-        this.onClickOut = (e) => { if (e.target === this.modal) { this.onClose() } }
-        this.onClose = () => { this.modal.style.display = "none" }
-        this.onOpen = () => { this.modal.style.display = "flex" }
+
+        this.keyEscapeListener = (e) => { 
+            if (e.key === "Escape") { 
+                this.onClose() 
+            } 
+        }
+        
+        this.keyEnterAndSpace = (e) => {
+            if (e.code==="Enter" || e.code==="Space") {
+                e.preventDefault()
+                this.onClose()
+            }
+        }
+
+        this.onClickOut = (e) => { 
+            if (e.target === this.modal) { 
+                this.onClose() 
+            } 
+        }
+
+        this.onClose = () => { 
+            this.modal.style.display = "none" 
+            this.callbackOnClose && this.callbackOnClose()
+        }
+
+        this.onOpen = () => { 
+            this.modal.style.display = "flex" 
+            this.modal.focus()
+            this.callbackOnOpen && this.callbackOnOpen()
+        }
     }
+
 
     /**
      * check if fields are empty before user entry
@@ -45,6 +72,7 @@ export class ContactForm {
         })
     }
 
+    
     addListeners() {
 
         //all Fields
@@ -120,7 +148,8 @@ export class ContactForm {
         //open && close modal
         this.openBtn.addEventListener('click', this.onOpen)
         this.closeBtn.addEventListener("click", this.onClose)
-        this.body.addEventListener("keydown", this.keyEscapeListener)
+        this.closeBtn.addEventListener("keydown", this.keyEnterAndSpace)
+        this.modal.addEventListener("keydown", this.keyEscapeListener)
         this.modal.addEventListener("click", this.onClickOut)
 
     }
@@ -134,6 +163,7 @@ export class ContactForm {
         this.emailField.removeEventListener('input', null)
         this.openBtn.removeEventListener('click', this.onOpen)
         this.closeBtn.removeEventListener('click', this.onClose)
+        this.closeBtn.removeListener("keydown", this.keyEnterAndSpace)
         this.modal.removeEventListener('keydown', this.keyEscapeListener)
         this.modal.removeEventListener('click', this.onClickOut)
     }
@@ -147,6 +177,6 @@ export class ContactForm {
     close() {
         this.onClose()
         this.removeListeners()
+        
     }
 }
-

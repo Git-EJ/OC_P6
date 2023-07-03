@@ -1,10 +1,13 @@
 
 export class Lightbox {
 
-    constructor() {
+    constructor(callbackOnOpen, callbackOnClose) {
         this.medias = []
         this.map = new Map()
         this.index = -1
+
+        this.callbackOnOpen = callbackOnOpen;
+        this.callbackOnClose = callbackOnClose;
 
         this.buildElements()
         this.extractElements()
@@ -16,13 +19,14 @@ export class Lightbox {
         const body = document.body
         const div = document.createElement('div')
         
-        this.body = body
         this.container = div
         this.container.classList.add("lightbox")
+        this.container.setAttribute('role', 'dialog') 
         this.wrapper = document.createElement("div")
         this.wrapper.classList.add("lightbox_modal")
-        this.wrapper.setAttribute('role', 'dialog') 
         this.wrapper.setAttribute('aria-label', 'media closeup view')
+        this.wrapper.setAttribute('tabindex', '1')
+
         this.wrapper.innerHTML = `
             <svg class="lightbox_modal_close" viewBox="0 0 384 512" role="button"  aria-label="closeup dialog"
                 alt="icone de fermeture lightBox media" aria-label="icone de fermeture carrousel photos et videos">
@@ -49,8 +53,7 @@ export class Lightbox {
     }
  
     extractElements() {
-        this.wrapper.setAttribute("tabindex", 1)
-        
+
         this.closeBtn = this.wrapper.querySelector('.lightbox_modal_close')
         this.beforeBtn = this.wrapper.querySelector('.lightbox_modal_before')
         this.afterBtn = this.wrapper.querySelector('.lightbox_modal_after')
@@ -59,7 +62,7 @@ export class Lightbox {
         this.imageElement.classList.add('lightbox_modal_media', "hidden")
         this.imageElement.setAttribute("data-type", 'image')
         this.imageElement.setAttribute("role", 'image')
-        this.imageElement.setAttribute("tabindex", '2')
+        this.imageElement.setAttribute("tabindex", '1')
         
         this.videoElement = document.createElement('video')
         this.videoElement.classList.add('lightbox_modal_media', "hidden")
@@ -68,16 +71,16 @@ export class Lightbox {
         this.videoElement.setAttribute('type', 'video/mp4')
         this.videoElement.setAttribute("data-type", 'video')
         this.videoElement.setAttribute("role", 'video')
-        this.videoElement.setAttribute("tabindex", '2')
+        this.videoElement.setAttribute("tabindex", '1')
         
         this.titleElement = document.createElement("div")     
         this.titleElement.classList.add("lightbox_modal_title")
         this.titleElement.setAttribute("role", 'text')
-        this.titleElement.setAttribute("tabindex", '3')
+        this.titleElement.setAttribute("tabindex", '2')
 
-        this.beforeBtn.setAttribute("tabindex", 4)
-        this.afterBtn.setAttribute("tabindex", 5)
-        this.closeBtn.setAttribute("tabindex", 6)
+        this.beforeBtn.setAttribute("tabindex", '3')
+        this.closeBtn.setAttribute("tabindex", '4')
+        this.afterBtn.setAttribute("tabindex", '5')
 
         this.wrapper.appendChild(this.imageElement)
         this.wrapper.appendChild(this.videoElement)
@@ -85,10 +88,17 @@ export class Lightbox {
 
         this.container.appendChild(this.wrapper)
     }
-
+    
     init() {
         this.keyEscapeListener = (e) => {
             if (e.key === "Escape") {
+                this.onClose()
+            }
+        }
+
+        this.keyEnterAndSpace = (e) => {
+            if (e.code==="Enter" || e.code==="Space") {
+                e.preventDefault()
                 this.onClose()
             }
         }
@@ -113,12 +123,18 @@ export class Lightbox {
 
         this.onClose = () => {
             this.container.style.display = "none"
-        }
-
-        this.onOpen = () => {
-            this.container.style.display = "flex"
+            this.container.setAttribute('aria-hidden','true')
+            this.medias[this.index].content.focus()
+            this.callbackOnClose && this.callbackOnClose()
         }
         
+        this.onOpen = () => {
+            this.container.style.display = "flex"
+            this.container.setAttribute('aria-hidden','false')
+            this.wrapper.focus()
+            this.callbackOnOpen && this.callbackOnOpen()
+        }
+
         const that = this
 
         this.onBefore = () => {
@@ -129,6 +145,15 @@ export class Lightbox {
         this.onAfter = () => {
             that.index = (that.index+1) % that.medias.length
             that.updateMedia()
+        }
+
+        this.onKeydown = (e) => {
+            if (e.code==="Enter" || e.code==="Space") {
+                let elem = e.target
+                const media_index = +that.map.get(elem)
+                that.index = media_index
+                that.updateMedia()
+            }
         }
 
         this.onSelect = (e) => {
@@ -143,7 +168,6 @@ export class Lightbox {
         const index = this.index
         if (index<0) return
 
-        // const currentMedia = medias[index].content
         const mediaTitle = this.medias[index].title
         const mediaType = this.medias[index].type
         const mediaUrl = this.medias[index].url
@@ -170,35 +194,42 @@ export class Lightbox {
     }
 
     addListeners () {
-        this.body.addEventListener("keydown",this.keyEscapeListener )
+        this.container.addEventListener("keydown",this.keyEscapeListener )
         this.container.addEventListener("click", this.onClickOut)
         this.closeBtn.addEventListener("click", this.onClose)
+        this.closeBtn.addEventListener("keydown", this.keyEnterAndSpace )
        
-        this.body.addEventListener("keydown", this.keyLeftListener )
+        this.container.addEventListener("keydown", this.keyLeftListener )
         this.beforeBtn.addEventListener("click", this.onBefore)
         
-        this.body.addEventListener("keydown", this.keyRightListener )
+        this.container.addEventListener("keydown", this.keyRightListener )
         this.afterBtn.addEventListener("click", this.onAfter)
        
         this.medias.forEach((m,i) => {
             this.map.set(m.content, i)
             m.content.addEventListener("click", this.onSelect)
+            m.content.addEventListener("keydown", this.onKeydown)
         })  
     }
 
     removeListeners() {
-        this.body.removeEventListener("keydown",this.keyEscapeListener )
+        this.container.removeEventListener("keydown",this.keyEscapeListener )
         this.closeBtn.removeEventListener("click", this.onClose)
+        this.closeBtn.removeListener("keydown", this.keyEnterAndSpace )
         
-        this.body.removeListener("keydown", this.keyLeftListener )
+        this.container.removeListener("keydown", this.keyLeftListener )
         this.beforeBtn.removeListener("click", this.onBefore)
         
-        this.body.removeListener("keydown", this.keyRightListener )
+        this.container.removeListener("keydown", this.keyRightListener )
         this.afterBtn.removeListener("click", this.onAfter)
         
         this.container.removeEventListener("click", this.onClickOut)
-        this.medias.map(m=>m.content.removeEventListener("click", this.onSelect))
+        this.medias.map(m=>{
+            m.content.removeEventListener("click", this.onSelect)
+            m.content.removeEventListener("keydown", this.onKeydown)
+        })
     }
+  
 
     open (medias) {
         this.medias = medias
@@ -208,10 +239,8 @@ export class Lightbox {
 
     close () {
         this.onClose()
-
         this.removeListeners()
         this.map.clear()
         this.medias = []
     }
-    
 }

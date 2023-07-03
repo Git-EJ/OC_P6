@@ -64,6 +64,10 @@
         font-size: clamp(0.8em, 2vw, 1.2em);
         background: $primary-color;
 
+        &:focus{
+            outline: 2px solid black;
+        }
+
         option:checked {background: $secondary-color;}
     }
 }
