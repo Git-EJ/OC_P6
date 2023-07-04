@@ -8,7 +8,7 @@
   <link rel="icon" type="image/png" href="assets/favicon.png">
   <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
   <script src="https://kit.fontawesome.com/bb7f86ceb6.js" crossorigin="anonymous"></script>
-  <script src="./scripts/pages/photographer.js" type="module" defer></script>
+  <script src="./scripts/pages/photographer.js" type="module"></script>
   <title>Fisheye - photographe</title>
 </head>
 
@@ -16,21 +16,21 @@
   <div class="page_body_wrapper">
     <div class="not_modal">
       <header>
-        <a href="./index.html"><img src="assets/images/logo.png" class="logo" alt="Fisheye logo link to Home Page"
-            role="link" aria-label="Fisheye Home Page" tabindex="1" ></a>
+        <a href="./index.html" tabindex="1"><img src="assets/images/logo.png" class="logo" alt="Fisheye logo link to Home Page"
+            role="link" aria-label="Fisheye Home Page"  ></a>
       </header>
 
       <main class="photographBanner_container" id="main">
         <div class="photographBanner left"></div>  
         <div class="photographBanner middle">
-          <button class="contact_button" id="photograph_contact_button" role='button'
+          <button class="contact_button" id="photograph_contact_button"
             aria-label="Contact Me">Contactez-moi</button>
         </div>
         <div class="photographBanner right"></div>
       </main>
 
       <div class="select_container">
-        <label for="sort" role="input label" tabindex="7">Trier par</label>
+        <label for="sort" tabindex="7">Trier par</label>
         <select id="sort" name="sort" aria-label="Order by" tabindex="8">
           <option value="Popularité" id="popularite" tabindex="8">Popularité</option>
           <option value="Date (plus récents)" id="dateNew" tabindex="8">Date (plus récents)</option>
@@ -42,48 +42,48 @@
       <section class="photographer_medias_section"></section>
 
       <div class="overlay_bottomRight">
-        <span class="overlay_bottomRight_likesCounter" role="text" aria-label="nombre de like total" tabindex="5"></span>
+        <span class="overlay_bottomRight_likesCounter" aria-label="nombre de like total" tabindex="5"></span>
         <em class="fa-solid fa-heart"></em>
-        <span class="overlay_bottomRight_pricePerDay" role="text" aria-label="prix par jour" tabindex="6"></span>
+        <span class="overlay_bottomRight_pricePerDay" aria-label="prix par jour" tabindex="6"></span>
       </div>
     </div>
 
     <div id="contact_modal" role="dialog" tabindex="1">
       <div class="modal_form">
         <header class="modal_form_header">
-          <h2 class="modal_form_header_title" role="Heading(h2)" aria-labelledby="contact_modal" tabindex="2">Contactez-moi</h2>
+          <h2 class="modal_form_header_title" aria-labelledby="contact_modal" tabindex="2">Contactez-moi</h2>
           <img id="contact_form_btn_close" src="assets/icons/close.svg" alt="icone de fermeture formulaire"
-            role="button" aria-label="close" tabindex="12"/>
+            role="button" aria-label="close" tabindex="12">
         </header>
 
         <form>
           <div role="group" aria-label="Informations personnelles">
 
-            <label for="firstname" id="first-name" role="label" tabindex="3">Prénom</label>
-            <input id="firstname" type="text" name="firstname" value="" aria-labelledby="first-name" role="textfield"
+            <label for="firstname" id="first-name" tabindex="3">Prénom</label>
+            <input id="firstname" type="text" name="firstname" value="" aria-labelledby="first-name"
               aria-label="firstname" placeholder="Votre prénom ici" minlength="2" maxlength='40' spellcheck="false"
-              pattern="^[a-zA-ZÀ-ÿ][a-zA-ZÀ-ÿ\s\-]*[a-zA-ZÀ-ÿ]$" tabindex="4" required />
+              pattern="^[a-zA-ZÀ-ÿ][a-zA-ZÀ-ÿ\s\-]*[a-zA-ZÀ-ÿ]$" tabindex="4" required >
 
-            <label for="lastname" id="last-name" role="label" tabindex="5">Nom</label>
-            <input id="lastname" type="text" name="lastname" value="" aria-labelledby="last-name" role="textfield"
+            <label for="lastname" id="last-name" tabindex="5">Nom</label>
+            <input id="lastname" type="text" name="lastname" value="" aria-labelledby="last-name"
               aria-label="lastname" placeholder="Votre nom ici" minlength="2" maxlength='40' spellcheck="false"
-              pattern="^[a-zA-ZÀ-ÿ][a-zA-ZÀ-ÿ\s\-]*[a-zA-ZÀ-ÿ]$" tabindex="6" required />
+              pattern="^[a-zA-ZÀ-ÿ][a-zA-ZÀ-ÿ\s\-]*[a-zA-ZÀ-ÿ]$" tabindex="6" required >
 
-            <label for="email" id="e-mail" role="label" tabindex="7">Email</label>
-            <input id="email" type="email" name="email" value="" aria-labelledby="e-mail" role="textfield"
+            <label for="email" id="e-mail" tabindex="7">Email</label>
+            <input id="email" type="email" name="email" value="" aria-labelledby="e-mail"
               aria-label="email" placeholder="Votre email ici: email@example.com"
-              pattern="^[\w.%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}$" tabindex="8" required />
+              pattern="^[\w.%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}$" tabindex="8" required >
           </div>
 
           <div role="group" aria-label="Message">
-            <label for="message" id="m-essage" role="label" tabindex="9">Votre Message</label>
-            <textarea id="message" class="form_message" name="message" value="" aria-labelledby="m-essage" role="textfield" aria-label="your message"
+            <label for="message" id="m-essage" tabindex="9">Votre Message</label>
+            <textarea id="message" class="form_message" name="message" aria-labelledby="m-essage" aria-label="your message"
               placeholder="Votre message ici" minlength="20" maxlength="600" tabindex="10"
               required></textarea>
           </div>
 
           <label for="submit-button" id="s-ubmit-button" class="hidden">Envoyer</label>
-          <button id="submit-button" aria-labelledby="s-ubmit-button" role="button" aria-label="Send"
+          <button id="submit-button" aria-labelledby="s-ubmit-button" aria-label="Send"
             class="contact_button" tabindex="11">Envoyer
           </button>
         </form>

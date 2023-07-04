@@ -1,59 +1,56 @@
-import { DOMElement, photographerName, photographerCity, photographerTagline, photographerPrice } from "../components/DomElement.js";
-import { photographerPicture, photographerPortrait } from "../components/Portrait.js";
+import { DOMElement, photographerName, photographerCity, photographerTagline, photographerPrice } from '../components/DomElement.js'
+import { photographerPicture, photographerPortrait } from '../components/Portrait.js'
 
+export function photographerTemplate (data) {
+  const { name, id, city, country, tagline, price, portrait } = data
 
-export function photographerTemplate(data) {
-    const { name, id, city, country, tagline, price, portrait } = data
-    
-    function getUserCardDOM() {
-        const article = document.createElement('article')
-        article.setAttribute("aria-labelledby", "Descriptions-des-photographes")
-        article.setAttribute("role", "group")
-        article.setAttribute("aria-label", "Description du photographe")
-        
-        //Photographer img Portrait Link
-        const imgContainerLink = document.createElement('a')
-        imgContainerLink.setAttribute("href", `./photographer.html?id=${id}` )
-        imgContainerLink.classList.add('photographer_portrait_container')
-        imgContainerLink.setAttribute("tabindex", '3')
-        
+  function getUserCardDOM () {
+    const article = document.createElement('article')
+    article.setAttribute('aria-labelledby', 'Descriptions-des-photographes')
+    article.setAttribute('role', 'group')
+    article.setAttribute('aria-label', 'Description du photographe')
 
-        //Photographer  name Link 
-        const nameContainerLink = document.createElement('a')
-        nameContainerLink.setAttribute("href", `./photographer.html?id=${id}` )
-        nameContainerLink.setAttribute("tabindex", '3')
-        
+    // Photographer img Portrait Link
+    const imgContainerLink = document.createElement('a')
+    imgContainerLink.setAttribute('href', `./photographer.html?id=${id}`)
+    imgContainerLink.classList.add('photographer_portrait_container')
+    imgContainerLink.setAttribute('tabindex', '3')
 
-        //Photographer img portrait
-        const picture = photographerPicture(data)
-        photographerPortrait(data, picture, imgContainerLink)
-        article.appendChild(imgContainerLink)
-        
-        //Photographer Name
-        const photographerName_payload = photographerName(data)
-        photographerName_payload.classNames = photographerName_payload.classNames.concat(' ', 'home_name')
-        DOMElement(photographerName_payload, nameContainerLink)
-        article.appendChild(nameContainerLink)
-        
-        // Photographer City & Country
-        const photographerCity_payload = photographerCity(data)
-        photographerCity_payload.classNames = photographerCity_payload.classNames.concat(' ', 'home_city')
-        photographerCity_payload.attributes.tabindex = '3'
-        DOMElement(photographerCity_payload, article)
-        
-        // Photographer Tagline
-        const photographerTagline_payload = photographerTagline(data)
-        photographerTagline_payload.classNames = photographerTagline_payload.classNames.concat(' ', 'home_tagline')
-        photographerTagline_payload.attributes.tabindex = '3'
-        DOMElement(photographerTagline_payload, article)
-        
-        // Photographer Price per day
-        const photographerPrice_payload = photographerPrice(data)
-        photographerPrice_payload.classNames = photographerPrice_payload.classNames.concat(' ', 'home_price')
-        photographerPrice_payload.attributes.tabindex = '3'
-        DOMElement(photographerPrice_payload, article)
-        
-        return (article);
-    }
-    return { name, id, city, country, tagline, price, portrait, getUserCardDOM }
+    // Photographer  name Link
+    const nameContainerLink = document.createElement('a')
+    nameContainerLink.setAttribute('href', `./photographer.html?id=${id}`)
+    nameContainerLink.setAttribute('tabindex', '3')
+
+    // Photographer img portrait
+    const picture = photographerPicture(data)
+    photographerPortrait(data, picture, imgContainerLink)
+    article.appendChild(imgContainerLink)
+
+    // Photographer Name
+    const photographerNamePayload = photographerName(data)
+    photographerNamePayload.classNames = photographerNamePayload.classNames.concat(' ', 'home_name')
+    DOMElement(photographerNamePayload, nameContainerLink)
+    article.appendChild(nameContainerLink)
+
+    // Photographer City & Country
+    const photographerCityPayload = photographerCity(data)
+    photographerCityPayload.classNames = photographerCityPayload.classNames.concat(' ', 'home_city')
+    photographerCityPayload.attributes.tabindex = '3'
+    DOMElement(photographerCityPayload, article)
+
+    // Photographer Tagline
+    const photographerTaglinePayload = photographerTagline(data)
+    photographerTaglinePayload.classNames = photographerTaglinePayload.classNames.concat(' ', 'home_tagline')
+    photographerTaglinePayload.attributes.tabindex = '3'
+    DOMElement(photographerTaglinePayload, article)
+
+    // Photographer Price per day
+    const photographerPricePayload = photographerPrice(data)
+    photographerPricePayload.classNames = photographerPricePayload.classNames.concat(' ', 'home_price')
+    photographerPricePayload.attributes.tabindex = '3'
+    DOMElement(photographerPricePayload, article)
+
+    return (article)
+  }
+  return { name, id, city, country, tagline, price, portrait, getUserCardDOM }
 }
