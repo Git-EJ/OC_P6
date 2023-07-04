@@ -18,15 +18,15 @@
     @include flex_center_column;
     justify-content: space-between;
     padding: 10px 35px 20px 35px;
-    margin: auto;
+    margin: 0 auto;
 
     &_header {
     justify-content: space-between;
     width: 100%;
-    height: 160px;
+    height: 20%;
 
         &_title {
-            font-size: clamp(1.5em, 3vw, 3em);
+            font-size: clamp(1.5em, 2vw, 3em);
             font-weight: normal;
             padding-right: 1em;
             margin: 0.5em 0 1em 0;
@@ -42,7 +42,7 @@ form {
 
     & label {
         color: #312E2E;
-        font-size: clamp(1.4em, 1.5vw, 2em);
+        font-size: clamp(1.1em, 1.2vw, 2em);
     }
 
     & div {
@@ -72,6 +72,7 @@ form {
 
     .form_message {
         width : 100%;
+        height:20vh;
         resize: none;
         border: none;
         border-radius:$primary-border-radius;
