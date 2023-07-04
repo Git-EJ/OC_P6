@@ -25,8 +25,8 @@ export function photographerPortrait (data, picture, imgContainer) {
   const name = data.name
   DOMPortrait(
     picture,
-        `Photographe portrait: ${name}`,
-        'photographer_portrait',
-        imgContainer
+    `Photographe portrait: ${name}`,
+    'photographer_portrait',
+    imgContainer
   )
 }

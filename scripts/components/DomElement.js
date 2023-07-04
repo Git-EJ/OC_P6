@@ -4,7 +4,6 @@ export function DOMElement (json, parent) {
   const el = document.createElement(json.tag)
   json.textContent && (el.textContent = json.textContent)
   json.classNames && json.classNames.length > 0 && el.classList.add(...json.classNames.split(' '))
-  json.children && json.children.map(c => loadDOMJson(c, el))
   Object.keys(json.attributes).forEach(k => {
     el.setAttribute(k, json.attributes[k])
   })

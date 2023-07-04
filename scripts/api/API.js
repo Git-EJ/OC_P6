@@ -24,6 +24,10 @@ async function _getData () {
   return _data
 }
 
+/**
+ *
+ * @returns photographers : name, id (of photographer), city, country, tagline, price, portrait
+ */
 export async function getPhotographers () {
   const data = await _getData()
   return data.photographers
@@ -34,6 +38,10 @@ export async function getPhotographerById (id) {
   return photographers.find(p => p.id === id)
 }
 
+/**
+ *
+ * @returns media : id (of media), photographerId, title, image, likes, date, price, ariaLabel
+ */
 export async function getMedia () {
   const data = await _getData()
   return data.media
