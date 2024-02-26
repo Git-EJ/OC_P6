@@ -22,6 +22,7 @@ export function mediasLikesCounter (arrayOfPhotographerMedias) {
     const callbackLike = () => {
       if (!isLiked) {
         likedItems.push(media.id)
+        console.log(likedItems)
         button.classList.add('isLiked')
         isLiked = true
       } else {

@@ -7,7 +7,7 @@ import { mediasLikesCounter } from '../utils/likesCounter.js'
 
 /**
  * get the photographer's id from the url
- * @returns id of photographer
+ * @returns id of photographer string
  */
 function getPhotographerID () {
   const findPhotographerID = (new URL(document.location)).searchParams

@@ -210,13 +210,13 @@ export class Lightbox {
   removeListeners () {
     this.container.removeEventListener('keydown', this.keyEscapeListener)
     this.closeBtn.removeEventListener('click', this.onClose)
-    this.closeBtn.removeListener('keydown', this.keyEnterAndSpace)
+    this.closeBtn.removeEventListener('keydown', this.keyEnterAndSpace)
 
-    this.container.removeListener('keydown', this.keyLeftListener)
-    this.beforeBtn.removeListener('click', this.onBefore)
+    this.container.removeEventListener('keydown', this.keyLeftListener)
+    this.beforeBtn.removeEventListener('click', this.onBefore)
 
-    this.container.removeListener('keydown', this.keyRightListener)
-    this.afterBtn.removeListener('click', this.onAfter)
+    this.container.removeEventListener('keydown', this.keyRightListener)
+    this.afterBtn.removeEventListener('click', this.onAfter)
 
     this.container.removeEventListener('click', this.onClickOut)
     this.medias.forEach(m => {
