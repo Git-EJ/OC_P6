@@ -23,3 +23,15 @@
 <strong>Project goal:</strong> Create an accessible website for a photographers platform.
 
 <strong>Main features:</strong> Lightbox, like counter, sort by ..., contact form, keyboard navigation, compatible with screen readers.
+
+<strong>Install dependencies:</strong>
+
+```
+npm i
+```
+
+<strong>run sass</strong>
+
+```
+npm run sass
+```
